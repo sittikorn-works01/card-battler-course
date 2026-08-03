@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         health.Heal(cardData.healPower);
         healVFX.Play();
         PlayerEvents.PlayerHealed();
-        //PlayerEvents.SkillEnd();
+        PlayerEvents.SkillEnd();
     }
 
     private IEnumerator PlayAttackAnimation(CardData cardData)
