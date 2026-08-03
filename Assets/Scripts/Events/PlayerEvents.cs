@@ -9,7 +9,7 @@ public static class PlayerEvents
     public static event Action OnDrawCardRequested;
     public static event Action<List<CardData>> OnReshuffleRequested;
     public static event Action OnPlayerHealed;
-    public static event Action OnAttackEnd;
+    public static event Action OnSkillEnd;
 
     public static void CardPlayed(CardData cardData)
     {
@@ -40,8 +40,8 @@ public static class PlayerEvents
     {
         OnPlayerHealed?.Invoke();
     }
-    public static void AttackEnd()
+    public static void SkillEnd()
     {
-        OnAttackEnd?.Invoke();
+        OnSkillEnd?.Invoke();
     }
 }

@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
         health.Heal(cardData.healPower);
         healVFX.Play();
         PlayerEvents.PlayerHealed();
+        PlayerEvents.SkillEnd();
     }
 
     private IEnumerator PlayAttackAnimation(CardData cardData)
@@ -88,7 +89,7 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
-        PlayerEvents.AttackEnd();
+        PlayerEvents.SkillEnd();
         yield return null;
     }
 }
