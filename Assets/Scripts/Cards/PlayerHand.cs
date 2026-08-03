@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerHand : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PlayerHand : MonoBehaviour
         TurnEvents.OnPlayerTurnStart += PlayerEvents_OnPlayerTurnStart;
         TurnEvents.OnPlayerTurnEnd += PlayerEvents_OnPlayerTurnEnd;
         PlayerEvents.OnDrawCardRequested += PlayerEvents_OnDrawCardRequested;
-        PlayerEvents.OnAttackEnd += () => EnablePlayerHand(true) ;
+        PlayerEvents.OnSkillEnd += EnablePlayerHand ;
     }    
 
     private void OnDisable()
@@ -27,7 +28,7 @@ public class PlayerHand : MonoBehaviour
         TurnEvents.OnPlayerTurnStart -= PlayerEvents_OnPlayerTurnStart;
         TurnEvents.OnPlayerTurnEnd -= PlayerEvents_OnPlayerTurnEnd;
         PlayerEvents.OnDrawCardRequested -= PlayerEvents_OnDrawCardRequested;
-        PlayerEvents.OnAttackEnd -= () => EnablePlayerHand(true);
+        PlayerEvents.OnSkillEnd -= EnablePlayerHand;
     }
 
     private void Start()
@@ -44,23 +45,32 @@ public class PlayerHand : MonoBehaviour
 
     private void PlayerEvents_OnPlayerTurnStart()
     {
-        EnablePlayerHand(true);
+        EnablePlayerHand();
     }
 
     private void PlayerEvents_OnPlayerTurnEnd()
     {
-        EnablePlayerHand(false);
+        DisablePlayerHand();
     }
 
-    private void EnablePlayerHand(bool value)
+    private void EnablePlayerHand()
     {
         if (TurnSystem.Instance.HasActionsLeft())
         {
             foreach (Card card in cardsInHand)
             {
-                card.SetInteractable(value);
+                card.SetInteractable(true);
             }
-        }       
+            return;
+        }
+    }
+
+    private void DisablePlayerHand()
+    {
+        foreach (Card card in cardsInHand)
+        {
+            card.SetInteractable(false);
+        }
     }
 
     public void DrawNextCard()
@@ -109,7 +119,7 @@ public class PlayerHand : MonoBehaviour
     //TODO: fix bug: hands is not enable after player use non-attack card like heal, super heal card
     public async UniTask PlayCardWithDelay(Card card)
     {
-        EnablePlayerHand(false);
+        DisablePlayerHand();
         card.SetIsPlaying(true);
         card.Glow();
         cardsInHand.Remove(card);

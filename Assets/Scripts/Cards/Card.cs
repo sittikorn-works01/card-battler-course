@@ -28,6 +28,7 @@ public class Card : MonoBehaviour
     [SerializeField] private Collider2D cardCollider;
     [SerializeField] private SpriteRenderer glowOverlay;
     [SerializeField] private int glowDuration = 300;
+    [SerializeField] private SpriteRenderer disableOverlay;
 
     private void Start()
     {
@@ -102,6 +103,7 @@ public class Card : MonoBehaviour
     public void SetInteractable(bool interactable)
     {
         cardCollider.enabled = interactable;
+        disableOverlay.gameObject.SetActive(!interactable);
     }
 
     public void Glow()
