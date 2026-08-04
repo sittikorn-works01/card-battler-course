@@ -13,7 +13,7 @@ public class Card : MonoBehaviour
     [SerializeField] private SortingGroup sortingGroup;
     private int originalSortingOrder;
 
-    [SerializeField] private Vector3 originalScale;
+    private Vector3 originalScale;
     private Vector3 originalPosition;
 
     [SerializeField] private float hoverScale = 2f;
@@ -44,6 +44,13 @@ public class Card : MonoBehaviour
         cardNameText.text = cardData.CardName;
         descriptionText.text = cardData.CardDescription;
         actionText.text = cardData.actionCost.ToString();
+    }
+
+    private void OnMouseDown()
+    {
+        if (GameManager.Instance.IsGameActive()) return;
+
+        RewardManager.Instance.SelectCard(cardData);        
     }
 
     private void OnMouseEnter()
@@ -114,7 +121,7 @@ public class Card : MonoBehaviour
     private async UniTask GlowCoroutine()
     {
         glowOverlay.gameObject.SetActive(true);
-        await UniTask.Delay(300);
+        await UniTask.Delay(glowDuration);
         glowOverlay.gameObject.SetActive(false);
     }
 

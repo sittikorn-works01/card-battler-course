@@ -3,12 +3,12 @@ using System;
 public static class DeckEvents
 {
     public static event Action<CardData> OnRemoveCardFromDeck;
-    public static event Action<CardData> OnAddCardFromDeck;
+    public static event Action<CardData> OnAddCardToDeck;
     public static event Action OnDeckProcessed;
 
-    public static void AddCardFromDeck(CardData cardData)
+    public static void AddCardToDeck(CardData cardData)
     {
-        OnAddCardFromDeck?.Invoke(cardData);
+        OnAddCardToDeck?.Invoke(cardData);
     }
 
     public static void RemoveCardFromDeck(CardData cardData)

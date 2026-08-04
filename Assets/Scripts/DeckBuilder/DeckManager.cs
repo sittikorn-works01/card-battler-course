@@ -15,13 +15,13 @@ public class DeckManager : Singleton<DeckManager>
 
     private void OnEnable()
     {
-        DeckEvents.OnAddCardFromDeck += DeckEvents_OnAddCardFromDeck;
+        DeckEvents.OnAddCardToDeck += DeckEvents_OnAddCardToDeck;
         DeckEvents.OnRemoveCardFromDeck += DeckEvents_OnRemoveCardFromDeck;
     }
 
     private void OnDisable()
     {
-        DeckEvents.OnAddCardFromDeck -= DeckEvents_OnAddCardFromDeck;
+        DeckEvents.OnAddCardToDeck -= DeckEvents_OnAddCardToDeck;
         DeckEvents.OnRemoveCardFromDeck -= DeckEvents_OnRemoveCardFromDeck;
     }
 
@@ -36,7 +36,7 @@ public class DeckManager : Singleton<DeckManager>
         DeckEvents.DeckProcessed();
     }
 
-    private void DeckEvents_OnAddCardFromDeck(CardData cardData)
+    private void DeckEvents_OnAddCardToDeck(CardData cardData)
     {
         if (currentDeck.Count >= maxDeckSize)
         {

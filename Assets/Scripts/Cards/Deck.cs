@@ -36,11 +36,16 @@ public class Deck : MonoBehaviour
     private void OnMouseDown()
     {
         // TODO: add more condition to prevent bug when player can draw card eventhough the hand is full and no card's added but the system is still deducting action point
-        if(drawPile.Count <= 0)
+        if (!GameManager.Instance.IsGameActive())
+        {
+            return;
+        }
+        else if (drawPile.Count <= 0)
         {
             print("No cards left in deck!");
             return;
         }
+        
         if (TurnSystem.Instance.HasActionsLeft())
         {
             PlayerEvents.DrawCardRequested();

@@ -19,16 +19,24 @@ public class PlayerHand : MonoBehaviour
     {
         TurnEvents.OnPlayerTurnStart += PlayerEvents_OnPlayerTurnStart;
         TurnEvents.OnPlayerTurnEnd += PlayerEvents_OnPlayerTurnEnd;
+
         PlayerEvents.OnDrawCardRequested += PlayerEvents_OnDrawCardRequested;
-        PlayerEvents.OnSkillEnd += EnablePlayerHand ;
+        PlayerEvents.OnSkillEnd += EnablePlayerHand;
+        PlayerEvents.OnPlayerDeath += DisablePlayerHand;
+
+        BossEvents.OnBossDeath += DisablePlayerHand;
     }    
 
     private void OnDisable()
     {
         TurnEvents.OnPlayerTurnStart -= PlayerEvents_OnPlayerTurnStart;
         TurnEvents.OnPlayerTurnEnd -= PlayerEvents_OnPlayerTurnEnd;
+
         PlayerEvents.OnDrawCardRequested -= PlayerEvents_OnDrawCardRequested;
         PlayerEvents.OnSkillEnd -= EnablePlayerHand;
+        PlayerEvents.OnPlayerDeath -= DisablePlayerHand;
+
+        BossEvents.OnBossDeath -= DisablePlayerHand;
     }
 
     private void Start()
@@ -116,7 +124,7 @@ public class PlayerHand : MonoBehaviour
     {
         PlayCardWithDelay(card).Forget();
     }
-    //TODO: fix bug: hands is not enable after player use non-attack card like heal, super heal card
+
     public async UniTask PlayCardWithDelay(Card card)
     {
         DisablePlayerHand();

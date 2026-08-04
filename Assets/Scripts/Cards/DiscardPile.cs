@@ -24,19 +24,20 @@ public class DiscardPile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (discardPile.Count == 0) 
+        if (GameManager.Instance.IsGameActive())
         {
-            print("You have no card in the discard pile");
-            return;
-        }
+            if (discardPile.Count == 0)
+            {
+                print("You have no card in the discard pile");
+                return;
+            }
 
-        if (TurnSystem.Instance.HasActionsLeft())
-        {
-            PlayerEvents.ReshuffleRequested(discardPile);
-            ClearDiscardPile();
-        }
-
-        
+            if (TurnSystem.Instance.HasActionsLeft())
+            {
+                PlayerEvents.ReshuffleRequested(discardPile);
+                ClearDiscardPile();
+            }
+        }        
     }
 
     private void ClearDiscardPile()

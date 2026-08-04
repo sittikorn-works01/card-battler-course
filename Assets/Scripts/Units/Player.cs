@@ -89,7 +89,11 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
-        PlayerEvents.SkillEnd();
-        yield return null;
+        if (GameManager.Instance.IsGameActive())
+        {
+            PlayerEvents.SkillEnd();
+            yield return null;
+        }
+      
     }
 }
