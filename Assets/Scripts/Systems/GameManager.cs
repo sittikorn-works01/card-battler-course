@@ -6,34 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private float transitionTime = 2f;
-    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private float transitionTime = 2f; 
 
     private bool isGameActive = true;
 
     private void OnEnable()
     {
-        PlayerEvents.OnPlayerDeath += PlayerEvents_OnPlayerDeath;
-        BossEvents.OnBossDeath += BossEvents_OnBossDeath;
+        PlayerEvents.OnPlayerDeath += OnGameEnded;
+        BossEvents.OnBossDeath += OnGameEnded;
     }
     private void OnDisable()
     {
-        PlayerEvents.OnPlayerDeath -= PlayerEvents_OnPlayerDeath;
-        BossEvents.OnBossDeath -= BossEvents_OnBossDeath;
+        PlayerEvents.OnPlayerDeath -= OnGameEnded;
+        BossEvents.OnBossDeath -= OnGameEnded;
     }
 
-    private void PlayerEvents_OnPlayerDeath()
+    private void OnGameEnded()
     {
         isGameActive = false;
-        resultText.text = "You lose";
-        StartCoroutine(RestartGame());
-    }
-
-    private void BossEvents_OnBossDeath()
-    {
-        isGameActive = false;
-        resultText.text = "You defeated the boss!";
-        StartCoroutine(RestartGame());
     }
 
     private IEnumerator RestartGame()

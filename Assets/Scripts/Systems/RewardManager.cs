@@ -1,0 +1,34 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RewardManager : Singleton<RewardManager>
+{   
+    [SerializeField] private Card cardPrefab;
+    [SerializeField] private Card[] blankDropCards;
+    [SerializeField] private List<CardData> rewardPool; 
+    [SerializeField] private ResultPanel resultPanel; 
+
+   public void SpawnRewardCards()
+    {
+        foreach (Card dropCard in blankDropCards)
+        {
+            CardData newCardDrop = rewardPool[Random.Range(0, rewardPool.Count - 1)];
+            dropCard.LoadCardData(newCardDrop);
+            dropCard.gameObject.SetActive(true);
+        }
+
+    }
+
+    public void SelectCard(CardData chosenCard)
+    {
+        print($"{chosenCard.CardName} has been added");
+        DeckEvents.AddCardToDeck(chosenCard);
+
+        foreach (Card dropCard in blankDropCards)
+        {
+            dropCard.SetInteractable(false);
+        }
+
+        resultPanel.OnSelectRewardCard();
+    }
+}

@@ -7,7 +7,7 @@ public class DeckZoneTrigger : MonoBehaviour
         if(collision.TryGetComponent<Card>(out Card card))
         {
             print($"{card.GetCardData().CardName} was added to your deck");
-            DeckEvents.AddCardFromDeck(card.GetCardData());
+            DeckEvents.AddCardToDeck(card.GetCardData());
         }
     }
 }
