@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerHand : MonoBehaviour
 {
@@ -39,7 +38,7 @@ public class PlayerHand : MonoBehaviour
         BossEvents.OnBossDeath -= DisablePlayerHand;
     }
 
-    private void Start()
+    public void Initialize()
     {
         for (int i = 0; i < startingHandSize; i++)
         { 

@@ -93,7 +93,7 @@ public class TurnSystem : Singleton<TurnSystem>
         }
         
 
-        if (GameManager.Instance.IsGameActive())
+        if (GameManager.Instance.IsBattleActive())
         {
             if (currentState != TurnState.PlayerTurn)
             {

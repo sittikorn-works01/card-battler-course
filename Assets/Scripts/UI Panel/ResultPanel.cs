@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,21 +11,31 @@ public class ResultPanel : BasePanel
 
     private void OnEnable()
     {
-        restartButton.onClick.AddListener(RestartButton);
-        nextButton.onClick.AddListener(RandomDropCards);
-
         PlayerEvents.OnPlayerDeath += OnPlayerDeath;
         BossEvents.OnBossDeath += OnBossDeath;
     }
 
     private void OnDisable()
     {
-        restartButton.onClick.RemoveAllListeners();
-        nextButton.onClick.RemoveAllListeners();
-
         PlayerEvents.OnPlayerDeath -= OnPlayerDeath;
         BossEvents.OnBossDeath -= OnBossDeath;
-    } 
+    }
+
+    public override void Open()
+    {
+        base.Open();
+
+        restartButton.onClick.AddListener(RestartButton);
+        nextButton.onClick.AddListener(RandomDropCards);
+    }
+
+    public override void Close()
+    {
+        base.Close();
+
+        restartButton.onClick.RemoveAllListeners();
+        nextButton.onClick.RemoveAllListeners();
+    }
 
     private void OnPlayerDeath()
     {
@@ -50,10 +59,13 @@ public class ResultPanel : BasePanel
     public void OnSelectRewardCard()
     {
         restartButton.gameObject.SetActive(true);
+        RewardManager.Instance.HideDropCards();
     }
 
     private void RestartButton()
     {
-        SceneManager.LoadScene("Gameplay");
+        Close();
+        GameManager.Instance.EnterState(GameState.Shop);
+        //TODO: try change the directory to shop node
     }
 }

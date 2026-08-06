@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
     private void Attack(CardData cardData)
     {
-        print($"Attack with power: {cardData.attackPower}");
+        //print($"Attack with power: {cardData.attackPower}");
         StartCoroutine(PlayAttackAnimation(cardData));
     }
 
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 
         animator.Play("Attack 2");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        print(animator.GetCurrentAnimatorStateInfo(0).length);
+
         BossEvents.BossHit(cardData);
 
         timeElapsed = 0f;
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
-        if (GameManager.Instance.IsGameActive())
+        if (GameManager.Instance.IsBattleActive())
         {
             PlayerEvents.SkillEnd();
             yield return null;
