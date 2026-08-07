@@ -40,11 +40,13 @@ public class PlayerHand : MonoBehaviour
 
     public void Initialize()
     {
+        deck.Initialize();
         for (int i = 0; i < startingHandSize; i++)
         { 
             DrawNextCard(); 
-        }        
+        }  
     }
+
     private void PlayerEvents_OnDrawCardRequested()
     {
         DrawNextCard();
@@ -140,5 +142,17 @@ public class PlayerHand : MonoBehaviour
 
         Destroy(card.gameObject);
         RepositionCards();
+    }
+
+    public void Dispose()
+    {
+        foreach (Card card in cardsInHand)
+        {
+            Destroy(card.gameObject);
+        }
+        cardsInHand.Clear();
+
+        deck.Dispose();
+        discardPile.Dispose();
     }
 }

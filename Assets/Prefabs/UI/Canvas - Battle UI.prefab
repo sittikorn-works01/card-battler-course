@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1182666554232349889}
   - component: {fileID: 5923377726161366883}
+  - component: {fileID: 4449849177283213305}
   - component: {fileID: 1419316164220038056}
   - component: {fileID: 3389125205221788276}
-  - component: {fileID: 4449849177283213305}
   m_Layer: 5
   m_Name: 'Panel - Result '
   m_TagString: Untagged
@@ -50,6 +50,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017002477288930880}
   m_CullTransparentMesh: 1
+--- !u!225 &4449849177283213305
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017002477288930880}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1419316164220038056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,18 +108,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &4449849177283213305
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017002477288930880}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1694494174917851221
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,8 +711,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9095844788976917488}
-  - {fileID: 1182666554232349889}
   - {fileID: 8603536734089886229}
+  - {fileID: 1182666554232349889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -729,7 +729,7 @@ Canvas:
   m_GameObject: {fileID: 6279798907918548578}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Victory or Lose?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d640c7ef1a27d64a99f153c6a98a7fc, type: 2}
   m_sharedMaterial: {fileID: 8402549414439572662, guid: 2d640c7ef1a27d64a99f153c6a98a7fc, type: 2}

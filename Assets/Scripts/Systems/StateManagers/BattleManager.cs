@@ -34,8 +34,6 @@ public class BattleManager : MonoBehaviour
     {
         PlayerEvents.OnPlayerDeath -= OnBattleEnd;
         BossEvents.OnBossDeath -= OnBattleEnd;
-
-        battleCanvas.SetActive(false);
         OnExitBattleState();
     }
 
@@ -46,6 +44,7 @@ public class BattleManager : MonoBehaviour
         playerHand.Initialize();
         battleCanvas.SetActive(true);
         playZone.EnablePlayZone();
+        TurnSystem.Instance.Initialize();
 
         //Instantiate player & boss character on their position
         currentPlayerCharacter = Instantiate(playerCharacter, playerPosition.position, Quaternion.identity);
@@ -54,8 +53,12 @@ public class BattleManager : MonoBehaviour
 
     private void OnExitBattleState()
     {
+        battleCanvas.SetActive(false);
+
         Destroy(currentPlayerCharacter.gameObject);
         Destroy(currentEnemyCharacter.gameObject);
+
+        playerHand.Dispose();
     }
 
     private void OnBattleEnd()

@@ -48,4 +48,9 @@ public class DiscardPile : MonoBehaviour
             Destroy(discardedCard.gameObject);
         }
     }
+
+    public void Dispose()
+    {
+        ClearDiscardPile();
+    }
 }

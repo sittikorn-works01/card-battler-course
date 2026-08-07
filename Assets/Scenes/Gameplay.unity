@@ -335,7 +335,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 600
+  m_SortingOrder: 1500
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
 --- !u!1001 &252312117
@@ -1289,7 +1289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &887245936
 Transform:
   m_ObjectHideFlags: 0
@@ -1965,7 +1965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1771757099
 Transform:
   m_ObjectHideFlags: 0
@@ -2269,6 +2269,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2840931646373023909, guid: 492b7a2912e2d1446a6af2f69693968d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2840931646373023909, guid: 492b7a2912e2d1446a6af2f69693968d, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840931646373023909, guid: 492b7a2912e2d1446a6af2f69693968d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 3530496238017311838, guid: 492b7a2912e2d1446a6af2f69693968d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2370,6 +2382,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4409390211051821346, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 4409390211051821346, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449849177283213305, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533646073967422991, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6279798907918548578, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
       propertyPath: m_Name
       value: Canvas - Battle UI
@@ -2457,6 +2485,14 @@ PrefabInstance:
     - target: {fileID: 7383787590696830251, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658134548865976126, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9095844788976917488, guid: 4f1ccb8cb2d848048914c212863c9580, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -106.79999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

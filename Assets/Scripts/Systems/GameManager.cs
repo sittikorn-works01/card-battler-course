@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    //[SerializeField] private GameObject mapRoot;
-    //[SerializeField] private GameObject battleRoot;
-    //[SerializeField] private GameObject shopRoot;
-
     [SerializeField] private BattleManager BattleManager;
     [SerializeField] private ShopManager shopManager;
 
@@ -17,18 +13,6 @@ public class GameManager : Singleton<GameManager>
     public GameState CurrentState { get; private set; }
 
     public event Action<GameState> OnStateChanged;
-
-    //private void OnEnable()
-    //{
-    //    PlayerEvents.OnPlayerDeath += OnGameEnded;
-    //    BossEvents.OnBossDeath += OnGameEnded;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    PlayerEvents.OnPlayerDeath -= OnGameEnded;
-    //    BossEvents.OnBossDeath -= OnGameEnded;
-    //}
 
     private void Start()
     {
@@ -45,10 +29,6 @@ public class GameManager : Singleton<GameManager>
 
         switch (newState)
         {
-            //case GameState.Map:
-            //    mapRoot.SetActive(true);
-            //    break;
-
             case GameState.Battle:
                 BattleManager.gameObject.SetActive(true);
                 break;
@@ -57,27 +37,6 @@ public class GameManager : Singleton<GameManager>
                 shopManager.gameObject.SetActive(true);
                 break;
         }
-
-        //mapRoot.SetActive(false);
-        //battleRoot.SetActive(false);
-        //shopRoot.SetActive(false);
-
-        
-
-        //switch (newState)
-        //{
-        //    case GameState.Map:
-        //        mapRoot.SetActive(true);
-        //        break;
-
-        //    case GameState.Battle:
-        //        battleRoot.SetActive(true);
-        //        break;
-
-        //    case GameState.Shop:
-        //        shopRoot.SetActive(true);
-        //        break;
-        //}
 
         OnStateChanged?.Invoke(newState);
     }
@@ -94,14 +53,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     public bool IsBattleActive() => BattleManager.IsBattleActive();
-
-    //private void OnGameEnded()
-    //{
-    //    isGameActive = false;
-    //}
-
-    //public bool IsGameActive() => isGameActive;
-    public void ReturnToMap() => EnterState(GameState.Map);
+    //public void ReturnToMap() => EnterState(GameState.Map);
 
 
 }

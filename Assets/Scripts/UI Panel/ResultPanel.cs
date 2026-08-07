@@ -27,6 +27,11 @@ public class ResultPanel : BasePanel
 
         restartButton.onClick.AddListener(RestartButton);
         nextButton.onClick.AddListener(RandomDropCards);
+
+        resultText.gameObject.SetActive(true);
+
+        nextButton.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(false);
     }
 
     public override void Close()
@@ -52,7 +57,9 @@ public class ResultPanel : BasePanel
 
     private void RandomDropCards()
     {
-        nextButton.gameObject.SetActive(false);
+        resultText.gameObject.SetActive(false);
+
+        nextButton.gameObject.SetActive(false);        
         RewardManager.Instance.SpawnRewardCards();
     }
 

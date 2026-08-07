@@ -19,7 +19,7 @@ public class Deck : MonoBehaviour
         PlayerEvents.OnReshuffleRequested -= PlayerEvents_OnReshuffleRequested;
     }
 
-    private void Start()
+    public void Initialize()
     {
         drawPile = DeckManager.Instance.GetDeck();
         Shuffle();
@@ -90,5 +90,10 @@ public class Deck : MonoBehaviour
             drawPile[i] = drawPile[randomIndex];
             drawPile[randomIndex] = cardData;
         }
+    }
+
+    public void Dispose()
+    {
+
     }
 }
