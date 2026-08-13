@@ -3,5 +3,7 @@ using UnityEngine;
 public enum NodeType
 {
     Battle,
-    Shop
+    Shop,
+    Boss,
+    Rest
 }

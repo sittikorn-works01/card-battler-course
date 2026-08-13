@@ -5,14 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private BattleManager BattleManager;
+    [SerializeField] private BattleManager battleManager;
     [SerializeField] private ShopManager shopManager;
+    [SerializeField] private MapView mapView;
 
     [SerializeField] private GameState startState;
+    [SerializeField] private RunData runData;
+
+    public RunData RunData => runData;
 
     public GameState CurrentState { get; private set; }
 
     public event Action<GameState> OnStateChanged;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (runData == null)
+            runData = new RunData();
+    }
 
     private void Start()
     {
@@ -21,8 +33,9 @@ public class GameManager : Singleton<GameManager>
 
     public void EnterState(GameState newState)
     {
-        BattleManager.gameObject.SetActive(false);
+        battleManager.gameObject.SetActive(false);
         shopManager.gameObject.SetActive(false);
+        mapView.gameObject.SetActive(false);
 
         CurrentState = newState;
         print($"Enter {newState} State");
@@ -30,11 +43,14 @@ public class GameManager : Singleton<GameManager>
         switch (newState)
         {
             case GameState.Battle:
-                BattleManager.gameObject.SetActive(true);
+                battleManager.gameObject.SetActive(true);
                 break;
 
             case GameState.Shop:
                 shopManager.gameObject.SetActive(true);
+                break;
+            case GameState.Map:
+                mapView.gameObject.SetActive(true);
                 break;
         }
 
@@ -43,7 +59,7 @@ public class GameManager : Singleton<GameManager>
 
     public void EnterNode(MapNode node)
     {
-        //node.Visited = true;
+        node.Visited = true;
 
         switch (node.Type)
         {
@@ -52,8 +68,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public bool IsBattleActive() => BattleManager.IsBattleActive();
-    //public void ReturnToMap() => EnterState(GameState.Map);
+    public bool IsBattleActive() => battleManager.IsBattleActive();
+    public void ReturnToMap() => EnterState(GameState.Map);
 
 
 }

@@ -1,5 +1,7 @@
 public enum GameState
 {
     Battle,
-    Shop
+    Shop,
+    Map
+
 }

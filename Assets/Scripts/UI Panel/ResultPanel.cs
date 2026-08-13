@@ -72,7 +72,6 @@ public class ResultPanel : BasePanel
     private void RestartButton()
     {
         Close();
-        GameManager.Instance.EnterState(GameState.Shop);
-        //TODO: try change the directory to shop node
+        GameManager.Instance.EnterState(GameState.Map);
     }
 }
