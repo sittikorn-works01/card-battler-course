@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class MapView : MonoBehaviour
 {
     [Header("Prefabs & containers")]
     [SerializeField] private RectTransform nodeContainer;   // parent for spawned node buttons
+    [SerializeField] private RectTransform lineContainer;  
     [SerializeField] private GameObject nodeButtonPrefab;    // a Button + Image + TMP label
-    //[SerializeField] private LineRenderer linePrefab;        // world-space or UI line for connections
+    [SerializeField] private Image linePrefab;        // world-space or UI line for connections
 
     [Header("Layout")]
     [SerializeField] private float floorSpacingY = 160f;
@@ -43,8 +44,7 @@ public class MapView : MonoBehaviour
             {
                 GameObject nodeButtonGO = Instantiate(nodeButtonPrefab, nodeContainer);
                 RectTransform rt = nodeButtonGO.GetComponent<RectTransform>();
-                rt.anchoredPosition = new Vector2(node.Position.x * nodeSpacingX,
-                                                   node.Floor * floorSpacingY);
+                rt.anchoredPosition = new Vector2(node.Position.x * nodeSpacingX, node.Floor * floorSpacingY);
 
                 nodeButtonGO.GetComponentInChildren<TextMeshProUGUI>().text = node.Type.ToString();
 
@@ -57,25 +57,20 @@ public class MapView : MonoBehaviour
         }
 
         //// 2. Draw connector lines between each node and the nodes it leads to.
-        //foreach (List<MapNode> floor in map.Floors)
-        //{
-        //    foreach (MapNode node in floor)
-        //    {
-        //        foreach (MapNode next in node.ConnectedNodes)
-        //        {
-        //            DrawConnection(node, next);
-        //        }
-        //    }
-        //}
+        foreach (List<MapNode> floor in map.Floors)
+        {
+            foreach (MapNode node in floor)
+            {
+                foreach (MapNode next in node.ConnectedNodes)
+                {
+                    DrawConnection(node, next);
+                }
+            }
+        }
 
         RefreshInteractability(map);
     }
 
-    /// <summary>
-    /// Core rule: you can only click a node if it's one of the
-    /// CurrentNode's ConnectedNodes (or any first-floor node if the act
-    /// just started). Everything else is shown but disabled.
-    /// </summary>
     private void RefreshInteractability(MapGraph map)
     {
         HashSet<MapNode> reachable = new HashSet<MapNode>();
@@ -108,15 +103,24 @@ public class MapView : MonoBehaviour
         GameManager.Instance.EnterNode(node);
     }
 
-    //private void DrawConnection(MapNode from, MapNode to)
-    //{
-    //    LineRenderer line = Instantiate(linePrefab, nodeContainer);
-    //    Vector3 a = new Vector3(from.Position.x * nodeSpacingX, from.Floor * floorSpacingY, 0f);
-    //    Vector3 b = new Vector3(to.Position.x * nodeSpacingX, to.Floor * floorSpacingY, 0f);
-    //    line.SetPosition(0, a);
-    //    line.SetPosition(1, b);
-    //    _spawnedLines.Add(line.gameObject);
-    //}
+    private void DrawConnection(MapNode from, MapNode to)
+    {
+        Image line = Instantiate(linePrefab, lineContainer);
+        Vector3 posA = new Vector3(from.Position.x * nodeSpacingX, from.Floor * floorSpacingY, 0f);
+        Vector3 posB = new Vector3(to.Position.x * nodeSpacingX, to.Floor * floorSpacingY, 0f);
+
+        print($"Line start from {posA}");
+
+        line.rectTransform.anchoredPosition = posA;
+        Vector3 difference = posB - posA;
+        float distance = difference.magnitude;
+        float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+
+        line.rectTransform.sizeDelta = new Vector2(distance, 6);
+        line.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
+
+        _spawnedLines.Add(line.gameObject);
+    }
 
     private void Clear()
     {

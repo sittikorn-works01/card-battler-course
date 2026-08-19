@@ -3,7 +3,8 @@ using UnityEngine;
 public enum NodeType
 {
     Battle,
-    Shop,
+    Elite,
     Boss,
+    Shop,  
     Rest
 }

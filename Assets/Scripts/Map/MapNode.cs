@@ -16,5 +16,5 @@ public class MapNode
 public class MapGraph
 {
     public List<List<MapNode>> Floors = new List<List<MapNode>>();
-    public MapNode CurrentNode; // where the player currently is; null = not started
+    public MapNode CurrentNode;
 }
