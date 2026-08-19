@@ -16,6 +16,8 @@ public class BattleManager : MonoBehaviour
     //Units for instantiating
     [SerializeField] private GameObject playerCharacter;
     [SerializeField] private GameObject bossCharacter;
+    [SerializeField] private GameObject eliteCharacter;
+
     [SerializeField] private Transform playerPosition;
     [SerializeField] private Transform bossPosition;
 
@@ -27,7 +29,7 @@ public class BattleManager : MonoBehaviour
         PlayerEvents.OnPlayerDeath += OnBattleEnd;
         BossEvents.OnBossDeath += OnBattleEnd;
 
-        SetupBattle();
+        
     }
 
     private void OnDisable()
@@ -37,7 +39,7 @@ public class BattleManager : MonoBehaviour
         OnExitBattleState();
     }
 
-    private void SetupBattle()
+    public void SetupBattle(GameState enemyType)
     {
         isBattleActive = true;
 
@@ -46,9 +48,26 @@ public class BattleManager : MonoBehaviour
         playZone.EnablePlayZone();
         TurnSystem.Instance.Initialize();
 
+        InstantiateCharacters(enemyType);
+
+        print(enemyType);
+    }
+
+    private void InstantiateCharacters(GameState enemyType)
+    {
         //Instantiate player & boss character on their position
         currentPlayerCharacter = Instantiate(playerCharacter, playerPosition.position, Quaternion.identity);
-        currentEnemyCharacter = Instantiate(bossCharacter, bossPosition.position, Quaternion.identity);
+
+        switch (enemyType)
+        {
+            case GameState.EliteBattle:
+                currentEnemyCharacter = Instantiate(eliteCharacter, bossPosition.position, Quaternion.identity);
+                break;
+            case GameState.BossBattle:
+                currentEnemyCharacter = Instantiate(bossCharacter, bossPosition.position, Quaternion.identity);
+                break;
+        }
+        
     }
 
     private void OnExitBattleState()
