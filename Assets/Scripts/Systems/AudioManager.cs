@@ -75,7 +75,7 @@ public class AudioManager : Singleton<AudioManager>
         PlaySFX(bossDeathSFX);
     }
 
-    private void BossEvents_BossHit(CardData _)
+    private void BossEvents_BossHit(int _)
     {
         PlaySFX(bossHitSFX);
     }
