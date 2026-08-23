@@ -24,7 +24,7 @@ public class DiscardPile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.Instance.IsGameActive())
+        if (GameManager.Instance.IsBattleActive())
         {
             if (discardPile.Count == 0)
             {
@@ -47,5 +47,10 @@ public class DiscardPile : MonoBehaviour
         {
             Destroy(discardedCard.gameObject);
         }
+    }
+
+    public void Dispose()
+    {
+        ClearDiscardPile();
     }
 }

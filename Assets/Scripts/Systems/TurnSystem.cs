@@ -44,7 +44,7 @@ public class TurnSystem : Singleton<TurnSystem>
         BossEvents.OnBossDeath -= ClearTurnStateDisplayText;
     }
 
-    private void Start()
+    public void Initialize()
     {
         StartPlayerTurn();
     }
@@ -93,7 +93,7 @@ public class TurnSystem : Singleton<TurnSystem>
         }
         
 
-        if (GameManager.Instance.IsGameActive())
+        if (GameManager.Instance.IsBattleActive())
         {
             if (currentState != TurnState.PlayerTurn)
             {

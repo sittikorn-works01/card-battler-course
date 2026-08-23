@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 
-public class BasePanel : MonoBehaviour
+public class BaseUIController : MonoBehaviour
 {
     [SerializeField] private CanvasGroup UICanvas;
-    public virtual void Open()
+    public void OpenCanvas()
     {
         UICanvas.alpha = 1;
     }
-    public virtual void Close()
+    public void HideCanvas()
     {
         UICanvas.alpha = 0;
     }

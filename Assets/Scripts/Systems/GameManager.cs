@@ -1,38 +1,75 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private float transitionTime = 2f; 
+    [SerializeField] private BattleManager battleManager;
+    [SerializeField] private ShopManager shopManager;
+    [SerializeField] private MapView mapView;
 
-    private bool isGameActive = true;
+    [SerializeField] private GameState startState;
+    [SerializeField] private RunData runData;
 
-    private void OnEnable()
-    {
-        PlayerEvents.OnPlayerDeath += OnGameEnded;
-        BossEvents.OnBossDeath += OnGameEnded;
-    }
-    private void OnDisable()
-    {
-        PlayerEvents.OnPlayerDeath -= OnGameEnded;
-        BossEvents.OnBossDeath -= OnGameEnded;
-    }
+    public RunData RunData => runData;
 
-    private void OnGameEnded()
-    {
-        isGameActive = false;
-    }
+    public GameState CurrentState { get; private set; }
 
-    private IEnumerator RestartGame()
+    public event Action<GameState> OnStateChanged;
+
+    protected override void Awake()
     {
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene("Gameplay");
+        base.Awake();
+
+        if (runData == null)
+            runData = new RunData();
     }
 
-    public bool IsGameActive() => isGameActive;
+    private void Start()
+    {
+        EnterState(startState);
+    }
+
+    public void EnterState(GameState newState)
+    {
+        battleManager.gameObject.SetActive(false);
+        shopManager.gameObject.SetActive(false);
+        mapView.gameObject.SetActive(false);
+
+        CurrentState = newState;
+        print($"Enter {newState} State");
+
+        switch (newState)
+        {
+            case GameState.Battle:
+                battleManager.gameObject.SetActive(true);
+                break;
+
+            case GameState.Shop:
+                shopManager.gameObject.SetActive(true);
+                break;
+            case GameState.Map:
+                mapView.gameObject.SetActive(true);
+                break;
+        }
+
+        OnStateChanged?.Invoke(newState);
+    }
+
+    public void EnterNode(MapNode node)
+    {
+        node.Visited = true;
+
+        switch (node.Type)
+        {
+            case NodeType.Battle: EnterState(GameState.Battle); break;
+            case NodeType.Shop: EnterState(GameState.Shop); break;
+        }
+    }
+
+    public bool IsBattleActive() => battleManager.IsBattleActive();
+    public void ReturnToMap() => EnterState(GameState.Map);
 
 
 }

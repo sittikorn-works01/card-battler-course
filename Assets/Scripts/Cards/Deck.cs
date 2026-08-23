@@ -19,7 +19,7 @@ public class Deck : MonoBehaviour
         PlayerEvents.OnReshuffleRequested -= PlayerEvents_OnReshuffleRequested;
     }
 
-    private void Start()
+    public void Initialize()
     {
         drawPile = DeckManager.Instance.GetDeck();
         Shuffle();
@@ -36,7 +36,7 @@ public class Deck : MonoBehaviour
     private void OnMouseDown()
     {
         // TODO: add more condition to prevent bug when player can draw card eventhough the hand is full and no card's added but the system is still deducting action point
-        if (!GameManager.Instance.IsGameActive())
+        if (!GameManager.Instance.IsBattleActive())
         {
             return;
         }
@@ -90,5 +90,10 @@ public class Deck : MonoBehaviour
             drawPile[i] = drawPile[randomIndex];
             drawPile[randomIndex] = cardData;
         }
+    }
+
+    public void Dispose()
+    {
+
     }
 }

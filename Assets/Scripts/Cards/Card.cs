@@ -48,7 +48,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.Instance.IsGameActive()) return;
+        if (GameManager.Instance.IsBattleActive()) return;
 
         RewardManager.Instance.SelectCard(cardData);        
     }

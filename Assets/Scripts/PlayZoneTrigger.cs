@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayZoneTrigger : MonoBehaviour
 {
     [SerializeField] private PlayerHand playerHand;
+    [SerializeField] private BoxCollider2D playZoneCollider;
 
     private void OnEnable()
     {
@@ -11,16 +12,20 @@ public class PlayZoneTrigger : MonoBehaviour
         BossEvents.OnBossDeath += DisablePlayZone;
     }
 
-
     private void OnDisable()
     {
         PlayerEvents.OnPlayerDeath -= DisablePlayZone;
         BossEvents.OnBossDeath -= DisablePlayZone;
     }
 
+    public void EnablePlayZone()
+    {
+        playZoneCollider.enabled = true;
+    }
+
     private void DisablePlayZone()
     {
-        gameObject.SetActive(false);
+        playZoneCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -31,4 +31,13 @@ public class RewardManager : Singleton<RewardManager>
 
         resultPanel.OnSelectRewardCard();
     }
+
+    public void HideDropCards()
+    {
+        foreach (Card dropCard in blankDropCards)
+        {
+            dropCard.SetInteractable(true);
+            dropCard.gameObject.SetActive(false);
+        }
+    }
 }

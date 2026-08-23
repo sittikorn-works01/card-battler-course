@@ -29,7 +29,7 @@ public class Boss : MonoBehaviour
 
     private void TurnEvents_OnBossTurnStart()
     {
-        print("Boss starting");
+        //print("Boss starting");
         StartCoroutine(Attack());
     }
 
@@ -65,7 +65,7 @@ public class Boss : MonoBehaviour
 
     private void BossEvents_OnBossHit(CardData cardData)
     {
-        print($"Boss is hit with card: {cardData.CardName}");
+        //print($"Boss is hit with card: {cardData.CardName}");
         health.TakeDamage(cardData.attackPower);
 
         if(!health.IsAlive())
