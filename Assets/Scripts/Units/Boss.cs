@@ -62,10 +62,10 @@ public class Boss : MonoBehaviour
         yield return null;
     }
 
-    private void BossEvents_OnBossHit(int damage)
+    private void BossEvents_OnBossHit(CardData cardData)
     {
-        print($"Boss received {damage} damage!");
-        health.TakeDamage(damage);
+        //print($"Boss is hit with card: {cardData.CardName}");
+        health.TakeDamage(cardData.attackPower);
 
         if(!health.IsAlive())
         {

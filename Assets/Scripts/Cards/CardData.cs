@@ -9,5 +9,4 @@ public class CardData : ScriptableObject
     public Sprite Illustration;
     public int attackPower;
     public int healPower;
-    public Buff Buff;
 }
