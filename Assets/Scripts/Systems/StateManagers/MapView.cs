@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class MapView : MonoBehaviour
 {
     [Header("Prefabs & containers")]
-    [SerializeField] private GameObject mapUICanvas;
     [SerializeField] private RectTransform nodeContainer;   // parent for spawned node buttons
     [SerializeField] private RectTransform lineContainer;  
     [SerializeField] private GameObject nodeButtonPrefab;    // a Button + Image + TMP label
@@ -27,12 +26,12 @@ public class MapView : MonoBehaviour
             run.CurrentMap = MapGenerator.GenerateAct(floorCount: 3, nodesPerFloor: 3);
 
         BuildView(run.CurrentMap);
-        mapUICanvas.SetActive(true);
+        nodeContainer.gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
-        mapUICanvas.SetActive(false);
+        nodeContainer.gameObject.SetActive(false);
     }
 
     private void BuildView(MapGraph map)
@@ -100,6 +99,7 @@ public class MapView : MonoBehaviour
         RunData run = GameManager.Instance.RunData;
         run.CurrentMap.CurrentNode = node;
 
+        // Hand off to the state manager, which enables Battle/Shop/Event/etc.
         GameManager.Instance.EnterNode(node);
     }
 
@@ -108,6 +108,8 @@ public class MapView : MonoBehaviour
         Image line = Instantiate(linePrefab, lineContainer);
         Vector3 posA = new Vector3(from.Position.x * nodeSpacingX, from.Floor * floorSpacingY, 0f);
         Vector3 posB = new Vector3(to.Position.x * nodeSpacingX, to.Floor * floorSpacingY, 0f);
+
+        print($"Line start from {posA}");
 
         line.rectTransform.anchoredPosition = posA;
         Vector3 difference = posB - posA;

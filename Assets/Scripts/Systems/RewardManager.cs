@@ -12,7 +12,7 @@ public class RewardManager : Singleton<RewardManager>
     {
         foreach (Card dropCard in blankDropCards)
         {
-            CardData newCardDrop = rewardPool[Random.Range(0, rewardPool.Count)];
+            CardData newCardDrop = rewardPool[Random.Range(0, rewardPool.Count - 1)];
             dropCard.LoadCardData(newCardDrop);
             dropCard.gameObject.SetActive(true);
         }

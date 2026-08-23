@@ -17,6 +17,6 @@ public class ShopPanel : BasePanel
 
     private void ExitShop()
     {
-        GameManager.Instance.EnterState(GameState.Map);
+        GameManager.Instance.EnterState(GameState.Battle);
     }
 }

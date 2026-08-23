@@ -1,7 +1,6 @@
 public enum GameState
 {
-    BossBattle,
-    EliteBattle,
+    Battle,
     Shop,
     Map
 

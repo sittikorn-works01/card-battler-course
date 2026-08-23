@@ -49,11 +49,11 @@ public static class MapGenerator
 
     private static NodeType PickNodeType(int floor, int floorCount, System.Random rng)
     {
-        if (floor == 0) return NodeType.Elite;             // always start on a normal fight
+        if (floor == 0) return NodeType.Battle;             // always start on a normal fight
         if (floor == floorCount - 1) return NodeType.Boss;  // last floor is always the boss
 
         double roll = rng.NextDouble();
-        if (roll < 0.50) return NodeType.Elite;
+        if (roll < 0.50) return NodeType.Battle;
         if (roll < 0.92) return NodeType.Shop;
         return NodeType.Rest;
     }

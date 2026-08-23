@@ -38,16 +38,12 @@ public class GameManager : Singleton<GameManager>
         mapView.gameObject.SetActive(false);
 
         CurrentState = newState;
+        print($"Enter {newState} State");
 
         switch (newState)
         {
-            case GameState.EliteBattle:
+            case GameState.Battle:
                 battleManager.gameObject.SetActive(true);
-                battleManager.SetupBattle(GameState.EliteBattle);
-                break;
-            case GameState.BossBattle:
-                battleManager.gameObject.SetActive(true);
-                battleManager.SetupBattle(GameState.BossBattle);
                 break;
 
             case GameState.Shop:
@@ -67,8 +63,7 @@ public class GameManager : Singleton<GameManager>
 
         switch (node.Type)
         {
-            case NodeType.Elite: EnterState(GameState.EliteBattle); break;
-            case NodeType.Boss: EnterState(GameState.BossBattle); break;
+            case NodeType.Battle: EnterState(GameState.Battle); break;
             case NodeType.Shop: EnterState(GameState.Shop); break;
         }
     }

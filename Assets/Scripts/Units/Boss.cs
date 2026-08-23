@@ -29,6 +29,7 @@ public class Boss : MonoBehaviour
 
     private void TurnEvents_OnBossTurnStart()
     {
+        //print("Boss starting");
         StartCoroutine(Attack());
     }
 
