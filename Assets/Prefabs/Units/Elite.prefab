@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c62bd062a39814b92a1e8385fdf299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 1
+  maxHealth: 10
   healthBarFill: {fileID: 7315989420291916420}
   healthText: {fileID: 7690011903509465322}
   flash: {fileID: 9131652200720595214}

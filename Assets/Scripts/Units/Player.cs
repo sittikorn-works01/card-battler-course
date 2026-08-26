@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
         animator.Play("Attack 2");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-        BossEvents.BossHit(attackPower);
+        EnemyEvents.BossHit(attackPower);
 
         timeElapsed = 0f;
 

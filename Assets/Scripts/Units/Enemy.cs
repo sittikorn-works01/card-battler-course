@@ -1,39 +1,80 @@
 using UnityEngine;
 using System.Collections;
 
-public class Boss : MonoBehaviour
+public enum EnemyBehavior
+{
+    Attack, Empower
+}
+
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private Health health;
     [SerializeField] private Animator animator;
 
-    private int attackPower = 3;
+    private int originalATK = 3;
+    private int attackPower;
+    private int empower = 2;
 
     private Vector3 originalPosition;
 
     private void OnEnable()
     {
-        BossEvents.OnBossHit += BossEvents_OnBossHit;
-        TurnEvents.OnBossTurnStart += TurnEvents_OnBossTurnStart;
+        EnemyEvents.OnBossHit += BossEvents_OnEnemyHit;
+        TurnEvents.OnEnemyTurnStart += TurnEvents_OnEnemyTurnStart;
     }
 
     private void OnDisable()
     {
-        BossEvents.OnBossHit -= BossEvents_OnBossHit;
-        TurnEvents.OnBossTurnStart -= TurnEvents_OnBossTurnStart;
+        EnemyEvents.OnBossHit -= BossEvents_OnEnemyHit;
+        TurnEvents.OnEnemyTurnStart -= TurnEvents_OnEnemyTurnStart;
     }
 
     private void Start()
     {
         originalPosition = transform.position;
+        attackPower = originalATK;
     }
 
-    private void TurnEvents_OnBossTurnStart()
+    private void TurnEvents_OnEnemyTurnStart()
     {
-        StartCoroutine(Attack());
+        DecideActions();
+    }
+
+    private void DecideActions()
+    {
+        if(attackPower >= originalATK + empower)
+        {
+            StartCoroutine(Attack());
+        }
+        else
+        {
+            RandomEnemyAction();
+        }
+    }
+
+    private void RandomEnemyAction()
+    {
+        if (Random.Range(0, 2) > 0)
+        {
+            StartCoroutine(Attack());
+        }
+        else
+        {
+            Empower();
+        }
+    }
+
+    #region Skills
+    private void Empower()
+    {
+        Dev.Log();
+        attackPower += empower;
+        TurnSystem.Instance.EndBossTurn();
     }
 
     private IEnumerator Attack()
     {
+        Dev.Log();
         Vector3 targetPosition = originalPosition + new Vector3(-4, 0, 0);
 
         float duration = 0.5f;
@@ -59,10 +100,13 @@ public class Boss : MonoBehaviour
             yield return null;
         }
 
+        attackPower = originalATK;
+        TurnSystem.Instance.EndBossTurn();
         yield return null;
     }
+    #endregion
 
-    private void BossEvents_OnBossHit(int damage)
+    private void BossEvents_OnEnemyHit(int damage)
     {
         print($"Boss received {damage} damage!");
         health.TakeDamage(damage);
@@ -70,7 +114,7 @@ public class Boss : MonoBehaviour
         if(!health.IsAlive())
         {
             animator.Play("Death");
-            BossEvents.BossDeath();
+            EnemyEvents.BossDeath();
         }
     }
 }

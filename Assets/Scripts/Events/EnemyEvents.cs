@@ -1,6 +1,6 @@
 using System;
 
-public static class BossEvents
+public static class EnemyEvents
 {
     public static event Action<int> OnBossHit;
     public static event Action OnBossDeath;

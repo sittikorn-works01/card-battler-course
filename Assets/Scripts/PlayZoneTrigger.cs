@@ -9,13 +9,13 @@ public class PlayZoneTrigger : MonoBehaviour
     private void OnEnable()
     {
         PlayerEvents.OnPlayerDeath += DisablePlayZone;
-        BossEvents.OnBossDeath += DisablePlayZone;
+        EnemyEvents.OnBossDeath += DisablePlayZone;
     }
 
     private void OnDisable()
     {
         PlayerEvents.OnPlayerDeath -= DisablePlayZone;
-        BossEvents.OnBossDeath -= DisablePlayZone;
+        EnemyEvents.OnBossDeath -= DisablePlayZone;
     }
 
     public void EnablePlayZone()

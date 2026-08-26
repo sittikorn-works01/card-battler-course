@@ -12,13 +12,13 @@ public class ResultPanel : BasePanel
     private void OnEnable()
     {
         PlayerEvents.OnPlayerDeath += OnPlayerDeath;
-        BossEvents.OnBossDeath += OnBossDeath;
+        EnemyEvents.OnBossDeath += OnBossDeath;
     }
 
     private void OnDisable()
     {
         PlayerEvents.OnPlayerDeath -= OnPlayerDeath;
-        BossEvents.OnBossDeath -= OnBossDeath;
+        EnemyEvents.OnBossDeath -= OnBossDeath;
     }
 
     public override void Open()

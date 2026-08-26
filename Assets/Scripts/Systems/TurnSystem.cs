@@ -31,7 +31,7 @@ public class TurnSystem : Singleton<TurnSystem>
         PlayerEvents.OnReshuffleRequested += PlayerEvents_OnReshuffleRequested;
 
         PlayerEvents.OnPlayerDeath += ClearTurnStateDisplayText;
-        BossEvents.OnBossDeath += ClearTurnStateDisplayText;
+        EnemyEvents.OnBossDeath += ClearTurnStateDisplayText;
     }
 
     private void OnDisable()
@@ -41,7 +41,7 @@ public class TurnSystem : Singleton<TurnSystem>
         PlayerEvents.OnReshuffleRequested -= PlayerEvents_OnReshuffleRequested;
 
         PlayerEvents.OnPlayerDeath -= ClearTurnStateDisplayText;
-        BossEvents.OnBossDeath -= ClearTurnStateDisplayText;
+        EnemyEvents.OnBossDeath -= ClearTurnStateDisplayText;
     }
 
     public void Initialize()
@@ -76,10 +76,9 @@ public class TurnSystem : Singleton<TurnSystem>
         BossTurn();
     }
 
-    private async UniTaskVoid EndBossTurn()
+    public void EndBossTurn()
     {
-        TurnEvents.BossTurnEnd();
-        await UniTask.Delay((int)(bossDelayTime * MilliSecondMultiplier));
+        TurnEvents.EnemyTurnEnd();
         WaitBetweenTurns().Forget();
     }
 
@@ -152,8 +151,8 @@ public class TurnSystem : Singleton<TurnSystem>
 
     private void BossTurn()
     {
-        TurnEvents.BossTurnStart();
-        EndBossTurn().Forget();
+        TurnEvents.EnemyTurnStart();
+        //EndBossTurn().Forget();
         
     }
 }

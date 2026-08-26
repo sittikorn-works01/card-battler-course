@@ -5,8 +5,8 @@ public static class TurnEvents
 {
     public static event Action OnPlayerTurnStart;
     public static event Action OnPlayerTurnEnd;
-    public static event Action OnBossTurnStart;
-    public static event Action OnBossTurnEnd;
+    public static event Action OnEnemyTurnStart;
+    public static event Action OnEnemyTurnEnd;
 
     public static void PlayerTurnStart()
     {
@@ -18,13 +18,13 @@ public static class TurnEvents
         OnPlayerTurnEnd?.Invoke();
     }
 
-    public static void BossTurnStart()
+    public static void EnemyTurnStart()
     {
-        OnBossTurnStart?.Invoke();
+        OnEnemyTurnStart?.Invoke();
     }
 
-    public static void BossTurnEnd()
+    public static void EnemyTurnEnd()
     {
-        OnBossTurnEnd?.Invoke();
+        OnEnemyTurnEnd?.Invoke();
     }
 }
