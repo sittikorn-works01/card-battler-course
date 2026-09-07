@@ -8,12 +8,15 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Health health;
     [SerializeField] private ParticleSystem healVFX;
+    [SerializeField] private Animator empowerVFX;
 
     public List<Buff> activeBuffs = new();
 
     private void Start()
     {
         originalPosition = transform.position;
+
+        health.Init(PlayerData.Instance.CurrentHealth, PlayerData.Instance.MaxHealth);
     }
 
     private void OnEnable()
@@ -21,6 +24,12 @@ public class Player : MonoBehaviour
         PlayerEvents.OnCardPlayed += PlayerEvents_OnCardPlayed;
         PlayerEvents.OnPlayerHit += PlayerEvents_OnPlayerHit;
         PlayerEvents.OnSkillEnd += RefreshActiveBuffs;
+        EnemyEvents.OnBossDeath += EnemyEvents_OnBossDeath;
+    }
+
+    private void EnemyEvents_OnBossDeath()
+    {
+        SaveHealthData();
     }
 
     private void RefreshActiveBuffs()
@@ -54,6 +63,7 @@ public class Player : MonoBehaviour
         else
         {
             Empower(cardData);
+            empowerVFX.Play("Empower");
         }
 
 
@@ -75,6 +85,7 @@ public class Player : MonoBehaviour
     private void PlayerEvents_OnPlayerHit(int damageAmount)
     {
         health.TakeDamage(damageAmount);
+        GameManager.Instance.ShowTextPopup(TextType.Damage, damageAmount.ToString(), transform.position);
 
         if (!health.IsAlive())
         {
@@ -103,9 +114,19 @@ public class Player : MonoBehaviour
     private void Heal(CardData cardData)
     {
         health.Heal(cardData.healPower);
+        GameManager.Instance.ShowTextPopup(TextType.Heal, cardData.healPower.ToString(), transform.position);
         healVFX.Play();
         PlayerEvents.PlayerHealed();
         PlayerEvents.SkillEnd();
+    }
+
+    private void SaveHealthData()
+    {
+        health.GetHealthData(out float currentHealth, out float maxHealth);
+        PlayerData.Instance.CurrentHealth = currentHealth;
+        PlayerData.Instance.MaxHealth = maxHealth;
+
+        PlayerData.Instance.Save();
     }
 
     private IEnumerator PlayAttackAnimation(int attackPower)

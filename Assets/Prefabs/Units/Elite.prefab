@@ -589,6 +589,7 @@ Transform:
   m_Children:
   - {fileID: 1329570840023023927}
   - {fileID: 4308628113059862798}
+  - {fileID: 5968309639055000451}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8439585463279026515
@@ -605,6 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   health: {fileID: 9124352412311487057}
   animator: {fileID: 666503636454035055}
+  empowerVFX: {fileID: 5025813532320718730}
 --- !u!114 &9124352412311487057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,3 +623,78 @@ MonoBehaviour:
   healthBarFill: {fileID: 7315989420291916420}
   healthText: {fileID: 7690011903509465322}
   flash: {fileID: 9131652200720595214}
+--- !u!1001 &7949777160765507731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 579857239887650438}
+    m_Modifications:
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18050483
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432176875547517337, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_Name
+      value: EmpowerVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6703216078700198454, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.309
+      objectReference: {fileID: 0}
+    - target: {fileID: 6703216078700198454, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.283
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+--- !u!95 &5025813532320718730 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3164921073424848665, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+  m_PrefabInstance: {fileID: 7949777160765507731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5968309639055000451 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4359759093722303248, guid: ef4ad18a763944643840aabe549857ad, type: 3}
+  m_PrefabInstance: {fileID: 7949777160765507731}
+  m_PrefabAsset: {fileID: 0}

@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+public enum TextType
+{
+    Heal, Damage
+}
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private BattleManager battleManager;
@@ -10,20 +14,24 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private MapView mapView;
 
     [SerializeField] private GameState startState;
-    [SerializeField] private RunData runData;
+    [SerializeField] private PlayerData runData;
 
-    public RunData RunData => runData;
+    [SerializeField] private TextMeshPro textPopup;
+
+    public PlayerData GetRunData => runData;
 
     public GameState CurrentState { get; private set; }
 
     public event Action<GameState> OnStateChanged;
+
+   
 
     protected override void Awake()
     {
         base.Awake();
 
         if (runData == null)
-            runData = new RunData();
+            runData = new PlayerData();
     }
 
     private void Start()
@@ -31,8 +39,27 @@ public class GameManager : Singleton<GameManager>
         EnterState(startState);
     }
 
+    public void ShowTextPopup(TextType textType, string text, Vector2 position)
+    {
+        TextMeshPro spawnedText = Instantiate(textPopup, position, Quaternion.identity);
+        switch (textType)
+        {
+            case TextType.Heal:
+                spawnedText.color = Color.green;
+                break;
+
+            case TextType.Damage:
+                spawnedText.color = Color.red;
+                break;
+        }
+        spawnedText.text = text;
+        Destroy(spawnedText.gameObject, 3f);
+    }
+
     public void EnterState(GameState newState)
     {
+        PlayerData.Instance.Save();
+
         battleManager.gameObject.SetActive(false);
         shopManager.gameObject.SetActive(false);
         mapView.gameObject.SetActive(false);

@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Health health;
     [SerializeField] private Animator animator;
+    [SerializeField] private Animator empowerVFX;
 
     private int originalATK = 3;
     private int attackPower;
@@ -70,6 +71,7 @@ public class Enemy : MonoBehaviour
         Dev.Log();
         attackPower += empower;
         TurnSystem.Instance.EndBossTurn();
+        empowerVFX.Play("Empower");
     }
 
     private IEnumerator Attack()
@@ -111,7 +113,9 @@ public class Enemy : MonoBehaviour
         print($"Boss received {damage} damage!");
         health.TakeDamage(damage);
 
-        if(!health.IsAlive())
+        GameManager.Instance.ShowTextPopup(TextType.Damage, damage.ToString(), transform.position);
+
+        if (!health.IsAlive())
         {
             animator.Play("Death");
             EnemyEvents.BossDeath();
