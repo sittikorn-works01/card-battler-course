@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 100;
+    private float maxHealth;
     private float currentHealth;
 
     [SerializeField] private Image healthBarFill;
@@ -12,9 +12,10 @@ public class Health : MonoBehaviour
 
     [SerializeField] private Flash flash;
 
-    private void Start()
+    public void Init(float currentHealth, float maxHealth)
     {
-        currentHealth = maxHealth;
+        this.currentHealth = currentHealth;
+        this.maxHealth = maxHealth;
         UpdateHealthBarUI();
     }
 
@@ -49,6 +50,12 @@ public class Health : MonoBehaviour
             currentHealth = 0;
         }
         UpdateHealthBarUI();
+    }
+
+    public void GetHealthData(out float currentHealth, out float maxHealth)
+    {
+        currentHealth = this.currentHealth; 
+        maxHealth = this.maxHealth;
     }
 
     public bool IsAlive() => currentHealth > 0;

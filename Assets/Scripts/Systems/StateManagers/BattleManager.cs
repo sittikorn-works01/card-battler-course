@@ -83,6 +83,7 @@ public class BattleManager : MonoBehaviour
     private void OnBattleEnd()
     {
         isBattleActive = false;
+        PlayerData.Instance.Save();
     }
 
 

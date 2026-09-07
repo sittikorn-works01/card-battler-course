@@ -21,7 +21,7 @@ public class MapView : MonoBehaviour
 
     private void OnEnable()
     {
-        RunData run = GameManager.Instance.RunData;
+        PlayerData run = GameManager.Instance.GetRunData;
 
         if(run.CurrentMap == null || run.CurrentMap.Floors.Count == 0)
             run.CurrentMap = MapGenerator.GenerateAct(floorCount: 3, nodesPerFloor: 3);
@@ -97,7 +97,7 @@ public class MapView : MonoBehaviour
 
     private void OnNodeClicked(MapNode node)
     {
-        RunData run = GameManager.Instance.RunData;
+        PlayerData run = GameManager.Instance.GetRunData;
         run.CurrentMap.CurrentNode = node;
 
         GameManager.Instance.EnterNode(node);
