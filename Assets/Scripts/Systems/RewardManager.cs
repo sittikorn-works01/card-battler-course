@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RewardManager : Singleton<RewardManager>
 {   
-    [SerializeField] private Card cardPrefab;
     [SerializeField] private Card[] blankDropCards;
     [SerializeField] private List<CardData> rewardPool; 
     [SerializeField] private ResultPanel resultPanel; 
@@ -12,6 +11,7 @@ public class RewardManager : Singleton<RewardManager>
     {
         foreach (Card dropCard in blankDropCards)
         {
+            dropCard.Init(OnSelectedCard);
             CardData newCardDrop = rewardPool[Random.Range(0, rewardPool.Count)];
             dropCard.LoadCardData(newCardDrop);
             dropCard.gameObject.SetActive(true);
@@ -19,7 +19,7 @@ public class RewardManager : Singleton<RewardManager>
 
     }
 
-    public void SelectCard(CardData chosenCard)
+    public void OnSelectedCard(CardData chosenCard)
     {
         print($"{chosenCard.CardName} has been added");
         DeckEvents.AddCardToDeck(chosenCard);

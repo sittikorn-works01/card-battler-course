@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using System;
 using UnityEngine.Rendering;
 
 public class Card : MonoBehaviour
@@ -30,6 +31,13 @@ public class Card : MonoBehaviour
     [SerializeField] private int glowDuration = 300;
     [SerializeField] private SpriteRenderer disableOverlay;
 
+    private event Action<CardData> OnClicked;
+
+    public void Init(Action<CardData> clickCallBack)
+    {
+        OnClicked = clickCallBack;
+    }
+
     private void Start()
     {
         originalScale = transform.localScale;
@@ -48,9 +56,11 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.Instance.IsBattleActive()) return;
+        //if (GameManager.Instance.IsBattleActive()) return;
+        //if (OnClicked == null) return;
 
-        RewardManager.Instance.SelectCard(cardData);        
+        OnClicked?.Invoke(cardData);
+        //RewardManager.Instance.SelectCard(cardData);        
     }
 
     private void OnMouseEnter()
