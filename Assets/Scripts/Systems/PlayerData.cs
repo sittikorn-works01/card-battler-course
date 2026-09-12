@@ -30,9 +30,9 @@ public class PlayerData : Singleton<PlayerData>
         return true;
     }
 
-    public void AddGold(int gold)
+    public void AddGold(int amount)
     {
-        gold += gold;
+        gold += amount;
     }
 
     public void TakeDamage(float amount)
