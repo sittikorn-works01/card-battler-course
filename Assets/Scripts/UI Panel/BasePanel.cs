@@ -7,9 +7,13 @@ public class BasePanel : MonoBehaviour
     public virtual void Open()
     {
         UICanvas.alpha = 1;
+        UICanvas.interactable = true;
+        UICanvas.blocksRaycasts = true;
     }
     public virtual void Close()
     {
         UICanvas.alpha = 0;
+        UICanvas.interactable = false;
+        UICanvas.blocksRaycasts = false;
     }
 }

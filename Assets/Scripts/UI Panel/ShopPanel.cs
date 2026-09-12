@@ -10,13 +10,21 @@ public class ShopPanel : BasePanel
     private void OnEnable()
     {
         exitShopButton.onClick.AddListener(ExitShop);
-        goldText.text = PlayerData.Instance.Gold.ToString();
+        PlayerData.OnGoldChanged += UpdateGoldTextUI;
+    }
+
+    private void UpdateGoldTextUI(int amount)
+    {
+        goldText.text = amount.ToString();
     }
 
     private void OnDisable()
     {
         exitShopButton.onClick.RemoveAllListeners();
+        PlayerData.OnGoldChanged -= UpdateGoldTextUI;
     }
+
+    
 
     private void ExitShop()
     {

@@ -18,6 +18,9 @@ public class PlayerData : Singleton<PlayerData>
 
     private string savePath; 
     public MapGraph CurrentMap = null;
+    
+    public static event Action<int> OnGoldChanged;
+    public static event Action<int> OnHealthChanged;
 
     private void Start()
     {
@@ -27,22 +30,26 @@ public class PlayerData : Singleton<PlayerData>
     {
         if (gold < price) return false;
         gold -= price;
+        OnGoldChanged?.Invoke(gold);
         return true;
     }
 
     public void AddGold(int amount)
     {
         gold += amount;
+        OnGoldChanged?.Invoke(gold);
     }
 
     public void TakeDamage(float amount)
     {
         currentHealth = Mathf.Max(0, currentHealth - amount);
+        OnHealthChanged?.Invoke((int)currentHealth);
     }
 
     public void Heal(float amount)
     {
         currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        OnHealthChanged?.Invoke((int)currentHealth);
     }
 
     public void Save()
