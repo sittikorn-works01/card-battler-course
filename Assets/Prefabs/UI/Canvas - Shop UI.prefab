@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 1106671385001933546}
   - component: {fileID: 1008873992341614947}
   m_Layer: 5
-  m_Name: Text - Coin
+  m_Name: Text - Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -649,6 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopPanel
   UICanvas: {fileID: 8562996913870770465}
   exitShopButton: {fileID: 3337139120363018853}
+  goldText: {fileID: 1008873992341614947}
 --- !u!114 &1382923475335869128
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,18 +5,44 @@ using System.IO;
 
 public class PlayerData : Singleton<PlayerData>
 {
-    public float CurrentHealth = 50;
-    public float MaxHealth = 50;
-    public float Gold;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private int gold;
 
-    public int CurrentActIndex = 0;
-    public int CurrentFloorIndex = 0;
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
+    public int Gold => gold;
 
+    //private int CurrentActIndex = 0;
+    //private int CurrentFloorIndex = 0;
+
+    private string savePath; 
     public MapGraph CurrentMap = null;
 
     private void Start()
     {
-        print(Application.persistentDataPath);
+        savePath = Path.Combine(Application.persistentDataPath, "savefile.json");
+    }
+    public bool TrySpendingGold(int price)
+    {
+        if (gold < price) return false;
+        gold -= price;
+        return true;
+    }
+
+    public void AddGold(int gold)
+    {
+        gold += gold;
+    }
+
+    public void TakeDamage(float amount)
+    {
+        currentHealth = Mathf.Max(0, currentHealth - amount);
+    }
+
+    public void Heal(float amount)
+    {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
     }
 
     public void Save()
@@ -27,20 +53,27 @@ public class PlayerData : Singleton<PlayerData>
         saveData.Gold = Gold;
 
         string json = JsonUtility.ToJson(saveData);
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        File.WriteAllText(savePath, json);
     }
 
-    public void Load() {
-        string path = Application.persistentDataPath + "/savefile.json";
-        if (File.Exists(path))
+    public void Load() 
+    {
+        if (!File.Exists(savePath)) return;
+
+        try
         {
-            string json = File.ReadAllText(path);
+            string json = File.ReadAllText(savePath);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
-             CurrentHealth = saveData.CurrentHealth;
-             MaxHealth = saveData.MaxHealth;
-             Gold = saveData.Gold;
+            currentHealth = saveData.CurrentHealth;
+            maxHealth = saveData.MaxHealth;
+            gold = saveData.Gold;
+
+            print("LOAD COMPLETED");
         }
+        catch (Exception e) {
+            Debug.LogWarning($"Save file corrupted or unreadable, starting fresh: {e.Message}");
+        }        
     }
 }
 
@@ -49,5 +82,5 @@ public class SaveData
 {
     public float CurrentHealth;
     public float MaxHealth;
-    public float Gold;
+    public int Gold;
 }

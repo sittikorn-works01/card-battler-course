@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     private int attackPower;
     private int empower = 2;
 
+    private float maxHealth = 1;
+    private float currentHealth = 1;
+
     private Vector3 originalPosition;
 
     private void OnEnable()
@@ -34,6 +37,7 @@ public class Enemy : MonoBehaviour
     {
         originalPosition = transform.position;
         attackPower = originalATK;
+        health.Init(currentHealth, maxHealth);
     }
 
     private void TurnEvents_OnEnemyTurnStart()

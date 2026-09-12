@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
 
     private void EnemyEvents_OnBossDeath()
     {
-        SaveHealthData();
     }
 
     private void RefreshActiveBuffs()
@@ -118,15 +117,6 @@ public class Player : MonoBehaviour
         healVFX.Play();
         PlayerEvents.PlayerHealed();
         PlayerEvents.SkillEnd();
-    }
-
-    private void SaveHealthData()
-    {
-        health.GetHealthData(out float currentHealth, out float maxHealth);
-        PlayerData.Instance.CurrentHealth = currentHealth;
-        PlayerData.Instance.MaxHealth = maxHealth;
-
-        PlayerData.Instance.Save();
     }
 
     private IEnumerator PlayAttackAnimation(int attackPower)

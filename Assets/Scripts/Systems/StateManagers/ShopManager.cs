@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] private GameObject shopCanvas;
+    [SerializeField] private GameObject shopUI;
     [SerializeField] private Card[] blankDropCards;
     [SerializeField] private List<CardData> rewardPool;
 
-    private float cardPrice = 1;
+    private int cardPrice = 2;
 
     private void OnEnable()
     {
-        shopCanvas.SetActive(true);
+        shopUI.SetActive(true);
         SpawnRewardCards();
     }
 
     private void OnDisable()
     {
-        shopCanvas.SetActive(false);
+        shopUI.SetActive(false);
         HideDropCards();
     }
 
@@ -36,14 +36,17 @@ public class ShopManager : MonoBehaviour
 
     public void OnSelectedCard(CardData chosenCard)
     {
-        //check if player can afford it
-        print($"{chosenCard.CardName} has been added");
-        DeckEvents.AddCardToDeck(chosenCard);
-
-        foreach (Card dropCard in blankDropCards)
+        if(PlayerData.Instance.TrySpendingGold(cardPrice))
         {
-            dropCard.SetInteractable(false);
-        }
+            print($"{chosenCard.CardName} has been added");
+            DeckEvents.AddCardToDeck(chosenCard);
+            print($"Player has gold left: {PlayerData.Instance.Gold}");
+
+            foreach (Card dropCard in blankDropCards)
+            {
+                dropCard.SetInteractable(false);
+            }
+        }        
     }
 
     public void HideDropCards()

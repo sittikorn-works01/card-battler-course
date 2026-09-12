@@ -10,7 +10,7 @@ public class BattleManager : MonoBehaviour
     public bool IsBattleActive() => isBattleActive;
 
     [SerializeField] private PlayerHand playerHand;
-    [SerializeField] private GameObject battleCanvas;
+    [SerializeField] private GameObject battleUI;
     [SerializeField] private PlayZoneTrigger playZone;
 
     //Units for instantiating
@@ -24,19 +24,38 @@ public class BattleManager : MonoBehaviour
     private GameObject currentPlayerCharacter;
     private GameObject currentEnemyCharacter;
 
+    private int rewardGold = 10;
+
     private void OnEnable()
     {
-        PlayerEvents.OnPlayerDeath += OnBattleEnd;
-        EnemyEvents.OnBossDeath += OnBattleEnd;
+        PlayerEvents.OnPlayerDeath += OnPlayerLose;
+        EnemyEvents.OnBossDeath += OnPlayerWin;
 
         
     }
 
     private void OnDisable()
     {
-        PlayerEvents.OnPlayerDeath -= OnBattleEnd;
-        EnemyEvents.OnBossDeath -= OnBattleEnd;
+        PlayerEvents.OnPlayerDeath -= OnPlayerLose;
+        EnemyEvents.OnBossDeath -= OnPlayerWin;
         OnExitBattleState();
+    }
+
+    private void OnPlayerWin()
+    {
+        OnBattleEnd();
+        PlayerData.Instance.AddGold(rewardGold);
+    }
+
+    private void OnPlayerLose()
+    {
+        OnBattleEnd();
+    }
+
+    private void OnBattleEnd()
+    {
+        isBattleActive = false;
+        PlayerData.Instance.Save();
     }
 
     public void SetupBattle(GameState enemyType)
@@ -44,7 +63,7 @@ public class BattleManager : MonoBehaviour
         isBattleActive = true;
 
         playerHand.Initialize();
-        battleCanvas.SetActive(true);
+        battleUI.SetActive(true);
         playZone.EnablePlayZone();
         TurnSystem.Instance.Initialize();
 
@@ -72,18 +91,12 @@ public class BattleManager : MonoBehaviour
 
     private void OnExitBattleState()
     {
-        battleCanvas.SetActive(false);
+        battleUI.SetActive(false);
 
         Destroy(currentPlayerCharacter.gameObject);
         Destroy(currentEnemyCharacter.gameObject);
 
         playerHand.Dispose();
-    }
-
-    private void OnBattleEnd()
-    {
-        isBattleActive = false;
-        PlayerData.Instance.Save();
     }
 
 

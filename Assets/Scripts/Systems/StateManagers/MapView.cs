@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MapView : MonoBehaviour
 {
     [Header("Prefabs & containers")]
-    [SerializeField] private GameObject mapUICanvas;
+    [SerializeField] private GameObject mapUI;
     [SerializeField] private RectTransform nodeContainer;   // parent for spawned node buttons
     [SerializeField] private RectTransform lineContainer;  
     [SerializeField] private GameObject nodeButtonPrefab;    // a Button + Image + TMP label
@@ -19,20 +19,22 @@ public class MapView : MonoBehaviour
     private readonly Dictionary<MapNode, Button> _nodeButtons = new Dictionary<MapNode, Button>();
     private readonly List<GameObject> _spawnedLines = new List<GameObject>();
 
+    private PlayerData PlayerData => PlayerData.Instance;
+
     private void OnEnable()
     {
-        PlayerData run = GameManager.Instance.GetRunData;
+        PlayerData PlayerData = PlayerData.Instance;
 
-        if(run.CurrentMap == null || run.CurrentMap.Floors.Count == 0)
-            run.CurrentMap = MapGenerator.GenerateAct(floorCount: 3, nodesPerFloor: 3);
+        if(PlayerData.CurrentMap == null || PlayerData.CurrentMap.Floors.Count == 0)
+            PlayerData.CurrentMap = MapGenerator.GenerateAct(floorCount: 3, nodesPerFloor: 3);
 
-        BuildView(run.CurrentMap);
-        mapUICanvas.SetActive(true);
+        BuildView(PlayerData.CurrentMap);
+        mapUI.SetActive(true);
     }
 
     private void OnDisable()
     {
-        mapUICanvas.SetActive(false);
+        mapUI.SetActive(false);
     }
 
     private void BuildView(MapGraph map)
@@ -97,8 +99,7 @@ public class MapView : MonoBehaviour
 
     private void OnNodeClicked(MapNode node)
     {
-        PlayerData run = GameManager.Instance.GetRunData;
-        run.CurrentMap.CurrentNode = node;
+        PlayerData.CurrentMap.CurrentNode = node;
 
         GameManager.Instance.EnterNode(node);
     }

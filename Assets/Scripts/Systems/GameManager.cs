@@ -14,11 +14,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private MapView mapView;
 
     [SerializeField] private GameState startState;
-    [SerializeField] private PlayerData runData;
-
     [SerializeField] private TextMeshPro textPopup;
-
-    public PlayerData GetRunData => runData;
 
     public GameState CurrentState { get; private set; }
 
@@ -29,14 +25,12 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-
-        if (runData == null)
-            runData = new PlayerData();
     }
 
     private void Start()
     {
         EnterState(startState);
+        PlayerData.Instance.Load();
     }
 
     public void ShowTextPopup(TextType textType, string text, Vector2 position)
@@ -58,7 +52,7 @@ public class GameManager : Singleton<GameManager>
 
     public void EnterState(GameState newState)
     {
-        PlayerData.Instance.Save();
+        //PlayerData.Instance.Save();
 
         battleManager.gameObject.SetActive(false);
         shopManager.gameObject.SetActive(false);

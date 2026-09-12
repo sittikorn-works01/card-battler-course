@@ -52,11 +52,11 @@ public class Health : MonoBehaviour
         UpdateHealthBarUI();
     }
 
-    public void GetHealthData(out float currentHealth, out float maxHealth)
-    {
-        currentHealth = this.currentHealth; 
-        maxHealth = this.maxHealth;
-    }
+    //public void GetHealthData(out float currentHealth, out float maxHealth)
+    //{
+    //    currentHealth = this.currentHealth; 
+    //    maxHealth = this.maxHealth;
+    //}
 
     public bool IsAlive() => currentHealth > 0;
 }
