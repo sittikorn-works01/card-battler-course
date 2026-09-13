@@ -2,16 +2,16 @@ using System;
 
 public static class EnemyEvents
 {
-    public static event Action<int> OnBossHit;
-    public static event Action OnBossDeath;
+    public static event Action<int> OnEnemyHit;
+    public static event Action OnEnemyDeath;
 
-    public static void BossHit(int damage)
+    public static void EnemyHit(int damage)
     {
-        OnBossHit?.Invoke(damage);
+        OnEnemyHit?.Invoke(damage);
     }
 
-    public static void BossDeath()
+    public static void EnemyDeath()
     {
-        OnBossDeath?.Invoke();
+        OnEnemyDeath?.Invoke();
     }
 }

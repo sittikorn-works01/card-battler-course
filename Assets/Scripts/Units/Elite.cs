@@ -1,16 +1,21 @@
+using System.Collections;
 using UnityEngine;
 
-public class Elite : MonoBehaviour
+// Example of a simpler enemy built on the shared Enemy base: no empower
+// mechanic, it just attacks every turn.
+public class Elite : Enemy
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private int attackPower = 2;
+
+    protected override void DecideActions()
     {
-        
+        StartCoroutine(Attack());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Attack()
     {
-        
+        Dev.Log();
+        yield return MoveAndAttack("Attack", () => PlayerEvents.PlayerHit(attackPower));
+        EndTurn();
     }
 }

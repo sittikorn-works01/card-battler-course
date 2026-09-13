@@ -1,128 +1,83 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using UnityEngine;
 
-public enum EnemyBehavior
-{
-    Attack, Empower
-}
-
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private Health health;
     [SerializeField] private Animator animator;
-    [SerializeField] private Animator empowerVFX;
-
-    private int originalATK = 3;
-    private int attackPower;
-    private int empower = 2;
 
     private float maxHealth = 1;
     private float currentHealth = 1;
 
-    private Vector3 originalPosition;
+    protected Vector3 originalPosition;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        EnemyEvents.OnBossHit += BossEvents_OnEnemyHit;
-        TurnEvents.OnEnemyTurnStart += TurnEvents_OnEnemyTurnStart;
+        EnemyEvents.OnEnemyHit += OnHit;
+        TurnEvents.OnEnemyTurnStart += OnTurnStart;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
-        EnemyEvents.OnBossHit -= BossEvents_OnEnemyHit;
-        TurnEvents.OnEnemyTurnStart -= TurnEvents_OnEnemyTurnStart;
+        EnemyEvents.OnEnemyHit -= OnHit;
+        TurnEvents.OnEnemyTurnStart -= OnTurnStart;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         originalPosition = transform.position;
-        attackPower = originalATK;
         health.Init(currentHealth, maxHealth);
     }
 
-    private void TurnEvents_OnEnemyTurnStart()
+    private void OnTurnStart()
     {
         DecideActions();
     }
 
-    private void DecideActions()
+    // Each enemy type decides what happens on its turn: attack pattern, buffs, etc.
+    protected abstract void DecideActions();
+
+    protected void EndTurn() => TurnSystem.Instance.EndEnemyTurn();
+
+    protected virtual void OnHit(int damage)
     {
-        if(attackPower >= originalATK + empower)
-        {
-            StartCoroutine(Attack());
-        }
-        else
-        {
-            RandomEnemyAction();
-        }
-    }
-
-    private void RandomEnemyAction()
-    {
-        if (Random.Range(0, 2) > 0)
-        {
-            StartCoroutine(Attack());
-        }
-        else
-        {
-            Empower();
-        }
-    }
-
-    #region Skills
-    private void Empower()
-    {
-        Dev.Log();
-        attackPower += empower;
-        TurnSystem.Instance.EndBossTurn();
-        empowerVFX.Play("Empower");
-    }
-
-    private IEnumerator Attack()
-    {
-        Dev.Log();
-        Vector3 targetPosition = originalPosition + new Vector3(-4, 0, 0);
-
-        float duration = 0.5f;
-        float timeElapsed = 0f;
-
-        while (timeElapsed < duration)
-        {
-            transform.position = Vector3.Lerp(originalPosition, targetPosition, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        animator.Play("Attack");
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        PlayerEvents.PlayerHit(attackPower);
-
-        timeElapsed = 0f;
-
-        while (timeElapsed < duration)
-        {
-            transform.position = Vector3.Lerp(targetPosition, originalPosition, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        attackPower = originalATK;
-        TurnSystem.Instance.EndBossTurn();
-        yield return null;
-    }
-    #endregion
-
-    private void BossEvents_OnEnemyHit(int damage)
-    {
-        print($"Boss received {damage} damage!");
         health.TakeDamage(damage);
-
         GameManager.Instance.ShowTextPopup(TextType.Damage, damage.ToString(), transform.position);
 
         if (!health.IsAlive())
         {
             animator.Play("Death");
-            EnemyEvents.BossDeath();
+            EnemyEvents.EnemyDeath();
         }
+    }
+
+    // Shared "lunge in, play attack anim, deal damage, lunge back" choreography
+    // so subclasses reuse the same tween instead of re-implementing it per enemy.
+    protected IEnumerator MoveAndAttack(string attackAnimation, Action onImpact, float lungeDistance = 4f, float duration = 0.5f)
+    {
+        Vector3 targetPosition = originalPosition + new Vector3(-lungeDistance, 0, 0);
+        yield return MoveTo(targetPosition, duration);
+
+        animator.Play(attackAnimation);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        onImpact?.Invoke();
+
+        yield return MoveTo(originalPosition, duration);
+    }
+
+    private IEnumerator MoveTo(Vector3 destination, float duration)
+    {
+        Vector3 start = transform.position;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < duration)
+        {
+            transform.position = Vector3.Lerp(start, destination, timeElapsed / duration);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = destination;
     }
 }

@@ -12,13 +12,13 @@ public class ResultPanel : BasePanel
     private void OnEnable()
     {
         PlayerEvents.OnPlayerDeath += OnPlayerDeath;
-        EnemyEvents.OnBossDeath += OnBossDeath;
+        EnemyEvents.OnEnemyDeath += OnEnemyDeath;
     }
 
     private void OnDisable()
     {
         PlayerEvents.OnPlayerDeath -= OnPlayerDeath;
-        EnemyEvents.OnBossDeath -= OnBossDeath;
+        EnemyEvents.OnEnemyDeath -= OnEnemyDeath;
     }
 
     public override void Open()
@@ -48,9 +48,9 @@ public class ResultPanel : BasePanel
         Open();
     }
 
-    private void OnBossDeath()
+    private void OnEnemyDeath()
     {
-        resultText.text = "You defeated the boss!";
+        resultText.text = "You defeated the enemy!";
         Open();
     }
 

@@ -23,7 +23,7 @@ public class PlayerHand : MonoBehaviour
         PlayerEvents.OnSkillEnd += EnablePlayerHand;
         PlayerEvents.OnPlayerDeath += DisablePlayerHand;
 
-        EnemyEvents.OnBossDeath += DisablePlayerHand;
+        EnemyEvents.OnEnemyDeath += DisablePlayerHand;
     }    
 
     private void OnDisable()
@@ -35,7 +35,7 @@ public class PlayerHand : MonoBehaviour
         PlayerEvents.OnSkillEnd -= EnablePlayerHand;
         PlayerEvents.OnPlayerDeath -= DisablePlayerHand;
 
-        EnemyEvents.OnBossDeath -= DisablePlayerHand;
+        EnemyEvents.OnEnemyDeath -= DisablePlayerHand;
     }
 
     public void Initialize()

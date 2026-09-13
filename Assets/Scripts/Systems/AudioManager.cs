@@ -23,8 +23,8 @@ public class AudioManager : Singleton<AudioManager>
         PlayerEvents.OnReshuffleRequested += PlayerEvents_ReshuffleRequested;
         PlayerEvents.OnPlayerHealed += PlayerEvents_PlayerHealed;
 
-        EnemyEvents.OnBossDeath += BossEvents_BossDeath;
-        EnemyEvents.OnBossHit += BossEvents_BossHit;
+        EnemyEvents.OnEnemyDeath += EnemyEvents_EnemyDeath;
+        EnemyEvents.OnEnemyHit += EnemyEvents_EnemyHit;
     }
 
     private void OnDisable()
@@ -36,8 +36,8 @@ public class AudioManager : Singleton<AudioManager>
         PlayerEvents.OnReshuffleRequested -= PlayerEvents_ReshuffleRequested;
         PlayerEvents.OnPlayerHealed -= PlayerEvents_PlayerHealed;
 
-        EnemyEvents.OnBossDeath -= BossEvents_BossDeath;
-        EnemyEvents.OnBossHit -= BossEvents_BossHit;
+        EnemyEvents.OnEnemyDeath -= EnemyEvents_EnemyDeath;
+        EnemyEvents.OnEnemyHit -= EnemyEvents_EnemyHit;
     }
 
     private void PlayerEvents_PlayerHealed()
@@ -70,12 +70,12 @@ public class AudioManager : Singleton<AudioManager>
         PlaySFX(shuffleSFX);
     }
 
-    private void BossEvents_BossDeath()
+    private void EnemyEvents_EnemyDeath()
     {
         PlaySFX(bossDeathSFX);
     }
 
-    private void BossEvents_BossHit(int _)
+    private void EnemyEvents_EnemyHit(int _)
     {
         PlaySFX(bossHitSFX);
     }

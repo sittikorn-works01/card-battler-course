@@ -24,10 +24,10 @@ public class Player : MonoBehaviour
         PlayerEvents.OnCardPlayed += PlayerEvents_OnCardPlayed;
         PlayerEvents.OnPlayerHit += PlayerEvents_OnPlayerHit;
         PlayerEvents.OnSkillEnd += RefreshActiveBuffs;
-        EnemyEvents.OnBossDeath += EnemyEvents_OnBossDeath;
+        EnemyEvents.OnEnemyDeath += EnemyEvents_OnEnemyDeath;
     }
 
-    private void EnemyEvents_OnBossDeath()
+    private void EnemyEvents_OnEnemyDeath()
     {
     }
 
@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         animator.Play("Attack 2");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-        EnemyEvents.BossHit(attackPower);
+        EnemyEvents.EnemyHit(attackPower);
 
         timeElapsed = 0f;
 

@@ -7,15 +7,11 @@ public class TopBarUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private Button pauseButton;
-    [SerializeField] private TextMeshProUGUI pauseButtonText;
-
-    private bool isPaused = false;
 
     private void OnEnable()
     {
         PlayerData.OnHealthChanged += UpdateHealthText;
         PlayerData.OnGoldChanged += UpdateGoldText;
-        //pauseButton.onClick.AddListener(TogglePause);
     }
 
     private void Start()
@@ -28,7 +24,6 @@ public class TopBarUI : MonoBehaviour
     {
         PlayerData.OnHealthChanged -= UpdateHealthText;
         PlayerData.OnGoldChanged -= UpdateGoldText;
-        //pauseButton.onClick.RemoveListener(TogglePause);
     }
 
     private void UpdateHealthText(int currentHealth)
@@ -39,12 +34,5 @@ public class TopBarUI : MonoBehaviour
     private void UpdateGoldText(int amount)
     {
         goldText.text = $"{amount} Gold";
-    }
-
-    private void TogglePause()
-    {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
-        pauseButtonText.text = isPaused ? "Resume" : "Pause";
     }
 }

@@ -8,7 +8,7 @@ public class TurnSystem : Singleton<TurnSystem>
 {
     private enum TurnState
     {
-        PlayerTurn, BossTurn
+        PlayerTurn, EnemyTurn
     }
 
     private TurnState currentState = TurnState.PlayerTurn;
@@ -20,7 +20,7 @@ public class TurnSystem : Singleton<TurnSystem>
     private int remainingActions;    
 
     [SerializeField] private float turnWaitTime = 2f;
-    [SerializeField] private float bossDelayTime = 1f;
+    [SerializeField] private float enemyDelayTime = 1f;
     private const float MilliSecondMultiplier = 1000;
     [SerializeField] private TextMeshProUGUI displayTurnStateText;
 
@@ -31,7 +31,7 @@ public class TurnSystem : Singleton<TurnSystem>
         PlayerEvents.OnReshuffleRequested += PlayerEvents_OnReshuffleRequested;
 
         PlayerEvents.OnPlayerDeath += ClearTurnStateDisplayText;
-        EnemyEvents.OnBossDeath += ClearTurnStateDisplayText;
+        EnemyEvents.OnEnemyDeath += ClearTurnStateDisplayText;
     }
 
     private void OnDisable()
@@ -41,7 +41,7 @@ public class TurnSystem : Singleton<TurnSystem>
         PlayerEvents.OnReshuffleRequested -= PlayerEvents_OnReshuffleRequested;
 
         PlayerEvents.OnPlayerDeath -= ClearTurnStateDisplayText;
-        EnemyEvents.OnBossDeath -= ClearTurnStateDisplayText;
+        EnemyEvents.OnEnemyDeath -= ClearTurnStateDisplayText;
     }
 
     public void Initialize()
@@ -68,15 +68,15 @@ public class TurnSystem : Singleton<TurnSystem>
         WaitBetweenTurns().Forget();
     }
 
-    private async UniTaskVoid StartBossTurn()
+    private async UniTaskVoid StartEnemyTurn()
     {
-        displayTurnStateText.text = "Boss's Turn";
-        currentState = TurnState.BossTurn;
-        await UniTask.Delay((int)(bossDelayTime * MilliSecondMultiplier));
-        BossTurn();
+        displayTurnStateText.text = "Enemy's Turn";
+        currentState = TurnState.EnemyTurn;
+        await UniTask.Delay((int)(enemyDelayTime * MilliSecondMultiplier));
+        EnemyTurn();
     }
 
-    public void EndBossTurn()
+    public void EndEnemyTurn()
     {
         TurnEvents.EnemyTurnEnd();
         WaitBetweenTurns().Forget();
@@ -100,7 +100,7 @@ public class TurnSystem : Singleton<TurnSystem>
             }
             else
             {
-                StartBossTurn().Forget();
+                StartEnemyTurn().Forget();
             }
         }
         
@@ -149,10 +149,10 @@ public class TurnSystem : Singleton<TurnSystem>
         UpdateActionsUI();
     }
 
-    private void BossTurn()
+    private void EnemyTurn()
     {
         TurnEvents.EnemyTurnStart();
-        //EndBossTurn().Forget();
-        
+        //EndEnemyTurn().Forget();
+
     }
 }
