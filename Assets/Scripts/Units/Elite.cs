@@ -5,9 +5,12 @@ using UnityEngine;
 // mechanic, it just attacks every turn.
 public class Elite : Enemy
 {
-    [SerializeField] private int attackPower = 2;
+    protected override EnemyIntent ChooseNextMove()
+    {
+        return new EnemyIntent(IntentType.Attack, enemyData.attackPower);
+    }
 
-    protected override void DecideActions()
+    protected override void PerformMove(EnemyIntent intent)
     {
         StartCoroutine(Attack());
     }
@@ -15,7 +18,7 @@ public class Elite : Enemy
     private IEnumerator Attack()
     {
         Dev.Log();
-        yield return MoveAndAttack("Attack", () => PlayerEvents.PlayerHit(attackPower));
+        yield return MoveAndAttack("Attack", () => PlayerEvents.PlayerHit(enemyData.attackPower));
         EndTurn();
     }
 }

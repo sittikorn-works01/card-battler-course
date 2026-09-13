@@ -6,37 +6,61 @@ public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private Health health;
     [SerializeField] private Animator animator;
-
-    private float maxHealth = 1;
-    private float currentHealth = 1;
+    [SerializeField] private EnemyIntentUI intentUI;
+    [SerializeField] protected EnemyData enemyData;
 
     protected Vector3 originalPosition;
+
+    private EnemyIntent nextMove;
 
     protected virtual void OnEnable()
     {
         EnemyEvents.OnEnemyHit += OnHit;
         TurnEvents.OnEnemyTurnStart += OnTurnStart;
+        TurnEvents.OnPlayerTurnStart += OnPlayerTurnStart;
     }
 
     protected virtual void OnDisable()
     {
         EnemyEvents.OnEnemyHit -= OnHit;
         TurnEvents.OnEnemyTurnStart -= OnTurnStart;
+        TurnEvents.OnPlayerTurnStart -= OnPlayerTurnStart;
     }
 
     protected virtual void Start()
     {
         originalPosition = transform.position;
-        health.Init(currentHealth, maxHealth);
+        health.Init(enemyData.maxHealth, enemyData.maxHealth);
+
+        // The player's first turn already started before this enemy was
+        // instantiated (see BattleManager.SetupBattle), so it never received
+        // that event. Show an intent right away instead of waiting for the
+        // next one.
+        ShowNextMove();
+    }
+
+    private void OnPlayerTurnStart()
+    {
+        ShowNextMove();
+    }
+
+    private void ShowNextMove()
+    {
+        nextMove = ChooseNextMove();
+        intentUI.SetIntent(nextMove);
     }
 
     private void OnTurnStart()
     {
-        DecideActions();
+        PerformMove(nextMove);
     }
 
-    // Each enemy type decides what happens on its turn: attack pattern, buffs, etc.
-    protected abstract void DecideActions();
+    // Each enemy type decides what its next move will be, without acting on
+    // it yet, so the intent can be telegraphed to the player one turn ahead.
+    protected abstract EnemyIntent ChooseNextMove();
+
+    // Executes the move that was previously telegraphed via ChooseNextMove.
+    protected abstract void PerformMove(EnemyIntent intent);
 
     protected void EndTurn() => TurnSystem.Instance.EndEnemyTurn();
 

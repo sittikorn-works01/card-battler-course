@@ -5,31 +5,28 @@ public class Boss : Enemy
 {
     [SerializeField] private Animator empowerVFX;
 
-    private readonly int originalATK = 3;
-    private readonly int empowerAmount = 2;
     private int attackPower;
 
     protected override void Start()
     {
+        // Set before base.Start(), which immediately telegraphs the first
+        // move via ChooseNextMove() and needs attackPower to be valid.
+        attackPower = enemyData.attackPower;
         base.Start();
-        attackPower = originalATK;
     }
 
-    protected override void DecideActions()
+    protected override EnemyIntent ChooseNextMove()
     {
-        if (attackPower >= originalATK + empowerAmount)
-        {
-            StartCoroutine(Attack());
-        }
-        else
-        {
-            RandomEnemyAction();
-        }
+        bool willAttack = attackPower >= enemyData.attackPower + enemyData.empowerAmount || Random.Range(0, 2) > 0;
+
+        return willAttack
+            ? new EnemyIntent(IntentType.Attack, attackPower)
+            : new EnemyIntent(IntentType.Buff, enemyData.empowerAmount);
     }
 
-    private void RandomEnemyAction()
+    protected override void PerformMove(EnemyIntent intent)
     {
-        if (Random.Range(0, 2) > 0)
+        if (intent.Type == IntentType.Attack)
         {
             StartCoroutine(Attack());
         }
@@ -42,7 +39,7 @@ public class Boss : Enemy
     private void Empower()
     {
         Dev.Log();
-        attackPower += empowerAmount;
+        attackPower += enemyData.empowerAmount;
         empowerVFX.Play("Empower");
         EndTurn();
     }
@@ -51,7 +48,7 @@ public class Boss : Enemy
     {
         Dev.Log();
         yield return MoveAndAttack("Attack", () => PlayerEvents.PlayerHit(attackPower));
-        attackPower = originalATK;
+        attackPower = enemyData.attackPower;
         EndTurn();
     }
 }
