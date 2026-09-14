@@ -26,7 +26,7 @@ public class MapView : MonoBehaviour
         PlayerData PlayerData = PlayerData.Instance;
 
         if(PlayerData.CurrentMap == null || PlayerData.CurrentMap.Floors.Count == 0)
-            PlayerData.CurrentMap = MapGenerator.GenerateAct(floorCount: 3, nodesPerFloor: 3);
+            PlayerData.CurrentMap = MapGenerator.GenerateAct(floorCount: 6, nodesPerFloor: 4);
 
         BuildView(PlayerData.CurrentMap);
         mapUI.SetActive(true);
