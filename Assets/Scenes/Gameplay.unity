@@ -874,7 +874,7 @@ MonoBehaviour:
   reshuffleCost: 1
   remainingActionsText: {fileID: 809286068}
   turnWaitTime: 2
-  bossDelayTime: 1
+  enemyDelayTime: 1
   displayTurnStateText: {fileID: 90774554}
 --- !u!4 &366381398
 Transform:
@@ -2286,7 +2286,7 @@ MonoBehaviour:
   battleManager: {fileID: 887245937}
   shopManager: {fileID: 1771757100}
   mapView: {fileID: 1943115832}
-  startState: 3
+  startState: 0
   textPopup: {fileID: 8914253290641776123, guid: e0b243c345b03384383e0d842f07b272, type: 3}
 --- !u!1 &1755773681
 GameObject:

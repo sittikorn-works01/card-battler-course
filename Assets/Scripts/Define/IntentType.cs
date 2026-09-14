@@ -1,5 +1,6 @@
 public enum IntentType
 {
     Attack,
-    Buff
+    Buff,
+    Guard
 }

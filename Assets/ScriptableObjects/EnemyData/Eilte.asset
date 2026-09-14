@@ -15,3 +15,4 @@ MonoBehaviour:
   maxHealth: 10
   attackPower: 2
   empowerAmount: 2
+  blockAmount: 2

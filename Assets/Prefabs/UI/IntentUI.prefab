@@ -129,6 +129,7 @@ MonoBehaviour:
   valueText: {fileID: 2618772231939241387}
   attackIcon: {fileID: -5388424960534825893, guid: 4dbe1b8f3cd05014fad75409468f1732, type: 3}
   buffIcon: {fileID: 976837448483608467, guid: 4dbe1b8f3cd05014fad75409468f1732, type: 3}
+  guardIcon: {fileID: -2084055299223287971, guid: 4dbe1b8f3cd05014fad75409468f1732, type: 3}
 --- !u!1 &7288302565299827137
 GameObject:
   m_ObjectHideFlags: 0

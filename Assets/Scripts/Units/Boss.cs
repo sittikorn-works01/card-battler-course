@@ -1,9 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss : Enemy
 {
     [SerializeField] private Animator empowerVFX;
+
+    // Fixed move pattern, cycled through in order instead of rolled randomly.
+    private readonly List<IntentType> movePattern = new()
+    {
+        IntentType.Buff, IntentType.Attack, IntentType.Attack
+    };
+    private int moveIndex;
 
     private int attackPower;
 
@@ -17,9 +25,10 @@ public class Boss : Enemy
 
     protected override EnemyIntent ChooseNextMove()
     {
-        bool willAttack = attackPower >= enemyData.attackPower + enemyData.empowerAmount || Random.Range(0, 2) > 0;
+        IntentType nextType = movePattern[moveIndex];
+        moveIndex = (moveIndex + 1) % movePattern.Count;
 
-        return willAttack
+        return nextType == IntentType.Attack
             ? new EnemyIntent(IntentType.Attack, attackPower)
             : new EnemyIntent(IntentType.Buff, enemyData.empowerAmount);
     }

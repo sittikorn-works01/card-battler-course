@@ -10,7 +10,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected EnemyData enemyData;
 
     protected Vector3 originalPosition;
-
     private EnemyIntent nextMove;
 
     protected virtual void OnEnable()
@@ -52,6 +51,8 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnTurnStart()
     {
+        // Block only lasts until the guarding enemy acts again.
+        health.ClearBlock();
         PerformMove(nextMove);
     }
 
@@ -63,6 +64,8 @@ public abstract class Enemy : MonoBehaviour
     protected abstract void PerformMove(EnemyIntent intent);
 
     protected void EndTurn() => TurnSystem.Instance.EndEnemyTurn();
+
+    protected void ApplyBlock(int amount) => health.AddBlock(amount);
 
     protected virtual void OnHit(int damage)
     {
