@@ -43,8 +43,8 @@ public class BattleManager : MonoBehaviour
 
     private void OnPlayerWin()
     {
-        OnBattleEnd();
         PlayerData.Instance.AddGold(rewardGold);
+        OnBattleEnd();        
     }
 
     private void OnPlayerLose()

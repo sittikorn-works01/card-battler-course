@@ -2286,7 +2286,7 @@ MonoBehaviour:
   battleManager: {fileID: 887245937}
   shopManager: {fileID: 1771757100}
   mapView: {fileID: 1943115832}
-  startState: 0
+  startState: 3
   textPopup: {fileID: 8914253290641776123, guid: e0b243c345b03384383e0d842f07b272, type: 3}
 --- !u!1 &1755773681
 GameObject:
@@ -2548,7 +2548,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071930533}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

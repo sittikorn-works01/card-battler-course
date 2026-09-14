@@ -52,6 +52,15 @@ public class PlayerData : Singleton<PlayerData>
         OnHealthChanged?.Invoke((int)currentHealth);
     }
 
+    // Mirrors an already-computed health value (e.g. from the in-battle
+    // Health component, which accounts for block) instead of applying its
+    // own delta - use this when something else already did the math.
+    public void SetHealth(float value)
+    {
+        currentHealth = Mathf.Clamp(value, 0, maxHealth);
+        OnHealthChanged?.Invoke((int)currentHealth);
+    }
+
     public void Save()
     {
         SaveData saveData = new SaveData();
@@ -76,7 +85,9 @@ public class PlayerData : Singleton<PlayerData>
             maxHealth = saveData.MaxHealth;
             gold = saveData.Gold;
 
-            print("LOAD COMPLETED");
+            OnGoldChanged?.Invoke(gold);
+            OnHealthChanged?.Invoke((int)currentHealth);
+
         }
         catch (Exception e) {
             Debug.LogWarning($"Save file corrupted or unreadable, starting fresh: {e.Message}");

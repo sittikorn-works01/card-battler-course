@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
     private void PlayerEvents_OnPlayerHit(int damageAmount)
     {
         health.TakeDamage(damageAmount);
+        PlayerData.Instance.SetHealth(health.CurrentHealth);
         GameManager.Instance.ShowTextPopup(TextType.Damage, damageAmount.ToString(), transform.position);
 
         if (!health.IsAlive())
@@ -113,6 +114,7 @@ public class Player : MonoBehaviour
     private void Heal(CardData cardData)
     {
         health.Heal(cardData.healPower);
+        PlayerData.Instance.SetHealth(health.CurrentHealth);
         GameManager.Instance.ShowTextPopup(TextType.Heal, cardData.healPower.ToString(), transform.position);
         healVFX.Play();
         PlayerEvents.PlayerHealed();

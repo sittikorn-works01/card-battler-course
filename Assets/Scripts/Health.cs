@@ -8,6 +8,8 @@ public class Health : MonoBehaviour
     private float currentHealth;
     private int currentBlock;
 
+    public float CurrentHealth => currentHealth;
+
     [SerializeField] private Image healthBarFill;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI blockText;
