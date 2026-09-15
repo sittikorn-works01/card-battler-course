@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private ShopManager shopManager;
     [SerializeField] private MapView mapView;
+    [SerializeField] private RestPanel restPanel;
 
     [SerializeField] private GameState startState;
     [SerializeField] private TextMeshPro textPopup;
@@ -57,6 +58,7 @@ public class GameManager : Singleton<GameManager>
         battleManager.gameObject.SetActive(false);
         shopManager.gameObject.SetActive(false);
         mapView.gameObject.SetActive(false);
+        restPanel.gameObject.SetActive(false);
 
         CurrentState = newState;
 
@@ -77,6 +79,9 @@ public class GameManager : Singleton<GameManager>
             case GameState.Map:
                 mapView.gameObject.SetActive(true);
                 break;
+            case GameState.Rest:
+                restPanel.gameObject.SetActive(true);
+                break;
         }
 
         OnStateChanged?.Invoke(newState);
@@ -91,6 +96,7 @@ public class GameManager : Singleton<GameManager>
             case NodeType.Elite: EnterState(GameState.EliteBattle); break;
             case NodeType.Boss: EnterState(GameState.BossBattle); break;
             case NodeType.Shop: EnterState(GameState.Shop); break;
+            case NodeType.Rest: EnterState(GameState.Rest); break;
         }
     }
 

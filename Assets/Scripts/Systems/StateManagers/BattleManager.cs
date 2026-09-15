@@ -29,9 +29,7 @@ public class BattleManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerEvents.OnPlayerDeath += OnPlayerLose;
-        EnemyEvents.OnEnemyDeath += OnPlayerWin;
-
-        
+        EnemyEvents.OnEnemyDeath += OnPlayerWin;        
     }
 
     private void OnDisable()
