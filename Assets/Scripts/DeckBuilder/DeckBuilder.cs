@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckBuilder : MonoBehaviour
 {
     [SerializeField] private List<CardData> availableCardList = new();
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private Card cardPrefab;
+    [SerializeField] private Button exitButtton;
 
     private void Start()
     {
@@ -13,6 +15,14 @@ public class DeckBuilder : MonoBehaviour
         {
             AddCardToCollection(i);
         }
+        exitButtton.onClick.AddListener(ExitRest);
+    }
+
+    private void ExitRest()
+    {
+        DeckManager.Instance.gameObject.SetActive(false);
+        GameManager.Instance.EnterState(GameState.Map);
+        exitButtton.onClick.RemoveAllListeners();
     }
 
     private void AddCardToCollection(int index)
