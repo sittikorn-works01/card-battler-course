@@ -10,4 +10,5 @@ public class CardData : ScriptableObject
     public int attackPower;
     public int healPower;
     public Buff Buff;
+    public int buyPrice;
 }

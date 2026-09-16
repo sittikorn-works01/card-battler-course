@@ -1,60 +1,52 @@
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private GameObject shopUI;
-    [SerializeField] private Card[] blankDropCards;
-    [SerializeField] private List<CardData> rewardPool;
-
-    private int cardPrice = 2;
+    [SerializeField] private List<CardData> sellCardPool;
+    [SerializeField] private SellCardSlot[] sellCardSlots;
 
     private void OnEnable()
     {
         shopUI.SetActive(true);
-        SpawnRewardCards();
+        PopulateSellSlots();
     }
 
     private void OnDisable()
     {
         shopUI.SetActive(false);
-        HideDropCards();
+        HideSellSlots();
     }
 
-    public void SpawnRewardCards()
+    public void PopulateSellSlots()
     {
-        foreach (Card dropCard in blankDropCards)
+        foreach (SellCardSlot sellCardSlot in sellCardSlots)
         {
-            dropCard.Init(OnSelectedCard);
-            CardData newCardDrop = rewardPool[UnityEngine.Random.Range(0, rewardPool.Count)];
-            dropCard.LoadCardData(newCardDrop);
-            dropCard.gameObject.SetActive(true);
+            CardData cardForSale = sellCardPool[UnityEngine.Random.Range(0, sellCardPool.Count)];
+            sellCardSlot.gameObject.SetActive(true);
+            sellCardSlot.Initialize(cardForSale, OnSelectedCard);
         }
-
     }
 
-    public void OnSelectedCard(CardData chosenCard)
+    public void OnSelectedCard(SellCardSlot slot, CardData chosenCard)
     {
-        if(PlayerData.Instance.TrySpendingGold(cardPrice))
+        if(PlayerData.Instance.TrySpendingGold(chosenCard.buyPrice))
         {
             print($"{chosenCard.CardName} has been added");
             DeckEvents.AddCardToDeck(chosenCard);
             print($"Player has gold left: {PlayerData.Instance.Gold}");
 
-            foreach (Card dropCard in blankDropCards)
-            {
-                dropCard.SetInteractable(false);
-            }
-        }        
+            slot.SetInteractable(false);
+        }
     }
 
-    public void HideDropCards()
+    public void HideSellSlots()
     {
-        foreach (Card dropCard in blankDropCards)
+        foreach (SellCardSlot sellCardSlot in sellCardSlots)
         {
-            dropCard.SetInteractable(true);
-            dropCard.gameObject.SetActive(false);
+            sellCardSlot.SetInteractable(true);
+            sellCardSlot.gameObject.SetActive(false);
         }
     }
 

@@ -9,7 +9,7 @@ public class RestPanel : BasePanel
     [SerializeField] private Button exitButton;
 
     [SerializeField, Range(0f, 1f)] private float healPercentage = 0.3f;
-    [SerializeField] private GameObject deckManager;
+    [SerializeField] private GameObject deckBuilder;
 
     // A rest site grants one action: heal or manage deck, not both.
     private bool hasChosenOption;
@@ -17,6 +17,7 @@ public class RestPanel : BasePanel
     private void OnEnable()
     {
         hasChosenOption = false;
+        Open();
 
         healButton.onClick.AddListener(HealButton);
         manageDeckButton.onClick.AddListener(ManageDeckButton);
@@ -48,7 +49,7 @@ public class RestPanel : BasePanel
             return;
         }
 
-        deckManager.SetActive(true);
+        deckBuilder.SetActive(true);
         Close();
     }
 

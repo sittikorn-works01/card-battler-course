@@ -21,3 +21,4 @@ MonoBehaviour:
   Buff:
     buffPower: 2
     UseRemaining: 2
+  buyPrice: 5

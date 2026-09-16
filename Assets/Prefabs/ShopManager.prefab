@@ -1,0 +1,475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &541071898874594057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7114972983429494045}
+  - component: {fileID: 6554770005163437387}
+  m_Layer: 0
+  m_Name: ShopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7114972983429494045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541071898874594057}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7801229728953040237}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6554770005163437387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541071898874594057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8f5b2345b69d046b65073743a0198f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  shopUI: {fileID: 0}
+  sellCardPool:
+  - {fileID: 11400000, guid: 90d2ec5059c2c0f49843d7546f459a67, type: 2}
+  - {fileID: 11400000, guid: f55315127e2e9a14dbdeba50ab00a71a, type: 2}
+  - {fileID: 11400000, guid: f8c4129c2b44ea4408307ba604261b94, type: 2}
+  - {fileID: 11400000, guid: bb451182e69700a4a931169bcaa9ea15, type: 2}
+  - {fileID: 11400000, guid: bf9a540eba35e7f44b4bfb842a724357, type: 2}
+  sellCardSlots:
+  - {fileID: 6334272673921570968}
+  - {fileID: 4354980917780572578}
+  - {fileID: 3548925364216680454}
+  - {fileID: 2283616756413252036}
+  - {fileID: 409542394776918990}
+--- !u!1 &5162046675632733166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7801229728953040237}
+  - component: {fileID: 5204043850731152621}
+  m_Layer: 0
+  m_Name: Group - SellCards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7801229728953040237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162046675632733166}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2058886905601316892}
+  - {fileID: 8576394960489982246}
+  - {fileID: 8805989743987560578}
+  - {fileID: 6108130704975626560}
+  - {fileID: 5682282103953873738}
+  m_Father: {fileID: 7114972983429494045}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &5204043850731152621
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162046675632733166}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1500
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
+--- !u!1001 &464687263509588480
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7801229728953040237}
+    m_Modifications:
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631580755526531807, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_Name
+      value: SellCardSlot (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+--- !u!114 &2283616756413252036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1856591139046910916, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 464687263509588480}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a21b2aeae3b1f84cb5c101ff573884d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SellCardSlot
+--- !u!4 &6108130704975626560 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 464687263509588480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2048314770991575050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7801229728953040237}
+    m_Modifications:
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631580755526531807, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_Name
+      value: SellCardSlot (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+--- !u!114 &409542394776918990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1856591139046910916, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 2048314770991575050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a21b2aeae3b1f84cb5c101ff573884d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SellCardSlot
+--- !u!4 &5682282103953873738 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 2048314770991575050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2716778744645485158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7801229728953040237}
+    m_Modifications:
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631580755526531807, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_Name
+      value: SellCardSlot (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+--- !u!114 &4354980917780572578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1856591139046910916, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 2716778744645485158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a21b2aeae3b1f84cb5c101ff573884d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SellCardSlot
+--- !u!4 &8576394960489982246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 2716778744645485158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2919387115756534722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7801229728953040237}
+    m_Modifications:
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631580755526531807, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_Name
+      value: SellCardSlot (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+--- !u!114 &3548925364216680454 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1856591139046910916, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 2919387115756534722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a21b2aeae3b1f84cb5c101ff573884d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SellCardSlot
+--- !u!4 &8805989743987560578 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 2919387115756534722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5630683305977869148
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7801229728953040237}
+    m_Modifications:
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631580755526531807, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+      propertyPath: m_Name
+      value: SellCardSlot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+--- !u!4 &2058886905601316892 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5960116191637384000, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 5630683305977869148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6334272673921570968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1856591139046910916, guid: 6d6efb53ec882a24f885da21e557ee5b, type: 3}
+  m_PrefabInstance: {fileID: 5630683305977869148}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a21b2aeae3b1f84cb5c101ff573884d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SellCardSlot

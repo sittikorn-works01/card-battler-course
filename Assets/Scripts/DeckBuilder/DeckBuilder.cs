@@ -14,13 +14,17 @@ public class DeckBuilder : MonoBehaviour
         for(int i = 0; i < availableCardList.Count; i++)
         {
             AddCardToCollection(i);
-        }
+        }        
+    }
+
+    private void OnEnable()
+    {
         exitButtton.onClick.AddListener(ExitRest);
     }
 
     private void ExitRest()
     {
-        DeckManager.Instance.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         GameManager.Instance.EnterState(GameState.Map);
         exitButtton.onClick.RemoveAllListeners();
     }
