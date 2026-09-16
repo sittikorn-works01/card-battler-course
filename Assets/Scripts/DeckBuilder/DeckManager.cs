@@ -28,6 +28,7 @@ public class DeckManager : Singleton<DeckManager>
     private void Start()
     {
         currentDeck = new List<CardData>(defaultDeck.cards);
+        DeckEvents.DeckProcessed();
     }
 
     private void DeckEvents_OnRemoveCardFromDeck(CardData cardData)

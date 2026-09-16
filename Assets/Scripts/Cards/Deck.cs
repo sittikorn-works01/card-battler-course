@@ -1,11 +1,14 @@
 using System.Collections.Generic;
-using Unity.Hierarchy;
+using TMPro;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
     [SerializeField] private List<CardData> drawPile = new();
     [SerializeField] private GameObject cardBackPrefab;
+    [SerializeField] private TextMeshPro pileCountText;
+
+    private readonly List<GameObject> cardBackInstances = new();
 
     private const float VerticalSpacing = 0.1f;
 
@@ -68,17 +71,21 @@ public class Deck : MonoBehaviour
 
     private void UpdateDeckVisual()
     {
-        foreach (Transform card in transform)
+        foreach (GameObject cardBack in cardBackInstances)
         {
-            Destroy(card.gameObject);
+            Destroy(cardBack);
         }
+        cardBackInstances.Clear();
 
         for (int i = 0; i < drawPile.Count; i++)
         {
             GameObject newCardBack = Instantiate(cardBackPrefab, transform);
             newCardBack.GetComponent<SpriteRenderer>().sortingOrder = i;
             newCardBack.transform.localPosition = new Vector3(0f, -i* VerticalSpacing, 0f);
+            cardBackInstances.Add(newCardBack);
         }
+
+        pileCountText.text = drawPile.Count.ToString();
     }
 
     public void Shuffle()
