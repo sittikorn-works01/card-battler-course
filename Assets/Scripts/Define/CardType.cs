@@ -3,5 +3,6 @@ public enum CardType
     None,
     Attack,
     Heal,
-    Buff
+    Buff,
+    Shield
 }

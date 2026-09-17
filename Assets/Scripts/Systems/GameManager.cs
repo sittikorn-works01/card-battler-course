@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public enum TextType
 {
-    Heal, Damage
+    Heal, Damage, Block
 }
 public class GameManager : Singleton<GameManager>
 {
@@ -45,6 +45,10 @@ public class GameManager : Singleton<GameManager>
 
             case TextType.Damage:
                 spawnedText.color = Color.red;
+                break;
+
+            case TextType.Block:
+                spawnedText.color = Color.cyan;
                 break;
         }
         spawnedText.text = text;

@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
         PlayerEvents.OnPlayerHit += PlayerEvents_OnPlayerHit;
         PlayerEvents.OnSkillEnd += RefreshActiveBuffs;
         EnemyEvents.OnEnemyDeath += EnemyEvents_OnEnemyDeath;
+        TurnEvents.OnPlayerTurnStart += health.ClearBlock;
     }
 
     private void EnemyEvents_OnEnemyDeath()
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         PlayerEvents.OnCardPlayed -= PlayerEvents_OnCardPlayed;
         PlayerEvents.OnPlayerHit -= PlayerEvents_OnPlayerHit;
         PlayerEvents.OnSkillEnd -= RefreshActiveBuffs;
+        TurnEvents.OnPlayerTurnStart -= health.ClearBlock;
     }
 
     private void PlayerEvents_OnCardPlayed(CardData cardData)
@@ -62,6 +64,9 @@ public class Player : MonoBehaviour
             case CardType.Buff:
                 Empower(cardData);
                 empowerVFX.Play("Empower");
+                break;
+            case CardType.Shield:
+                Shield(cardData);
                 break;
             case CardType.None:
                 Debug.LogWarning($"{cardData.CardName} has no CardType set!");
@@ -120,6 +125,13 @@ public class Player : MonoBehaviour
         GameManager.Instance.ShowTextPopup(TextType.Heal, cardData.power.ToString(), transform.position);
         healVFX.Play();
         PlayerEvents.PlayerHealed();
+        PlayerEvents.SkillEnd();
+    }
+
+    private void Shield(CardData cardData)
+    {
+        health.AddBlock(cardData.power);
+        GameManager.Instance.ShowTextPopup(TextType.Block, cardData.power.ToString(), transform.position);
         PlayerEvents.SkillEnd();
     }
 

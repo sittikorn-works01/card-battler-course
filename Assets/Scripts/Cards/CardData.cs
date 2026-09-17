@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CardData", menuName = "Scriptable Objects/CardData")]
+[CreateAssetMenu(fileName = "NewCardData", menuName = "Scriptable Objects/CardData")]
 public class CardData : ScriptableObject
 {
     public string CardName;
