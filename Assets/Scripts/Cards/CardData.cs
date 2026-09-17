@@ -8,8 +8,10 @@ public class CardData : ScriptableObject
     public CardType Type;
     public int actionCost;
     public Sprite Illustration;
-    // Meaning depends on Type: damage dealt for Attack, HP restored for Heal.
+    // Meaning depends on Type: damage for Attack, HP restored for Heal,
+    // block for Shield, per-use attack bonus for Buff.
     public int power;
-    public Buff Buff;
+    // Buff only: how many attacks the bonus lasts for.
+    public int buffUses;
     public int buyPrice;
 }

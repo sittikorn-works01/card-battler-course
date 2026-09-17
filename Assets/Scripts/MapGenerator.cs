@@ -3,14 +3,17 @@ using UnityEngine;
 
 public static class MapGenerator
 {
-    public static MapGraph GenerateAct(int floorCount, int nodesPerFloor)
+    public static MapGraph GenerateAct(int floorCount, int maxNodesPerFloor)
     {
         var map = new MapGraph();
         var rng = new System.Random();
 
+        
+
         for (int floor = 0; floor < floorCount; floor++)
         {
             var nodes = new List<MapNode>();
+            int nodesPerFloor = Random.Range(1, maxNodesPerFloor + 1);
             int countThisFloor = (floor == floorCount - 1) ? 1 : nodesPerFloor; // last floor = Boss only
 
             for (int i = 0; i < countThisFloor; i++)

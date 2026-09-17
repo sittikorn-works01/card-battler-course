@@ -80,9 +80,9 @@ public class Player : MonoBehaviour
     {
         Buff buff = new()
         {
-            buffPower = cardData.Buff.buffPower,
-            UseRemaining = cardData.Buff.UseRemaining
-        }; 
+            buffPower = cardData.power,
+            UseRemaining = cardData.buffUses
+        };
 
         activeBuffs.Add(buff);
         PlayerEvents.SkillEnd();
