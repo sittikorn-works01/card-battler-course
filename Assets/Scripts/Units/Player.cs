@@ -51,20 +51,22 @@ public class Player : MonoBehaviour
 
     private void PlayerEvents_OnCardPlayed(CardData cardData)
     {
-        if (cardData.attackPower > 0)
+        switch (cardData.Type)
         {
-            Attack(cardData);
+            case CardType.Attack:
+                Attack(cardData);
+                break;
+            case CardType.Heal:
+                Heal(cardData);
+                break;
+            case CardType.Buff:
+                Empower(cardData);
+                empowerVFX.Play("Empower");
+                break;
+            case CardType.None:
+                Debug.LogWarning($"{cardData.CardName} has no CardType set!");
+                break;
         }
-        else if (cardData.healPower > 0)
-        {
-            Heal(cardData);
-        }
-        else
-        {
-            Empower(cardData);
-            empowerVFX.Play("Empower");
-        }
-
 
         print(cardData.CardName);
     }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   CardName: Empower
   CardDescription: Empower
+  Type: 3
   actionCost: 1
   Illustration: {fileID: 976837448483608467, guid: 4dbe1b8f3cd05014fad75409468f1732, type: 3}
   attackPower: 0

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   CardName: Heal
   CardDescription: Heals 3 Point
+  Type: 2
   actionCost: 1
   Illustration: {fileID: -98272708732530083, guid: 4dbe1b8f3cd05014fad75409468f1732, type: 3}
   attackPower: 0

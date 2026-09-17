@@ -5,6 +5,7 @@ public class CardData : ScriptableObject
 {
     public string CardName;
     public string CardDescription;
+    public CardType Type;
     public int actionCost;
     public Sprite Illustration;
     public int attackPower;

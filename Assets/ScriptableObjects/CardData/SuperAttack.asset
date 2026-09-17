@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   CardName: SuperAttack
   CardDescription: Deals 6 Damage
+  Type: 1
   actionCost: 3
   Illustration: {fileID: 21300000, guid: e146794282e1fa1448d90ec3e7e790e0, type: 3}
   attackPower: 6
