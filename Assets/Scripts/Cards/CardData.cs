@@ -8,8 +8,8 @@ public class CardData : ScriptableObject
     public CardType Type;
     public int actionCost;
     public Sprite Illustration;
-    public int attackPower;
-    public int healPower;
+    // Meaning depends on Type: damage dealt for Attack, HP restored for Heal.
+    public int power;
     public Buff Buff;
     public int buyPrice;
 }

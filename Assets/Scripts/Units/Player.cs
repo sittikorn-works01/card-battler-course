@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
 
     private void Attack(CardData cardData)
     {
-        int attackPower = cardData.attackPower;
+        int attackPower = cardData.power;
         foreach (Buff buff in activeBuffs)
         {
             if (buff.UseRemaining > 0)
@@ -115,9 +115,9 @@ public class Player : MonoBehaviour
 
     private void Heal(CardData cardData)
     {
-        health.Heal(cardData.healPower);
+        health.Heal(cardData.power);
         PlayerData.Instance.SetHealth(health.CurrentHealth);
-        GameManager.Instance.ShowTextPopup(TextType.Heal, cardData.healPower.ToString(), transform.position);
+        GameManager.Instance.ShowTextPopup(TextType.Heal, cardData.power.ToString(), transform.position);
         healVFX.Play();
         PlayerEvents.PlayerHealed();
         PlayerEvents.SkillEnd();

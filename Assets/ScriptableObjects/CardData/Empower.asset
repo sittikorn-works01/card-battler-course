@@ -17,8 +17,7 @@ MonoBehaviour:
   Type: 3
   actionCost: 1
   Illustration: {fileID: 976837448483608467, guid: 4dbe1b8f3cd05014fad75409468f1732, type: 3}
-  attackPower: 0
-  healPower: 0
+  power: 0
   Buff:
     buffPower: 2
     UseRemaining: 2
