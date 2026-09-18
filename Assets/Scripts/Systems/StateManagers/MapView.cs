@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +13,9 @@ public class MapView : MonoBehaviour
 
     [Header("Layout")]
     [SerializeField] private float floorSpacingY = 160f;
-    [SerializeField] private float nodeSpacingX = 140f;
+    [SerializeField] private float nodeSpacingX = 160f;
 
-    private readonly Dictionary<MapNode, Button> _nodeButtons = new Dictionary<MapNode, Button>();
+    private readonly Dictionary<MapNode, MapNodeButton> _nodeButtons = new Dictionary<MapNode, MapNodeButton>();
     private readonly List<GameObject> _spawnedLines = new List<GameObject>();
 
     private PlayerData PlayerData => PlayerData.Instance;
@@ -28,8 +27,14 @@ public class MapView : MonoBehaviour
         if(PlayerData.CurrentMap == null || PlayerData.CurrentMap.Floors.Count == 0)
             PlayerData.CurrentMap = MapGenerator.GenerateAct(floorCount: 6, maxNodesPerFloor: 4);
 
-        BuildView(PlayerData.CurrentMap);
+        // Must activate mapUI before instantiating node buttons under it -
+        // Awake() on a newly instantiated child is deferred until its
+        // hierarchy is active, so building the view first left
+        // MapNodeButton.nodeIconsDict null on every re-entry after the
+        // first (mapUI starts active by default, but OnDisable turns it
+        // off, so this only broke once you left and came back).
         mapUI.SetActive(true);
+        BuildView(PlayerData.CurrentMap);
     }
 
     private void OnDisable()
@@ -49,13 +54,12 @@ public class MapView : MonoBehaviour
                 RectTransform rt = nodeButtonGO.GetComponent<RectTransform>();
                 rt.anchoredPosition = new Vector2(node.Position.x * nodeSpacingX, node.Floor * floorSpacingY);
 
-                nodeButtonGO.GetComponentInChildren<TextMeshProUGUI>().text = node.Type.ToString();
-
-                Button button = nodeButtonGO.GetComponent<Button>();
+                MapNodeButton nodeButton = nodeButtonGO.GetComponent<MapNodeButton>();
                 MapNode capturedNode = node; // avoid closure-over-loop-variable bug
-                button.onClick.AddListener(() => OnNodeClicked(capturedNode));
+                print(node.Type);
+                nodeButton.Initialize(node.Type, () => OnNodeClicked(capturedNode));
 
-                _nodeButtons[node] = button;
+                _nodeButtons[node] = nodeButton;
             }
         }
 
@@ -92,8 +96,8 @@ public class MapView : MonoBehaviour
         foreach (var kvp in _nodeButtons)
         {
             MapNode node = kvp.Key;
-            Button button = kvp.Value;
-            button.interactable = reachable.Contains(node) && !node.Visited;
+            MapNodeButton nodeButton = kvp.Value;
+            nodeButton.SetInteractable(reachable.Contains(node) && !node.Visited);
         }
     }
 
