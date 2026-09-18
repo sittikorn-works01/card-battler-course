@@ -2322,7 +2322,7 @@ MonoBehaviour:
   shopManager: {fileID: 1771757100}
   mapView: {fileID: 1943115832}
   restPanel: {fileID: 1762250185}
-  startState: 2
+  startState: 1
   textPopup: {fileID: 8914253290641776123, guid: e0b243c345b03384383e0d842f07b272, type: 3}
 --- !u!1 &1755773681
 GameObject:
@@ -2777,7 +2777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2870256009600654621, guid: 4524fad7d59ff5d40bd9f74866c2f9ef, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -799.99994
+      value: -800
       objectReference: {fileID: 0}
     - target: {fileID: 5279718594399029108, guid: 4524fad7d59ff5d40bd9f74866c2f9ef, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2805,7 +2805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6029041755619237717, guid: 4524fad7d59ff5d40bd9f74866c2f9ef, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -799.99994
+      value: -800
       objectReference: {fileID: 0}
     - target: {fileID: 6330508640765444152, guid: 4524fad7d59ff5d40bd9f74866c2f9ef, type: 3}
       propertyPath: m_AnchorMax.y

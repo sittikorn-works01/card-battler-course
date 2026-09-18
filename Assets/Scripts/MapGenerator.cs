@@ -32,17 +32,39 @@ public static class MapGenerator
         // Connect each node to 1-2 nodes on the next floor.
         for (int floor = 0; floor < map.Floors.Count - 1; floor++)
         {
-            List<MapNode> current = map.Floors[floor];
-            List<MapNode> next = map.Floors[floor + 1];
+            List<MapNode> currentFloorNodes = map.Floors[floor];
+            List<MapNode> nextFloorNodes = map.Floors[floor + 1];
 
-            foreach (MapNode node in current)
+            foreach (MapNode node in currentFloorNodes)
             {
                 int connections = rng.Next(1, 3); // 1 or 2 outgoing paths
                 for (int c = 0; c < connections; c++)
                 {
-                    MapNode target = next[rng.Next(next.Count)];
+                    MapNode target = nextFloorNodes[rng.Next(nextFloorNodes.Count)];
                     if (!node.ConnectedNodes.Contains(target))
                         node.ConnectedNodes.Add(target);
+                }
+            }
+
+            // The random pass above can leave some next-floor nodes with no
+            // incoming connection at all, making them unreachable regardless
+            // of path. Force-connect any orphan to a random node this floor.
+            foreach (MapNode target in nextFloorNodes)
+            {
+                bool hasIncoming = false;
+                foreach (MapNode source in currentFloorNodes)
+                {
+                    if (source.ConnectedNodes.Contains(target))
+                    {
+                        hasIncoming = true;
+                        break;
+                    }
+                }
+
+                if (!hasIncoming)
+                {
+                    MapNode fallbackSource = currentFloorNodes[rng.Next(currentFloorNodes.Count)];
+                    fallbackSource.ConnectedNodes.Add(target);
                 }
             }
         }
