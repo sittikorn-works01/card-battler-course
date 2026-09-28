@@ -105,7 +105,6 @@ public class MapView : MonoBehaviour
     {
         PlayerData.CurrentMap.CurrentNode = node;
 
-        // Hand off to the state manager, which enables Battle/Shop/Event/etc.
         GameManager.Instance.EnterNode(node);
     }
 
@@ -114,8 +113,6 @@ public class MapView : MonoBehaviour
         Image line = Instantiate(linePrefab, lineContainer);
         Vector3 posA = new Vector3(from.Position.x * nodeSpacingX, from.Floor * floorSpacingY, 0f);
         Vector3 posB = new Vector3(to.Position.x * nodeSpacingX, to.Floor * floorSpacingY, 0f);
-
-        print($"Line start from {posA}");
 
         line.rectTransform.anchoredPosition = posA;
         Vector3 difference = posB - posA;
