@@ -45,13 +45,10 @@ public class Boss : Enemy
         }
     }
 
-    private void Empower()
+    private void BossEvents_OnBossHit(int damage)
     {
-        Dev.Log();
-        attackPower += enemyData.empowerAmount;
-        empowerVFX.Play("Empower");
-        EndTurn();
-    }
+        print($"Boss received {damage} damage!");
+        health.TakeDamage(damage);
 
     private IEnumerator Attack()
     {

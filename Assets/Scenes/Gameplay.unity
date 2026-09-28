@@ -1724,7 +1724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &887245936
 Transform:
   m_ObjectHideFlags: 0
@@ -1759,7 +1759,6 @@ MonoBehaviour:
   playZone: {fileID: 2071930537}
   playerCharacter: {fileID: 3784837379982123740, guid: 130cbccb9821f494cb313e1da5083743, type: 3}
   bossCharacter: {fileID: 3848145180619031246, guid: 040f10671b84dce43ada6900a7b804b6, type: 3}
-  eliteCharacter: {fileID: 8763438349848400370, guid: 72811dceaeb8c1840b63697826aadac9, type: 3}
   playerPosition: {fileID: 686342857}
   bossPosition: {fileID: 865388275}
 --- !u!1 &964480871
@@ -2271,6 +2270,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.48, y: 2.99}
   m_EdgeRadius: 0
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1612625414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,10 +2320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   battleManager: {fileID: 887245937}
   shopManager: {fileID: 1771757100}
-  mapView: {fileID: 1943115832}
   restPanel: {fileID: 1762250185}
   startState: 1
   textPopup: {fileID: 8914253290641776123, guid: e0b243c345b03384383e0d842f07b272, type: 3}
+        Visited: 0
 --- !u!1 &1755773681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,9 +2378,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f55315127e2e9a14dbdeba50ab00a71a, type: 2}
   - {fileID: 11400000, guid: f8c4129c2b44ea4408307ba604261b94, type: 2}
   - {fileID: 11400000, guid: bb451182e69700a4a931169bcaa9ea15, type: 2}
-  - {fileID: 11400000, guid: bf9a540eba35e7f44b4bfb842a724357, type: 2}
   resultPanel: {fileID: 409464444}
 --- !u!114 &1762250185 stripped
+--- !u!114 &1771757100
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8630339910318289845, guid: 4524fad7d59ff5d40bd9f74866c2f9ef, type: 3}
   m_PrefabInstance: {fileID: 4817853182091867206}
@@ -2450,8 +2450,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 074d81252cd4f6c46a8fde33fe8d67e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MapView
   mapUI: {fileID: 36731947}
+  nodeContainer: {fileID: 2099542986}
   nodeContainer: {fileID: 2099542986}
   lineContainer: {fileID: 794875265}
   nodeButtonPrefab: {fileID: 6306328615209719251, guid: d768bd965482e8c4b89ffd1cf2047c7d, type: 3}
@@ -2620,12 +2620,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayZoneTrigger
   playerHand: {fileID: 1145760450}
-  playZoneCollider: {fileID: 2071930535}
 --- !u!224 &2099542986 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6029041755619237717, guid: 4524fad7d59ff5d40bd9f74866c2f9ef, type: 3}
   m_PrefabInstance: {fileID: 4817853182091867206}
   m_PrefabAsset: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::ResultPanel
+--- !u!1 &2099542985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2099542986}
+  m_Layer: 5
+  m_Name: NodeContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2099542986
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099542985}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1519619573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &361178334877375701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2904,6 +2939,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+  - {fileID: 21494775}
     - target: {fileID: 7114972983429494045, guid: 6175eda3829bc784cacf4b3a140d1a9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -2940,4 +2976,3 @@ SceneRoots:
   - {fileID: 217495459}
   - {fileID: 509869638}
   - {fileID: 424322696}
-  - {fileID: 21494775}

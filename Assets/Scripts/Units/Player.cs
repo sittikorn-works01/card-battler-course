@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,8 +8,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Health health;
     [SerializeField] private ParticleSystem healVFX;
     [SerializeField] private Animator empowerVFX;
-
-    public List<Buff> activeBuffs = new();
 
     private void Start()
     {
@@ -48,30 +45,23 @@ public class Player : MonoBehaviour
         PlayerEvents.OnCardPlayed -= PlayerEvents_OnCardPlayed;
         PlayerEvents.OnPlayerHit -= PlayerEvents_OnPlayerHit;
         PlayerEvents.OnSkillEnd -= RefreshActiveBuffs;
-        TurnEvents.OnPlayerTurnStart -= health.ClearBlock;
     }
 
     private void PlayerEvents_OnCardPlayed(CardData cardData)
     {
-        switch (cardData.Type)
+        if (cardData.attackPower > 0)
         {
-            case CardType.Attack:
-                Attack(cardData);
-                break;
-            case CardType.Heal:
-                Heal(cardData);
-                break;
-            case CardType.Buff:
-                Empower(cardData);
-                empowerVFX.Play("Empower");
-                break;
-            case CardType.Shield:
-                Shield(cardData);
-                break;
-            case CardType.None:
-                Debug.LogWarning($"{cardData.CardName} has no CardType set!");
-                break;
+            Attack(cardData);
         }
+        else if (cardData.healPower > 0)
+        {
+            Heal(cardData);
+        }
+        else
+        {
+            Empower(cardData);
+        }
+
 
         print(cardData.CardName);
     }
@@ -80,9 +70,9 @@ public class Player : MonoBehaviour
     {
         Buff buff = new()
         {
-            buffPower = cardData.power,
-            UseRemaining = cardData.buffUses
-        };
+            buffPower = cardData.Buff.buffPower,
+            UseRemaining = cardData.Buff.UseRemaining
+        }; 
 
         activeBuffs.Add(buff);
         PlayerEvents.SkillEnd();
@@ -103,7 +93,7 @@ public class Player : MonoBehaviour
 
     private void Attack(CardData cardData)
     {
-        int attackPower = cardData.power;
+        int attackPower = cardData.attackPower;
         foreach (Buff buff in activeBuffs)
         {
             if (buff.UseRemaining > 0)
@@ -128,13 +118,6 @@ public class Player : MonoBehaviour
         PlayerEvents.SkillEnd();
     }
 
-    private void Shield(CardData cardData)
-    {
-        health.AddBlock(cardData.power);
-        GameManager.Instance.ShowTextPopup(TextType.Block, cardData.power.ToString(), transform.position);
-        PlayerEvents.SkillEnd();
-    }
-
     private IEnumerator PlayAttackAnimation(int attackPower)
     {
         Vector3 targetPosition = originalPosition + new Vector3(4, 0, 0);
@@ -152,7 +135,7 @@ public class Player : MonoBehaviour
         animator.Play("Attack 2");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-        EnemyEvents.EnemyHit(attackPower);
+        BossEvents.BossHit(attackPower);
 
         timeElapsed = 0f;
 
