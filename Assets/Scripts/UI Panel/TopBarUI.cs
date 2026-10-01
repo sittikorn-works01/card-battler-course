@@ -32,16 +32,16 @@ public class TopBarUI : MonoBehaviour
 
     private void UpdateHealthText(int currentHealth)
     {
-        healthText.text = $"HP: {currentHealth}/{(int)PlayerData.Instance.MaxHealth}";
+        healthText.text = $"{currentHealth}/{(int)PlayerData.Instance.MaxHealth}";
     }
 
     private void UpdateGoldText(int amount)
     {
-        goldText.text = $"{amount} Gold";
+        goldText.text = $"{amount}";
     }
 
     private void UpdateDeckCountText()
     {
-        deckCountText.text = $"Deck: {DeckManager.Instance.GetDeck().Count}";
+        deckCountText.text = $"{DeckManager.Instance.GetDeck().Count}";
     }
 }
