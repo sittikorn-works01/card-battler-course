@@ -57,7 +57,7 @@ public class ResultPanel : BasePanel
 
     private void RandomDropCards()
     {
-        resultText.gameObject.SetActive(false);
+        //resultText.gameObject.SetActive(false);
 
         nextButton.gameObject.SetActive(false);        
         RewardManager.Instance.SpawnRewardCards();

@@ -16,13 +16,13 @@ public class TurnSystem : Singleton<TurnSystem>
     [SerializeField] private int maxActionsPerTurn = 1;
     [SerializeField] private int drawCost = 1;
     [SerializeField] private int reshuffleCost = 1;
-    [SerializeField] private TextMeshProUGUI remainingActionsText;
+    //[SerializeField] private TextMeshProUGUI remainingActionsText;
     private int remainingActions;    
 
     [SerializeField] private float turnWaitTime = 2f;
     [SerializeField] private float enemyDelayTime = 1f;
     private const float MilliSecondMultiplier = 1000;
-    [SerializeField] private TextMeshProUGUI displayTurnStateText;
+    //[SerializeField] private TextMeshProUGUI displayTurnStateText;
 
     private void OnEnable()
     {
@@ -30,8 +30,8 @@ public class TurnSystem : Singleton<TurnSystem>
         PlayerEvents.OnDrawCardRequested += PlayerEvents_OnDrawCardRequested;
         PlayerEvents.OnReshuffleRequested += PlayerEvents_OnReshuffleRequested;
 
-        PlayerEvents.OnPlayerDeath += ClearTurnStateDisplayText;
-        EnemyEvents.OnEnemyDeath += ClearTurnStateDisplayText;
+        //PlayerEvents.OnPlayerDeath += ClearTurnStateDisplayText;
+        //EnemyEvents.OnEnemyDeath += ClearTurnStateDisplayText;
     }
 
     private void OnDisable()
@@ -40,8 +40,8 @@ public class TurnSystem : Singleton<TurnSystem>
         PlayerEvents.OnDrawCardRequested -= PlayerEvents_OnDrawCardRequested;
         PlayerEvents.OnReshuffleRequested -= PlayerEvents_OnReshuffleRequested;
 
-        PlayerEvents.OnPlayerDeath -= ClearTurnStateDisplayText;
-        EnemyEvents.OnEnemyDeath -= ClearTurnStateDisplayText;
+        //PlayerEvents.OnPlayerDeath -= ClearTurnStateDisplayText;
+        //EnemyEvents.OnEnemyDeath -= ClearTurnStateDisplayText;
     }
 
     public void Initialize()
@@ -49,15 +49,17 @@ public class TurnSystem : Singleton<TurnSystem>
         StartPlayerTurn();
     }
 
-    private void ClearTurnStateDisplayText()
-    {
-        displayTurnStateText.text = "";
-    }
+    //private void ClearTurnStateDisplayText()
+    //{
+    //    displayTurnStateText.text = "";
+    //}
 
     private void StartPlayerTurn()
     {
-        displayTurnStateText.text = "Player's Turn";
+        //displayTurnStateText.text = "Player's Turn";
         ResetActionPoint();
+        TurnEvents.ActionPointChanged(remainingActions);
+
         currentState = TurnState.PlayerTurn;
         TurnEvents.PlayerTurnStart();
     }
@@ -70,7 +72,7 @@ public class TurnSystem : Singleton<TurnSystem>
 
     private async UniTaskVoid StartEnemyTurn()
     {
-        displayTurnStateText.text = "Enemy's Turn";
+        //displayTurnStateText.text = "Enemy's Turn";
         currentState = TurnState.EnemyTurn;
         await UniTask.Delay((int)(enemyDelayTime * MilliSecondMultiplier));
         EnemyTurn();
@@ -87,7 +89,7 @@ public class TurnSystem : Singleton<TurnSystem>
         float delayTime = turnWaitTime;
         while (delayTime > 0)
         {
-            displayTurnStateText.text = $"{delayTime--}...";
+            //displayTurnStateText.text = $"{delayTime--}...";
             await UniTask.Delay((int)(1000));
         }
         
@@ -127,6 +129,7 @@ public class TurnSystem : Singleton<TurnSystem>
             EndPlayerTurn();
         }
         UpdateActionsUI();
+        TurnEvents.ActionPointChanged(remainingActions);
     }
 
     public bool HasActionsLeft()
@@ -140,7 +143,7 @@ public class TurnSystem : Singleton<TurnSystem>
         {
             remainingActions = 0;
         }
-        remainingActionsText.text = $"Remaining Actions: {remainingActions}";
+        //remainingActionsText.text = $"Remaining Actions: {remainingActions}";
     }
 
     private void ResetActionPoint()
