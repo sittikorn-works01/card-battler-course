@@ -44,13 +44,13 @@ public class ResultPanel : BasePanel
 
     private void OnPlayerDeath()
     {
-        resultText.text = "You lose";
+        resultText.text = "Defeat";
         Open();
     }
 
     private void OnEnemyDeath()
     {
-        resultText.text = "You defeated the enemy!";
+        resultText.text = "Victory!";
         Open();
     }
 

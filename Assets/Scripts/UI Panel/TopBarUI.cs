@@ -1,13 +1,11 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TopBarUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI deckCountText;
-    [SerializeField] private Button pauseButton;
 
     private void OnEnable()
     {
