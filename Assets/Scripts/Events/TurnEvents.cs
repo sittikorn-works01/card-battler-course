@@ -7,6 +7,7 @@ public static class TurnEvents
     public static event Action OnPlayerTurnEnd;
     public static event Action OnEnemyTurnStart;
     public static event Action OnEnemyTurnEnd;
+    public static event Action<int> OnActionPointChanged;
 
     public static void PlayerTurnStart()
     {
@@ -26,5 +27,10 @@ public static class TurnEvents
     public static void EnemyTurnEnd()
     {
         OnEnemyTurnEnd?.Invoke();
+    }
+
+    public static void ActionPointChanged(int remainingAction)
+    {
+        OnActionPointChanged?.Invoke(remainingAction);
     }
 }

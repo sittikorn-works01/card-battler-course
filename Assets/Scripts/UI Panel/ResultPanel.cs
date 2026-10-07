@@ -44,20 +44,20 @@ public class ResultPanel : BasePanel
 
     private void OnPlayerDeath()
     {
-        resultText.text = "You lose";
+        resultText.text = "Defeat";
         Open();
     }
 
     private void OnEnemyDeath()
     {
-        resultText.text = "You defeated the enemy!";
+        resultText.text = "Victory!";
         Open();
     }
 
 
     private void RandomDropCards()
     {
-        resultText.gameObject.SetActive(false);
+        //resultText.gameObject.SetActive(false);
 
         nextButton.gameObject.SetActive(false);        
         RewardManager.Instance.SpawnRewardCards();
