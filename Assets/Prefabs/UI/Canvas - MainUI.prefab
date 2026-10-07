@@ -324,7 +324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7310173544170757079
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1712,7 +1712,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 239}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 923.01, y: 187.51001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &628421054429314246
 CanvasRenderer:
@@ -2034,7 +2034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleStateUIController
   UICanvas: {fileID: 4078393652022697738}
   remainingActionText: {fileID: 5666906595166343414}
-  displayTurnStateText: {fileID: 1831919929784319441}
+  displayTurnStateUI: {fileID: 1853202953637705174}
 --- !u!225 &4078393652022697738
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2367,6 +2367,7 @@ GameObject:
   - component: {fileID: 7338518100734855659}
   - component: {fileID: 4505946784448697065}
   - component: {fileID: 5716539374495039062}
+  - component: {fileID: 1853202953637705174}
   m_Layer: 5
   m_Name: Window - TurnState
   m_TagString: Untagged
@@ -2391,7 +2392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 280.4}
+  m_AnchoredPosition: {x: 1222, y: 280.4}
   m_SizeDelta: {x: 849.4, y: 163.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4505946784448697065
@@ -2432,6 +2433,40 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1853202953637705174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390562217614627536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d521b50defe9f40a10aaf6a87119d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatedTextUI
+  steps:
+  - target: {fileID: 7338518100734855659}
+    targetAnchoredPosition: {x: 1222, y: 280.4}
+    duration: 0
+    ease: 0
+    delay: 0
+    joinPrevious: 0
+  - target: {fileID: 7338518100734855659}
+    targetAnchoredPosition: {x: 0, y: 280.4}
+    duration: 0.5
+    ease: 0
+    delay: 0
+    joinPrevious: 0
+  - target: {fileID: 7338518100734855659}
+    targetAnchoredPosition: {x: -1222, y: 280.4}
+    duration: 0.5
+    ease: 0
+    delay: 1
+    joinPrevious: 0
+  playOnStart: 0
+  useUnscaledTime: 0
+  text: {fileID: 1831919929784319441}
 --- !u!1 &7496562741119896140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,10 +2848,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4598502019927008245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 461.505, y: -93.755005}
+  m_SizeDelta: {x: 823.01, y: 87.51001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9034332258298235482
 CanvasRenderer:

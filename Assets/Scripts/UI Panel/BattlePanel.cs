@@ -1,4 +1,4 @@
-using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -12,24 +12,25 @@ public class BattlePanel : BasePanel
     }
 
     [SerializeField] private TextMeshProUGUI remainingActionText;
-    [SerializeField] private TextMeshProUGUI displayTurnStateText;
+    [SerializeField] private AnimatedTextUI displayTurnStateUI;
 
     private void OnEnable()
     {
         TurnEvents.OnActionPointChanged += UpdateRemainingActionUI;
-        TurnEvents.OnPlayerTurnStart += () => UpdateDisplayTurnStateText(TurnState.Player);
-        TurnEvents.OnEnemyTurnStart += () => UpdateDisplayTurnStateText(TurnState.Enemy);
-        PlayerEvents.OnPlayerDeath += () => UpdateDisplayTurnStateText(TurnState.None);
-        EnemyEvents.OnEnemyDeath += () => UpdateDisplayTurnStateText(TurnState.None);
+        TurnEvents.OnPlayerTurnEnd += () => UpdateDisplayTurnStateText(TurnState.Enemy);
+        TurnEvents.OnEnemyTurnEnd += () => UpdateDisplayTurnStateText(TurnState.Player);
     }
 
     private void OnDisable()
     {
         TurnEvents.OnActionPointChanged -= UpdateRemainingActionUI;
-        TurnEvents.OnPlayerTurnStart -= () => UpdateDisplayTurnStateText(TurnState.Player);
-        TurnEvents.OnEnemyTurnStart -= () => UpdateDisplayTurnStateText(TurnState.Enemy);
-        PlayerEvents.OnPlayerDeath -= () => UpdateDisplayTurnStateText(TurnState.None);
-        EnemyEvents.OnEnemyDeath -= () => UpdateDisplayTurnStateText(TurnState.None);
+        TurnEvents.OnPlayerTurnEnd -= () => UpdateDisplayTurnStateText(TurnState.Enemy);
+        TurnEvents.OnEnemyTurnEnd -= () => UpdateDisplayTurnStateText(TurnState.Player);
+    }
+
+    private void Start()
+    {
+        //UpdateDisplayTurnStateText(TurnState.Player);
     }
 
     private void UpdateDisplayTurnStateText(TurnState state)
@@ -38,19 +39,17 @@ public class BattlePanel : BasePanel
         {
             default:
             case TurnState.Player:
-                displayTurnStateText.text = "Player's Turn";
+                displayTurnStateUI.SetText("Player's Turn");
                 break;
             case TurnState.Enemy:
-                displayTurnStateText.text = "Enemy's Turn";
-                break;
-            case TurnState.None:
-                displayTurnStateText.text = "";
-                break;
+                displayTurnStateUI.SetText("Enemy's Turn");
+                break;            
         }
+        displayTurnStateUI.Play();
     }
 
     private void UpdateRemainingActionUI(int remainingActions)
     {
-        remainingActionText.text = remainingActions.ToString();
+        remainingActionText.SetText(remainingActions.ToString());
     }
 }
