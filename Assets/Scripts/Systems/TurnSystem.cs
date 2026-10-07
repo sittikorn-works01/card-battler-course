@@ -73,6 +73,7 @@ public class TurnSystem : Singleton<TurnSystem>
     private async UniTaskVoid StartEnemyTurn()
     {
         //displayTurnStateText.text = "Enemy's Turn";
+        Dev.Log();
         currentState = TurnState.EnemyTurn;
         await UniTask.Delay((int)(enemyDelayTime * MilliSecondMultiplier));
         EnemyTurn();
@@ -89,6 +90,7 @@ public class TurnSystem : Singleton<TurnSystem>
         float delayTime = turnWaitTime;
         while (delayTime > 0)
         {
+            delayTime--;
             //displayTurnStateText.text = $"{delayTime--}...";
             await UniTask.Delay((int)(1000));
         }
