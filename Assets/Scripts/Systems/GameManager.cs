@@ -13,10 +13,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private ShopManager shopManager;
     [SerializeField] private MapView mapView;
     [SerializeField] private RestPanel restPanel;
+    [SerializeField] private GameObject endingPanel;
 
     [SerializeField] private GameState startState;
     [SerializeField] private TextMeshPro textPopup;
 
+    private NodeType currentNode;
+    public NodeType CurrentNode => currentNode;
     public GameState CurrentState { get; private set; }
 
     public event Action<GameState> OnStateChanged;
@@ -30,8 +33,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        EnterState(startState);
         PlayerData.Instance.Load();
+        EnterState(startState);        
     }
 
     public void ShowTextPopup(TextType textType, string text, Vector2 position)
@@ -86,6 +89,12 @@ public class GameManager : Singleton<GameManager>
             case GameState.Rest:
                 restPanel.gameObject.SetActive(true);
                 break;
+            case GameState.Ending:
+                endingPanel.gameObject.SetActive(true);
+                break;
+            default:
+                print("Enter unassigned game state, fix it");
+                break;
         }
 
         OnStateChanged?.Invoke(newState);
@@ -102,6 +111,8 @@ public class GameManager : Singleton<GameManager>
             case NodeType.Shop: EnterState(GameState.Shop); break;
             case NodeType.Rest: EnterState(GameState.Rest); break;
         }
+
+        currentNode = node.Type;
     }
 
     public bool IsBattleActive() => battleManager.IsBattleActive();

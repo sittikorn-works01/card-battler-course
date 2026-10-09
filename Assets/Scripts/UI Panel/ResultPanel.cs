@@ -26,11 +26,9 @@ public class ResultPanel : BasePanel
         base.Open();
 
         restartButton.onClick.AddListener(RestartButton);
-        nextButton.onClick.AddListener(RandomDropCards);
+        SetupNextButton();
 
-        resultText.gameObject.SetActive(true);
-
-        nextButton.gameObject.SetActive(true);
+        resultText.gameObject.SetActive(true);    
         restartButton.gameObject.SetActive(false);
     }
 
@@ -40,6 +38,20 @@ public class ResultPanel : BasePanel
 
         restartButton.onClick.RemoveAllListeners();
         nextButton.onClick.RemoveAllListeners();
+    }
+
+    private void SetupNextButton()
+    {
+        if (GameManager.Instance.CurrentNode == NodeType.Boss)
+        {
+            nextButton.onClick.AddListener(()=> GameManager.Instance.EnterState(GameState.Ending));
+        }
+        else
+        {
+            nextButton.onClick.AddListener(RandomDropCards);
+        }
+
+        nextButton.gameObject.SetActive(true);
     }
 
     private void OnPlayerDeath()

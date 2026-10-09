@@ -66,6 +66,7 @@ public class TurnSystem : Singleton<TurnSystem>
 
     private void EndPlayerTurn()
     {
+        if (!GameManager.Instance.IsBattleActive()) return;
         TurnEvents.PlayerTurnEnd();
         WaitBetweenTurns().Forget();
     }
@@ -81,6 +82,7 @@ public class TurnSystem : Singleton<TurnSystem>
 
     public void EndEnemyTurn()
     {
+        if (!GameManager.Instance.IsBattleActive()) return;
         TurnEvents.EnemyTurnEnd();
         WaitBetweenTurns().Forget();
     }
