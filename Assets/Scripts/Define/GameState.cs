@@ -1,9 +1,11 @@
 public enum GameState
 {
+    None,
     BossBattle,
     EliteBattle,
     Shop,
     Map,
-    Rest
+    Rest,
+    Ending
 
 }
