@@ -1,40 +1,45 @@
 using System.Collections.Generic;
+using CardBattlerCourse.Cards;
+using CardBattlerCourse.Systems;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeckBuilder : MonoBehaviour
+namespace CardBattlerCourse.DeckBuilder
 {
-    [SerializeField] private List<CardData> availableCardList = new();
-    [SerializeField] private Transform[] cardSlots;
-    [SerializeField] private Card cardPrefab;
-    [SerializeField] private Button exitButtton;
-
-    private void Start()
+    public class DeckBuilder : MonoBehaviour
     {
-        for(int i = 0; i < availableCardList.Count; i++)
+        [SerializeField] private List<CardData> availableCardList = new();
+        [SerializeField] private Transform[] cardSlots;
+        [SerializeField] private Card cardPrefab;
+        [SerializeField] private Button exitButtton;
+
+        private void Start()
         {
-            AddCardToCollection(i);
-        }        
-    }
+            for(int i = 0; i < availableCardList.Count; i++)
+            {
+                AddCardToCollection(i);
+            }        
+        }
 
-    private void OnEnable()
-    {
-        exitButtton.onClick.AddListener(ExitRest);
-    }
+        private void OnEnable()
+        {
+            exitButtton.onClick.AddListener(ExitRest);
+        }
 
-    private void ExitRest()
-    {
-        gameObject.SetActive(false);
-        GameManager.Instance.EnterState(GameState.Map);
-        exitButtton.onClick.RemoveAllListeners();
-    }
+        private void ExitRest()
+        {
+            gameObject.SetActive(false);
+            GameManager.Instance.EnterState(GameState.Map);
+            exitButtton.onClick.RemoveAllListeners();
+        }
 
-    private void AddCardToCollection(int index)
-    {
-        //TODO: fix bug that the heal card's local scale become 0, I think the cause is from where I try to instantiate a normal gameobject in a recttransform parent object, try removing recttransform for parent so you'll need to remove the old layout and implement normal manual arrangement instead; make parent a normal gameobject instead of some shit recttransform and normally instantiate card as its child
-        Card card = Instantiate(cardPrefab, cardSlots[index], false);
-        card.gameObject.transform.localScale = Vector3.one;
-        card.LoadCardData(availableCardList[index]);
+        private void AddCardToCollection(int index)
+        {
+            //TODO: fix bug that the heal card's local scale become 0, I think the cause is from where I try to instantiate a normal gameobject in a recttransform parent object, try removing recttransform for parent so you'll need to remove the old layout and implement normal manual arrangement instead; make parent a normal gameobject instead of some shit recttransform and normally instantiate card as its child
+            Card card = Instantiate(cardPrefab, cardSlots[index], false);
+            card.gameObject.transform.localScale = Vector3.one;
+            card.LoadCardData(availableCardList[index]);
 
+        }
     }
 }

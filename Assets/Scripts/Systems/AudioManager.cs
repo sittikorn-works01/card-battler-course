@@ -1,90 +1,92 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : Singleton<AudioManager>
+namespace CardBattlerCourse.Systems
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip playCardSFX;
-    [SerializeField] private AudioClip drawSFX;
-    [SerializeField] private AudioClip playerDeathSFX;
-    [SerializeField] private AudioClip bossDeathSFX;
-    [SerializeField] private AudioClip healSFX;
-    [SerializeField] private AudioClip shuffleSFX;
-    [SerializeField] private AudioClip playerHitSFX;
-    [SerializeField] private AudioClip bossHitSFX;
-
-    private void OnEnable()
+    public class AudioManager : Singleton<AudioManager>
     {
-        PlayerEvents.OnCardPlayed += PlayerEvents_OnCardPlayed;
-        PlayerEvents.OnDrawCardRequested += PlayerEvents_DrawCardRequested;
-        PlayerEvents.OnPlayerDeath += PlayerEvents_PlayerDeath;        
-        PlayerEvents.OnPlayerHit += PlayerEvents_PlayerHit;        
-        PlayerEvents.OnReshuffleRequested += PlayerEvents_ReshuffleRequested;
-        PlayerEvents.OnPlayerHealed += PlayerEvents_PlayerHealed;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip playCardSFX;
+        [SerializeField] private AudioClip drawSFX;
+        [SerializeField] private AudioClip playerDeathSFX;
+        [SerializeField] private AudioClip bossDeathSFX;
+        [SerializeField] private AudioClip healSFX;
+        [SerializeField] private AudioClip shuffleSFX;
+        [SerializeField] private AudioClip playerHitSFX;
+        [SerializeField] private AudioClip bossHitSFX;
 
-        EnemyEvents.OnEnemyDeath += EnemyEvents_EnemyDeath;
-        EnemyEvents.OnEnemyHit += EnemyEvents_EnemyHit;
-    }
-
-    private void OnDisable()
-    {
-        PlayerEvents.OnCardPlayed -= PlayerEvents_OnCardPlayed;
-        PlayerEvents.OnDrawCardRequested -= PlayerEvents_DrawCardRequested;
-        PlayerEvents.OnPlayerDeath -= PlayerEvents_PlayerDeath;
-        PlayerEvents.OnPlayerHit -= PlayerEvents_PlayerHit;
-        PlayerEvents.OnReshuffleRequested -= PlayerEvents_ReshuffleRequested;
-        PlayerEvents.OnPlayerHealed -= PlayerEvents_PlayerHealed;
-
-        EnemyEvents.OnEnemyDeath -= EnemyEvents_EnemyDeath;
-        EnemyEvents.OnEnemyHit -= EnemyEvents_EnemyHit;
-    }
-
-    private void PlayerEvents_PlayerHealed()
-    {
-        PlaySFX(healSFX);
-    }
-
-    private void PlayerEvents_OnCardPlayed(CardData _)
-    {
-        PlaySFX(playCardSFX);
-    }
-
-    private void PlayerEvents_DrawCardRequested()
-    {
-        PlaySFX(drawSFX);
-    }
-
-    private void PlayerEvents_PlayerDeath()
-    {
-        PlaySFX(playerDeathSFX);
-    }
-
-    private void PlayerEvents_PlayerHit(int _)
-    {
-        PlaySFX(playerHitSFX);
-    }
-
-    private void PlayerEvents_ReshuffleRequested(List<CardData> _)
-    {
-        PlaySFX(shuffleSFX);
-    }
-
-    private void EnemyEvents_EnemyDeath()
-    {
-        PlaySFX(bossDeathSFX);
-    }
-
-    private void EnemyEvents_EnemyHit(int _)
-    {
-        PlaySFX(bossHitSFX);
-    }
-
-    private void PlaySFX(AudioClip audioClip)
-    {
-        if (audioClip)
+        private void OnEnable()
         {
-            audioSource.PlayOneShot(audioClip);
+            PlayerEvents.OnCardPlayed += PlayerEvents_OnCardPlayed;
+            PlayerEvents.OnDrawCardRequested += PlayerEvents_DrawCardRequested;
+            PlayerEvents.OnPlayerDeath += PlayerEvents_PlayerDeath;
+            PlayerEvents.OnPlayerHit += PlayerEvents_PlayerHit;
+            PlayerEvents.OnReshuffleRequested += PlayerEvents_ReshuffleRequested;
+            PlayerEvents.OnPlayerHealed += PlayerEvents_PlayerHealed;
+
+            EnemyEvents.OnEnemyDeath += EnemyEvents_EnemyDeath;
+            EnemyEvents.OnEnemyHit += EnemyEvents_EnemyHit;
+        }
+
+        private void OnDisable()
+        {
+            PlayerEvents.OnCardPlayed -= PlayerEvents_OnCardPlayed;
+            PlayerEvents.OnDrawCardRequested -= PlayerEvents_DrawCardRequested;
+            PlayerEvents.OnPlayerDeath -= PlayerEvents_PlayerDeath;
+            PlayerEvents.OnPlayerHit -= PlayerEvents_PlayerHit;
+            PlayerEvents.OnReshuffleRequested -= PlayerEvents_ReshuffleRequested;
+            PlayerEvents.OnPlayerHealed -= PlayerEvents_PlayerHealed;
+
+            EnemyEvents.OnEnemyDeath -= EnemyEvents_EnemyDeath;
+            EnemyEvents.OnEnemyHit -= EnemyEvents_EnemyHit;
+        }
+
+        private void PlayerEvents_PlayerHealed()
+        {
+            PlaySFX(healSFX);
+        }
+
+        private void PlayerEvents_OnCardPlayed(CardData _)
+        {
+            PlaySFX(playCardSFX);
+        }
+
+        private void PlayerEvents_DrawCardRequested()
+        {
+            PlaySFX(drawSFX);
+        }
+
+        private void PlayerEvents_PlayerDeath()
+        {
+            PlaySFX(playerDeathSFX);
+        }
+
+        private void PlayerEvents_PlayerHit(int _)
+        {
+            PlaySFX(playerHitSFX);
+        }
+
+        private void PlayerEvents_ReshuffleRequested(List<CardData> _)
+        {
+            PlaySFX(shuffleSFX);
+        }
+
+        private void EnemyEvents_EnemyDeath()
+        {
+            PlaySFX(bossDeathSFX);
+        }
+
+        private void EnemyEvents_EnemyHit(int _)
+        {
+            PlaySFX(bossHitSFX);
+        }
+
+        private void PlaySFX(AudioClip audioClip)
+        {
+            if (audioClip)
+            {
+                audioSource.PlayOneShot(audioClip);
+            }
         }
     }
 }

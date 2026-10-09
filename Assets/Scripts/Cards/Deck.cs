@@ -1,106 +1,111 @@
+using CardBattlerCourse.DeckBuilder;
+using CardBattlerCourse.Systems;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+namespace CardBattlerCourse.Cards
 {
-    [SerializeField] private List<CardData> drawPile = new();
-    [SerializeField] private GameObject cardBackPrefab;
-    [SerializeField] private TextMeshPro pileCountText;
-
-    private readonly List<GameObject> cardBackInstances = new();
-
-    private const float VerticalSpacing = 0.1f;
-
-    private void OnEnable()
+    public class Deck : MonoBehaviour
     {
-        PlayerEvents.OnReshuffleRequested += PlayerEvents_OnReshuffleRequested;
-    }
+        [SerializeField] private List<CardData> drawPile = new();
+        [SerializeField] private GameObject cardBackPrefab;
+        [SerializeField] private TextMeshPro pileCountText;
 
-    private void OnDisable()
-    {
-        PlayerEvents.OnReshuffleRequested -= PlayerEvents_OnReshuffleRequested;
-    }
+        private readonly List<GameObject> cardBackInstances = new();
 
-    public void Initialize()
-    {
-        drawPile = DeckManager.Instance.GetDeck();
-        Shuffle();
-        UpdateDeckVisual();
-    }
+        private const float VerticalSpacing = 0.1f;
 
-    private void PlayerEvents_OnReshuffleRequested(List<CardData> discardPile)
-    {
-        drawPile.AddRange(discardPile);
-        UpdateDeckVisual();
-        Shuffle();
-    }
-
-    private void OnMouseDown()
-    {
-        // TODO: add more condition to prevent bug when player can draw card eventhough the hand is full and no card's added but the system is still deducting action point
-        if (!GameManager.Instance.IsBattleActive())
+        private void OnEnable()
         {
-            return;
-        }
-        else if (drawPile.Count <= 0)
-        {
-            print("No cards left in deck!");
-            return;
-        }
-        
-        if (TurnSystem.Instance.HasActionsLeft())
-        {
-            PlayerEvents.DrawCardRequested();
+            PlayerEvents.OnReshuffleRequested += PlayerEvents_OnReshuffleRequested;
         }
 
-    }
-
-    public CardData DrawCard()
-    {
-        if(drawPile.Count > 0)
+        private void OnDisable()
         {
-            int topIndex = drawPile.Count - 1;
-            CardData newCard = drawPile[topIndex];
-            drawPile.RemoveAt(topIndex);
+            PlayerEvents.OnReshuffleRequested -= PlayerEvents_OnReshuffleRequested;
+        }
+
+        public void Initialize()
+        {
+            drawPile = DeckManager.Instance.GetDeck();
+            Shuffle();
             UpdateDeckVisual();
-            return newCard;
         }
-        return null;
-    }
 
-    private void UpdateDeckVisual()
-    {
-        foreach (GameObject cardBack in cardBackInstances)
+        private void PlayerEvents_OnReshuffleRequested(List<CardData> discardPile)
         {
-            Destroy(cardBack);
+            drawPile.AddRange(discardPile);
+            UpdateDeckVisual();
+            Shuffle();
         }
-        cardBackInstances.Clear();
 
-        for (int i = 0; i < drawPile.Count; i++)
+        private void OnMouseDown()
         {
-            GameObject newCardBack = Instantiate(cardBackPrefab, transform);
-            newCardBack.GetComponent<SpriteRenderer>().sortingOrder = i;
-            newCardBack.transform.localPosition = new Vector3(0f, -i* VerticalSpacing, 0f);
-            cardBackInstances.Add(newCardBack);
+            // TODO: add more condition to prevent bug when player can draw card eventhough the hand is full and no card's added but the system is still deducting action point
+            if (!GameManager.Instance.IsBattleActive())
+            {
+                return;
+            }
+            else if (drawPile.Count <= 0)
+            {
+                print("No cards left in deck!");
+                return;
+            }
+
+            if (TurnSystem.Instance.HasActionsLeft())
+            {
+                PlayerEvents.DrawCardRequested();
+            }
+
         }
 
-        pileCountText.text = drawPile.Count.ToString();
-    }
-
-    public void Shuffle()
-    {
-        for (int i = 0; i < drawPile.Count; i++)
+        public CardData DrawCard()
         {
-            CardData cardData = drawPile[i];
-            int randomIndex = Random.Range(i, drawPile.Count);
-            drawPile[i] = drawPile[randomIndex];
-            drawPile[randomIndex] = cardData;
+            if (drawPile.Count > 0)
+            {
+                int topIndex = drawPile.Count - 1;
+                CardData newCard = drawPile[topIndex];
+                drawPile.RemoveAt(topIndex);
+                UpdateDeckVisual();
+                return newCard;
+            }
+            return null;
         }
-    }
 
-    public void Dispose()
-    {
+        private void UpdateDeckVisual()
+        {
+            foreach (GameObject cardBack in cardBackInstances)
+            {
+                Destroy(cardBack);
+            }
+            cardBackInstances.Clear();
 
+            for (int i = 0; i < drawPile.Count; i++)
+            {
+                GameObject newCardBack = Instantiate(cardBackPrefab, transform);
+                newCardBack.GetComponent<SpriteRenderer>().sortingOrder = i;
+                newCardBack.transform.localPosition = new Vector3(0f, -i * VerticalSpacing, 0f);
+                cardBackInstances.Add(newCardBack);
+            }
+
+            pileCountText.text = drawPile.Count.ToString();
+        }
+
+        public void Shuffle()
+        {
+            for (int i = 0; i < drawPile.Count; i++)
+            {
+                CardData cardData = drawPile[i];
+                int randomIndex = Random.Range(i, drawPile.Count);
+                drawPile[i] = drawPile[randomIndex];
+                drawPile[randomIndex] = cardData;
+            }
+        }
+
+        public void Dispose()
+        {
+
+        }
     }
 }

@@ -1,8 +1,12 @@
-using UnityEngine;
 using System.Collections.Generic;
+using CardBattlerCourse.Systems;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefaultDeck", menuName = "Scriptable Objects/DefaultDeck")]
-public class DefaultDeck : ScriptableObject
+namespace CardBattlerCourse.DeckBuilder
 {
-    public List<CardData> cards;
+    [CreateAssetMenu(fileName = "DefaultDeck", menuName = "Scriptable Objects/DefaultDeck")]
+    public class DefaultDeck : ScriptableObject
+    {
+        public List<CardData> cards;
+    }
 }
