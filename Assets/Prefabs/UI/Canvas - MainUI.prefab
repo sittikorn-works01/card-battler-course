@@ -549,7 +549,6 @@ RectTransform:
   - {fileID: 6331575495371114120}
   - {fileID: 1415817332961040547}
   - {fileID: 3225868736912966583}
-  - {fileID: 174407098599376320}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2121,6 +2120,7 @@ RectTransform:
   - {fileID: 4598502019927008245}
   - {fileID: 6424227674170905433}
   - {fileID: 2715650648396394233}
+  - {fileID: 2629739450514842604}
   m_Father: {fileID: 7310173544170757079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2161,7 +2161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultPanel
   UICanvas: {fileID: 6861833237257442687}
-  restartButton: {fileID: 6611513360866835467}
+  restartButton: {fileID: 2781279876886498494}
+  continueButton: {fileID: 6611513360866835467}
   nextButton: {fileID: 2830596716455936427}
   resultText: {fileID: 4270460482175348843}
 --- !u!114 &4041753074859901521
@@ -2275,57 +2276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
   m_ShowMaskGraphic: 0
---- !u!1 &6383322990236920025
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 174407098599376320}
-  - component: {fileID: 1109174392617796449}
-  m_Layer: 5
-  m_Name: SceneNavigator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &174407098599376320
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383322990236920025}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 386672478251288696}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1109174392617796449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383322990236920025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127d6a5dcbba8264aaa53cd568a6d324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneNavigator
-  navButtons:
-  - {fileID: 5263843643415250652}
-  - {fileID: 1422048912765494511}
 --- !u!1 &6464446104402423367
 GameObject:
   m_ObjectHideFlags: 0
@@ -3556,7 +3506,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3799895911997097107, guid: 839266d000802244f8a74578f7148e17, type: 3}
       propertyPath: m_Name
-      value: Button - Restart
+      value: Button - Continue
       objectReference: {fileID: 0}
     - target: {fileID: 3799895911997097107, guid: 839266d000802244f8a74578f7148e17, type: 3}
       propertyPath: m_IsActive
@@ -3564,7 +3514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3918476410697942463, guid: 839266d000802244f8a74578f7148e17, type: 3}
       propertyPath: m_text
-      value: Restart
+      value: Continue
       objectReference: {fileID: 0}
     - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
       propertyPath: m_Pivot.x
@@ -4416,17 +4366,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fd6204bbeb721b439a17a4a2ed51220, type: 3}
---- !u!114 &1422048912765494511 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8994258861198243807, guid: 6fd6204bbeb721b439a17a4a2ed51220, type: 3}
-  m_PrefabInstance: {fileID: 8029398292041257776}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 022b12bac6f057346b96c8f37cd745e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneNavButton
 --- !u!224 &4109650204271606475 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6225749443854412283, guid: 6fd6204bbeb721b439a17a4a2ed51220, type: 3}
@@ -4692,3 +4631,158 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1001 &9223175069129324926
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6560248837299576590}
+    m_Modifications:
+    - target: {fileID: 3799895911997097107, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_Name
+      value: Button - Restart Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799895911997097107, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918476410697942463, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_text
+      value: Restart Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 47.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -370
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3799895911997097107, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 324238159107965634}
+  m_SourcePrefab: {fileID: 100100000, guid: 839266d000802244f8a74578f7148e17, type: 3}
+--- !u!224 &2629739450514842604 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
+  m_PrefabInstance: {fileID: 9223175069129324926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2781279876886498494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6441937008388617664, guid: 839266d000802244f8a74578f7148e17, type: 3}
+  m_PrefabInstance: {fileID: 9223175069129324926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423668659194887661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &5423668659194887661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3799895911997097107, guid: 839266d000802244f8a74578f7148e17, type: 3}
+  m_PrefabInstance: {fileID: 9223175069129324926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &324238159107965634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423668659194887661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022b12bac6f057346b96c8f37cd745e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneNavButton
+  sceneName: Gameplay
+  button: {fileID: 2781279876886498494}

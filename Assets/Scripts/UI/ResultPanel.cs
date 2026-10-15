@@ -8,8 +8,10 @@ namespace CardBattlerCourse.UI
     public class ResultPanel : BasePanel
     {
         [SerializeField] private Button restartButton;
+        [SerializeField] private Button continueButton;
         [SerializeField] private Button nextButton;
         [SerializeField] private TextMeshProUGUI resultText;
+        private bool doesPlayerWin = false;
 
         private void OnEnable()
         {
@@ -27,63 +29,74 @@ namespace CardBattlerCourse.UI
         {
             base.Open();
 
-            restartButton.onClick.AddListener(RestartButton);
-            SetupNextButton();
+            continueButton.onClick.AddListener(BattleExitButton);
+            SetupButtons();
 
             resultText.gameObject.SetActive(true);    
-            restartButton.gameObject.SetActive(false);
         }
 
         public override void Close()
         {
             base.Close();
 
-            restartButton.onClick.RemoveAllListeners();
+            continueButton.onClick.RemoveAllListeners();
             nextButton.onClick.RemoveAllListeners();
         }
 
-        private void SetupNextButton()
+        private void SetupButtons()
         {
-            if (GameManager.Instance.CurrentNode == NodeType.Boss)
+            // Show the continue/reward button after a win, and the restart button after a loss.
+            if (doesPlayerWin)
             {
-                nextButton.onClick.AddListener(()=> GameManager.Instance.EnterState(GameState.Ending));
+                continueButton.gameObject.SetActive(false);
+
+                if (GameManager.Instance.CurrentNode == NodeType.Boss)
+                {
+                    nextButton.onClick.AddListener(() => GameManager.Instance.EnterState(GameState.Ending));
+                }
+                else
+                {
+                    nextButton.onClick.AddListener(RandomDropCards);
+                }
+
+                nextButton.gameObject.SetActive(true);
             }
             else
             {
-                nextButton.onClick.AddListener(RandomDropCards);
+                // A defeated player can restart, but should not continue to rewards or the ending.
+                nextButton.gameObject.SetActive(false);
+                restartButton.gameObject.SetActive(true);
             }
-
-            nextButton.gameObject.SetActive(true);
         }
 
         private void OnPlayerDeath()
         {
             resultText.text = "Defeat";
+            doesPlayerWin = false;
             Open();
         }
 
         private void OnEnemyDeath()
         {
             resultText.text = "Victory!";
+            doesPlayerWin = true;
             Open();
         }
 
 
         private void RandomDropCards()
         {
-            //resultText.gameObject.SetActive(false);
-
             nextButton.gameObject.SetActive(false);        
             RewardManager.Instance.SpawnRewardCards();
         }
 
         public void OnSelectRewardCard()
         {
-            restartButton.gameObject.SetActive(true);
+            continueButton.gameObject.SetActive(true);
             RewardManager.Instance.HideDropCards();
         }
 
-        private void RestartButton()
+        private void BattleExitButton()
         {
             Close();
             GameManager.Instance.EnterState(GameState.Map);
