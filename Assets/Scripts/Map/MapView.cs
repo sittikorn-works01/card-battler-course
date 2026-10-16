@@ -57,7 +57,6 @@ public class MapView : MonoBehaviour
 
                 MapNodeButton nodeButton = nodeButtonGO.GetComponent<MapNodeButton>();
                 MapNode capturedNode = node; // avoid closure-over-loop-variable bug
-                print(node.Type);
                 nodeButton.Initialize(node.Type, () => OnNodeClicked(capturedNode));
 
                 _nodeButtons[node] = nodeButton;
