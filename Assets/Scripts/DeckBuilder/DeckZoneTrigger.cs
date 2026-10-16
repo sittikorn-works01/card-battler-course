@@ -1,13 +1,17 @@
+using CardBattlerCourse.Cards;
 using UnityEngine;
 
-public class DeckZoneTrigger : MonoBehaviour
+namespace CardBattlerCourse.DeckBuilder
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class DeckZoneTrigger : MonoBehaviour
     {
-        if(collision.TryGetComponent<Card>(out Card card))
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            print($"{card.GetCardData().CardName} was added to your deck");
-            DeckEvents.AddCardToDeck(card.GetCardData());
+            if(collision.TryGetComponent<Card>(out Card card))
+            {
+                print($"{card.GetCardData().CardName} was added to your deck");
+                DeckEvents.AddCardToDeck(card.GetCardData());
+            }
         }
     }
 }

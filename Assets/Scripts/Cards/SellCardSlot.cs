@@ -1,18 +1,21 @@
+using CardBattlerCourse.Systems;
 using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class SellCardSlot : MonoBehaviour
+namespace CardBattlerCourse.Cards
 {
-    [SerializeField] private Card card;
-    [SerializeField] private TextMeshPro priceText;
-    public void Initialize(CardData cardData, Action<SellCardSlot, CardData> onSelected)
+    public class SellCardSlot : MonoBehaviour
     {
-        card.LoadCardData(cardData);
-        card.Init(selectedCardData => onSelected?.Invoke(this, selectedCardData));
-        priceText.text = cardData.buyPrice.ToString();
-    }
+        [SerializeField] private Card card;
+        [SerializeField] private TextMeshPro priceText;
+        public void Initialize(CardData cardData, Action<SellCardSlot, CardData> onSelected)
+        {
+            card.LoadCardData(cardData);
+            card.Init(selectedCardData => onSelected?.Invoke(this, selectedCardData));
+            priceText.text = cardData.buyPrice.ToString();
+        }
 
-    public void SetInteractable(bool interactable) => card.SetInteractable(interactable);
+        public void SetInteractable(bool interactable) => card.SetInteractable(interactable);
+    }
 }

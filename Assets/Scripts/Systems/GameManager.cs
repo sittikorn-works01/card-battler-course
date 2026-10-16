@@ -1,122 +1,122 @@
 using System;
 using System.Collections;
+using CardBattlerCourse.UI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public enum TextType
+
+namespace CardBattlerCourse.Systems
 {
-    Heal, Damage, Block
-}
-public class GameManager : Singleton<GameManager>
-{
-    [SerializeField] private BattleManager battleManager;
-    [SerializeField] private ShopManager shopManager;
-    [SerializeField] private MapView mapView;
-    [SerializeField] private RestPanel restPanel;
-    [SerializeField] private GameObject endingPanel;
-
-    [SerializeField] private GameState startState;
-    [SerializeField] private TextMeshPro textPopup;
-
-    private NodeType currentNode;
-    public NodeType CurrentNode => currentNode;
-    public GameState CurrentState { get; private set; }
-
-    public event Action<GameState> OnStateChanged;
-
-   
-
-    protected override void Awake()
+    public class GameManager : Singleton<GameManager>
     {
-        base.Awake();
-    }
+        [SerializeField] private BattleManager battleManager;
+        [SerializeField] private ShopManager shopManager;
+        [SerializeField] private MapView mapView;
+        [SerializeField] private RestPanel restPanel;
+        [SerializeField] private GameObject endingPanel;
 
-    private void Start()
-    {
-        PlayerData.Instance.Load();
-        EnterState(startState);        
-    }
+        [SerializeField] private GameState startState;
+        [SerializeField] private TextMeshPro textPopup;
 
-    public void ShowTextPopup(TextType textType, string text, Vector2 position)
-    {
-        TextMeshPro spawnedText = Instantiate(textPopup, position, Quaternion.identity);
-        switch (textType)
+        private NodeType currentNode;
+        public NodeType CurrentNode => currentNode;
+        public GameState CurrentState { get; private set; }
+
+        public event Action<GameState> OnStateChanged;
+
+
+
+        protected override void Awake()
         {
-            case TextType.Heal:
-                spawnedText.color = Color.green;
-                break;
-
-            case TextType.Damage:
-                spawnedText.color = Color.red;
-                break;
-
-            case TextType.Block:
-                spawnedText.color = Color.cyan;
-                break;
-        }
-        spawnedText.text = text;
-        Destroy(spawnedText.gameObject, 3f);
-    }
-
-    public void EnterState(GameState newState)
-    {
-        //PlayerData.Instance.Save();
-
-        battleManager.gameObject.SetActive(false);
-        shopManager.gameObject.SetActive(false);
-        mapView.gameObject.SetActive(false);
-        restPanel.gameObject.SetActive(false);
-
-        CurrentState = newState;
-
-        switch (newState)
-        {
-            case GameState.EliteBattle:
-                battleManager.gameObject.SetActive(true);
-                battleManager.SetupBattle(GameState.EliteBattle);
-                break;
-            case GameState.BossBattle:
-                battleManager.gameObject.SetActive(true);
-                battleManager.SetupBattle(GameState.BossBattle);
-                break;
-
-            case GameState.Shop:
-                shopManager.gameObject.SetActive(true);
-                break;
-            case GameState.Map:
-                mapView.gameObject.SetActive(true);
-                break;
-            case GameState.Rest:
-                restPanel.gameObject.SetActive(true);
-                break;
-            case GameState.Ending:
-                endingPanel.gameObject.SetActive(true);
-                break;
-            default:
-                print("Enter unassigned game state, fix it");
-                break;
+            base.Awake();
         }
 
-        OnStateChanged?.Invoke(newState);
-    }
-
-    public void EnterNode(MapNode node)
-    {
-        node.Visited = true;
-
-        switch (node.Type)
+        private void Start()
         {
-            case NodeType.Elite: EnterState(GameState.EliteBattle); break;
-            case NodeType.Boss: EnterState(GameState.BossBattle); break;
-            case NodeType.Shop: EnterState(GameState.Shop); break;
-            case NodeType.Rest: EnterState(GameState.Rest); break;
+            PlayerData.Instance.Load();
+            EnterState(startState);
         }
 
-        currentNode = node.Type;
+        public void ShowTextPopup(TextType textType, string text, Vector2 position)
+        {
+            TextMeshPro spawnedText = Instantiate(textPopup, position, Quaternion.identity);
+            switch (textType)
+            {
+                case TextType.Heal:
+                    spawnedText.color = Color.green;
+                    break;
+
+                case TextType.Damage:
+                    spawnedText.color = Color.red;
+                    break;
+
+                case TextType.Block:
+                    spawnedText.color = Color.cyan;
+                    break;
+            }
+            spawnedText.text = text;
+            Destroy(spawnedText.gameObject, 3f);
+        }
+
+        public void EnterState(GameState newState)
+        {
+            //PlayerData.Instance.Save();
+
+            battleManager.gameObject.SetActive(false);
+            shopManager.gameObject.SetActive(false);
+            mapView.gameObject.SetActive(false);
+            restPanel.gameObject.SetActive(false);
+
+            CurrentState = newState;
+
+            switch (newState)
+            {
+                case GameState.EliteBattle:
+                    battleManager.gameObject.SetActive(true);
+                    battleManager.SetupBattle(GameState.EliteBattle);
+                    break;
+                case GameState.BossBattle:
+                    battleManager.gameObject.SetActive(true);
+                    battleManager.SetupBattle(GameState.BossBattle);
+                    break;
+
+                case GameState.Shop:
+                    shopManager.gameObject.SetActive(true);
+                    break;
+                case GameState.Map:
+                    mapView.gameObject.SetActive(true);
+                    break;
+                case GameState.Rest:
+                    restPanel.gameObject.SetActive(true);
+                    break;
+                case GameState.Ending:
+                    endingPanel.gameObject.SetActive(true);
+                    break;
+                default:
+                    print("Enter unassigned game state, fix it");
+                    break;
+            }
+
+            OnStateChanged?.Invoke(newState);
+        }
+
+        public void EnterNode(MapNode node)
+        {
+            node.Visited = true;
+
+            switch (node.Type)
+            {
+                case NodeType.Elite: EnterState(GameState.EliteBattle); break;
+                case NodeType.Boss: EnterState(GameState.BossBattle); break;
+                case NodeType.Shop: EnterState(GameState.Shop); break;
+                case NodeType.Rest: EnterState(GameState.Rest); break;
+            }
+
+            currentNode = node.Type;
+        }
+
+        public bool IsBattleActive() => battleManager.IsBattleActive();
+        public void ReturnToMap() => EnterState(GameState.Map);
+
+
     }
-
-    public bool IsBattleActive() => battleManager.IsBattleActive();
-    public void ReturnToMap() => EnterState(GameState.Map);
-
-
 }
