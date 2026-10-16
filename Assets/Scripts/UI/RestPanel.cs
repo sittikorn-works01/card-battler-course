@@ -11,7 +11,7 @@ namespace CardBattlerCourse.UI
         [SerializeField] private Button exitButton;
 
         [SerializeField, Range(0f, 1f)] private float healPercentage = 0.3f;
-        [SerializeField] private GameObject deckBuilder;
+        [SerializeField] private GameObject deckBuilderPanel;
 
         // A rest site grants one action: heal or manage deck, not both.
         private bool hasChosenOption;
@@ -51,7 +51,7 @@ namespace CardBattlerCourse.UI
                 return;
             }
 
-            deckBuilder.SetActive(true);
+            deckBuilderPanel.SetActive(true);
             Close();
         }
 
