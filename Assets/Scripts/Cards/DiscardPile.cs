@@ -11,8 +11,6 @@ namespace CardBattlerCourse.Cards
         [SerializeField] private Card cardPrefab;
         private const float VerticalSpacing = 0.1f;
 
-        [SerializeField] private Deck deck;
-
         public void DiscardCard(CardData cardData)
         {
             discardPile.Add(cardData);

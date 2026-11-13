@@ -42,6 +42,10 @@ namespace CardBattlerCourse.Systems
 
                 slot.SetInteractable(false);
             }
+            else
+            {
+
+            }
         }
 
         public void HideSellSlots()

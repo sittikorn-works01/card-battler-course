@@ -11,9 +11,7 @@ namespace CardBattlerCourse.Cards
         [SerializeField] private List<CardData> drawPile = new();
         [SerializeField] private GameObject cardBackPrefab;
         [SerializeField] private TextMeshPro pileCountText;
-
         private readonly List<GameObject> cardBackInstances = new();
-
         private const float VerticalSpacing = 0.1f;
 
         private void OnEnable()

@@ -16,7 +16,7 @@ namespace CardBattlerCourse.UI
             PlayerData.OnGoldChanged += UpdateGoldTextUI;
         }
 
-        private void UpdateGoldTextUI(int amount)
+        private void UpdateGoldTextUI(int amount, int changedAmount = 0)
         {
             goldText.text = amount.ToString();
         }

@@ -1,13 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace CardBattlerCourse.Enemies
 {
 
-    // Example of a simpler enemy built on the shared Enemy base: cycles through
-    // a fixed move pattern instead of Boss's buff/attack pattern.
     public class Elite : Enemy
     {
         private readonly List<IntentType> movePattern = new()

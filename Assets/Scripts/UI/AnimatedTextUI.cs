@@ -6,7 +6,7 @@ namespace CardBattlerCourse.UI
     public class AnimatedTextUI : UIMoveSequence
     {
         [Header("")]
-        [SerializeField] private TextMeshProUGUI text;
+        [SerializeField] private TMP_Text text;
 
         public void SetText(string newText)
         {

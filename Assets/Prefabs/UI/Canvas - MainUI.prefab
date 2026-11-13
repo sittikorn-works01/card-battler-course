@@ -655,7 +655,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 1411.5286}
+  m_AnchoredPosition: {x: 0, y: 1411.5287}
   m_SizeDelta: {x: 0, y: 1411.5289}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &617650062617017265
@@ -1572,7 +1572,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 721942552585736673}
   m_Father: {fileID: 386672478251288696}
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   manageDeckButton: {fileID: 6530033176048294160}
   exitButton: {fileID: 6293690203186810333}
   healPercentage: 0.3
-  deckBuilder: {fileID: 0}
+  deckBuilderPanel: {fileID: 0}
 --- !u!1 &5856605977488878983
 GameObject:
   m_ObjectHideFlags: 0

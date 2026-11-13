@@ -1,4 +1,4 @@
 public enum TextType
 {
-    Heal, Damage, Block
+    None, Heal, Damage, Block, Add, Remove
 }

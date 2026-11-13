@@ -1,3 +1,4 @@
+using CardBattlerCourse.Systems;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class Health : MonoBehaviour
     [SerializeField] private TextMeshProUGUI blockText;
 
     [SerializeField] private Flash flash;
+    private UIBubbleManager UIBubbleManager => UIBubbleManager.Instance;
+    [SerializeField] private Transform owner;
 
     public void Init(float currentHealth, float maxHealth)
     {
@@ -43,7 +46,7 @@ public class Health : MonoBehaviour
         {
             return;
         }
-
+        UIBubbleManager.DisplayePopupText(TextType.Heal, healAmount.ToString(), owner.transform.position);
         currentHealth += healAmount;
 
         if(currentHealth > maxHealth)
@@ -59,7 +62,7 @@ public class Health : MonoBehaviour
         {
             return;
         }
-
+        UIBubbleManager.DisplayePopupText(TextType.Block, blockAmount.ToString(), owner.transform.position);
         currentBlock += blockAmount;
         UpdateBlockUI();
     }
@@ -72,6 +75,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        UIBubbleManager.DisplayePopupText(TextType.Damage, damageAmount.ToString(), owner.transform.position);
         StartCoroutine(flash.FlashRoutine());
 
         int blocked = Mathf.Min(currentBlock, damageAmount);

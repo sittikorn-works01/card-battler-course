@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button - MainMenu Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3918476410697942463, guid: 839266d000802244f8a74578f7148e17, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 735d17b81a1fbc74ca03bfeaa14413ee, type: 2}
     - target: {fileID: 6593827044997831314, guid: 839266d000802244f8a74578f7148e17, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
