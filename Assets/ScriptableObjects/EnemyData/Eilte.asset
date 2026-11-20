@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9953c48715340e4b96cd44b5e0db634, type: 3}
   m_Name: Eilte
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  maxHealth: 1
+  Id: enemy_elite
+  maxHealth: 12
   attackPower: 2
-  empowerAmount: 2
-  blockAmount: 2
+  empowerAmount: 1
+  blockAmount: 3

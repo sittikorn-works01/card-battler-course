@@ -115,38 +115,43 @@ namespace CardBattlerCourse.Systems
 
         public void Load()
         {
-            if (!File.Exists(savePath)) {
+            if (!File.Exists(savePath))
+            {
                 print($"Can't find save file from {savePath}");
                 return;
-            } 
-
+            }
             try
             {
-                string json = File.ReadAllText(savePath);
-                SaveData saveData = JsonUtility.FromJson<SaveData>(json);
+               string json = File.ReadAllText(savePath);
+               SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
-                currentHealth = saveData.CurrentHealth;
-                maxHealth = saveData.MaxHealth;
-                gold = saveData.Gold;
-                currentMap = saveData.Map;
-                RestoreMapReferences(currentMap);
+               currentHealth = saveData.CurrentHealth;
+               maxHealth = saveData.MaxHealth;
+               gold = saveData.Gold;
+               currentMap = saveData.Map;
+               RestoreMapReferences(currentMap);
 
-                if (!HasUsableMap(currentMap))
-                {
-                    Debug.LogWarning("Saved map has no usable node IDs or connections. Starting a new map.");
-                    currentMap = MapGenerator.GenerateAct(floorCount: 6, maxNodesPerFloor: 4);
-                }
+               if (!HasUsableMap(currentMap))
+               {
+                  Debug.LogWarning("Saved map has no usable node IDs orconnections. Starting a new map.");
+                  currentMap = MapGenerator.GenerateAct(floorCount: 6,maxNodesPerFloor: 4);
+               }
+               else if (CurrentMap.IsMapCompleted())
+               {
+                   currentMap = MapGenerator.GenerateAct(floorCount: 6,maxNodesPerFloor: 4);
+               }
 
-                // there is no changed amount here bc these 2 lines use for update UI from loading data
-                OnGoldChanged?.Invoke(gold, 0);
-                OnHealthChanged?.Invoke((int)currentHealth, 0);
+               // there is no changed amount here bc these 2 lines use forupdate UI from loading data
+               OnGoldChanged?.Invoke(gold, 0);
+               OnHealthChanged?.Invoke((int)currentHealth, 0);
 
             }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"Save file corrupted or unreadable, starting fresh: {e.Message}");
-            }
-        }
+               catch (Exception e)
+               {
+                   Debug.LogWarning($"Save file corrupted or unreadable,starting fresh: {e.Message}");
+               }
+           }
+        
 
         private static void RestoreMapReferences(MapGraph map)
         {

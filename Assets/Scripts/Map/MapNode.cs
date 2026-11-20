@@ -23,6 +23,11 @@ public class MapGraph
     // Runtime reference is rebuilt from CurrentNodeId after loading.
     [NonSerialized] public MapNode CurrentNode;
     public int CurrentNodeId = -1;
+
+    public bool IsMapCompleted()
+    {
+        return CurrentNode.Floor >= Floors.Count-1;
+    }
 }
 [Serializable]
 public class MapFloor

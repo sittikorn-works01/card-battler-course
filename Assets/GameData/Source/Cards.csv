@@ -1,0 +1,7 @@
+id,name,description,type,cost,power,buffUses,buyPrice,illustrationKey
+card_attack,Attack,Deals 3 Damage,Attack,1,3,0,5,
+card_empower,Empower,Increase Next Two Attack 2 Points,Buff,1,2,2,5,
+card_heal,Heal,Heals 3 Point,Heal,1,3,0,5,
+card_shield,Shield,Give you a shield 3 points,Shield,1,3,0,10,
+card_super_attack,SuperAttack,Deals 6 Damage,Attack,3,6,0,5,
+card_super_heal,SuperHeal,Heals 5 Point,Heal,3,5,0,5,

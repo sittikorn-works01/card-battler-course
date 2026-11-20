@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81969b7c441b0b04e80ec432b3405626, type: 3}
   m_Name: SuperHeal
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  Id: card_super_heal
   CardName: SuperHeal
   CardDescription: Heals 5 Point
   Type: 2

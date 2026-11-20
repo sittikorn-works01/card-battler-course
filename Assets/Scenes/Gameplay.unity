@@ -1124,7 +1124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000019073486
+      value: -0.00007247925
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1755,6 +1755,10 @@ PrefabInstance:
       propertyPath: restPanel
       value: 
       objectReference: {fileID: 1762250185}
+    - target: {fileID: 1085078928039592673, guid: 26267bd73f358bc4ab82b155fc32e3ad, type: 3}
+      propertyPath: startState
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1085078928039592673, guid: 26267bd73f358bc4ab82b155fc32e3ad, type: 3}
       propertyPath: endingPanel
       value: 
