@@ -1,0 +1,3 @@
+id,name,maxHealth,attackPower,empowerAmount,blockAmount
+enemy_boss,Boss,18,3,2,4
+enemy_elite,Elite,12,2,1,3

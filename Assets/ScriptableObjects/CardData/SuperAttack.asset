@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81969b7c441b0b04e80ec432b3405626, type: 3}
   m_Name: SuperAttack
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  Id: card_super_attack
   CardName: SuperAttack
   CardDescription: Deals 6 Damage
   Type: 1

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81969b7c441b0b04e80ec432b3405626, type: 3}
   m_Name: Empower
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  Id: card_empower
   CardName: Empower
-  CardDescription: Empower
+  CardDescription: Increase Next Two Attack 2 Points
   Type: 3
   actionCost: 1
   Illustration: {fileID: 976837448483608467, guid: 4dbe1b8f3cd05014fad75409468f1732, type: 3}

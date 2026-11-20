@@ -23,17 +23,12 @@ public class MapView : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerData PlayerData = PlayerData.Instance;
+        if (PlayerData.CurrentMap == null || PlayerData.CurrentMap.Floors.Count == 0)
+        {
+            PlayerData.SaveMapProgression(MapGenerator.GenerateAct(floorCount: 6, maxNodesPerFloor: 4));
+            print("Current map is null or floors count is zero");
+        }
 
-        if(PlayerData.CurrentMap == null || PlayerData.CurrentMap.Floors.Count == 0)
-            PlayerData.CurrentMap = MapGenerator.GenerateAct(floorCount: 6, maxNodesPerFloor: 4);
-
-        // Must activate mapUI before instantiating node buttons under it -
-        // Awake() on a newly instantiated child is deferred until its
-        // hierarchy is active, so building the view first left
-        // MapNodeButton.nodeIconsDict null on every re-entry after the
-        // first (mapUI starts active by default, but OnDisable turns it
-        // off, so this only broke once you left and came back).
         mapUI.SetActive(true);
         BuildView(PlayerData.CurrentMap);
     }
@@ -47,9 +42,9 @@ public class MapView : MonoBehaviour
     {
         Clear();
 
-        foreach (List<MapNode> floor in map.Floors)
+        foreach (MapFloor floor in map.Floors)
         {
-            foreach (MapNode node in floor)
+            foreach (MapNode node in floor.NodesInFloor)
             {
                 GameObject nodeButtonGO = Instantiate(nodeButtonPrefab, nodeContainer);
                 RectTransform rt = nodeButtonGO.GetComponent<RectTransform>();
@@ -57,7 +52,6 @@ public class MapView : MonoBehaviour
 
                 MapNodeButton nodeButton = nodeButtonGO.GetComponent<MapNodeButton>();
                 MapNode capturedNode = node; // avoid closure-over-loop-variable bug
-                print(node.Type);
                 nodeButton.Initialize(node.Type, () => OnNodeClicked(capturedNode));
 
                 _nodeButtons[node] = nodeButton;
@@ -65,9 +59,9 @@ public class MapView : MonoBehaviour
         }
 
         //// 2. Draw connector lines between each node and the nodes it leads to.
-        foreach (List<MapNode> floor in map.Floors)
+        foreach (MapFloor floor in map.Floors)
         {
-            foreach (MapNode node in floor)
+            foreach (MapNode node in floor.NodesInFloor)
             {
                 foreach (MapNode next in node.ConnectedNodes)
                 {
@@ -85,14 +79,16 @@ public class MapView : MonoBehaviour
 
         if (map.CurrentNode == null)
         {
-            foreach (MapNode n in map.Floors[0])
+            foreach (MapNode n in map.Floors[0].NodesInFloor)
                 reachable.Add(n);
         }
         else
         {
+            print($"CurrentNodeFloor: {map.CurrentNode.Floor}");
             foreach (MapNode n in map.CurrentNode.ConnectedNodes)
                 reachable.Add(n);
         }
+        
 
         foreach (var kvp in _nodeButtons)
         {

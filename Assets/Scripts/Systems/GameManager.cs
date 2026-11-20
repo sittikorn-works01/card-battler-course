@@ -15,15 +15,13 @@ namespace CardBattlerCourse.Systems
         [SerializeField] private GameObject endingPanel;
 
         [SerializeField] private GameState startState;
-        [SerializeField] private TextMeshPro textPopup;
+        
 
         private NodeType currentNode;
         public NodeType CurrentNode => currentNode;
         public GameState CurrentState { get; private set; }
 
         public event Action<GameState> OnStateChanged;
-
-
 
         protected override void Awake()
         {
@@ -36,26 +34,7 @@ namespace CardBattlerCourse.Systems
             EnterState(startState);
         }
 
-        public void ShowTextPopup(TextType textType, string text, Vector2 position)
-        {
-            TextMeshPro spawnedText = Instantiate(textPopup, position, Quaternion.identity);
-            switch (textType)
-            {
-                case TextType.Heal:
-                    spawnedText.color = Color.green;
-                    break;
-
-                case TextType.Damage:
-                    spawnedText.color = Color.red;
-                    break;
-
-                case TextType.Block:
-                    spawnedText.color = Color.cyan;
-                    break;
-            }
-            spawnedText.text = text;
-            Destroy(spawnedText.gameObject, 3f);
-        }
+        
 
         public void EnterState(GameState newState)
         {
@@ -102,7 +81,6 @@ namespace CardBattlerCourse.Systems
         public void EnterNode(MapNode node)
         {
             node.Visited = true;
-
             switch (node.Type)
             {
                 case NodeType.Elite: EnterState(GameState.EliteBattle); break;

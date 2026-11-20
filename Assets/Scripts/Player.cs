@@ -57,10 +57,10 @@ public class Player : MonoBehaviour
         switch (cardData.Type)
         {
             case CardType.Attack:
-                Attack(cardData);
+                AttackByCard(cardData);
                 break;
             case CardType.Heal:
-                Heal(cardData);
+                HealByCard(cardData);
                 break;
             case CardType.Buff:
                 Empower(cardData);
@@ -93,7 +93,6 @@ public class Player : MonoBehaviour
     {
         health.TakeDamage(damageAmount);
         PlayerData.Instance.SetHealth(health.CurrentHealth);
-        GameManager.Instance.ShowTextPopup(TextType.Damage, damageAmount.ToString(), transform.position);
 
         if (!health.IsAlive())
         {
@@ -102,7 +101,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Attack(CardData cardData)
+    private void AttackByCard(CardData cardData)
     {
         int attackPower = cardData.power;
         foreach (Buff buff in activeBuffs)
@@ -119,11 +118,10 @@ public class Player : MonoBehaviour
         StartCoroutine(PlayAttackAnimation(attackPower));
     }
 
-    private void Heal(CardData cardData)
+    private void HealByCard(CardData cardData)
     {
         health.Heal(cardData.power);
         PlayerData.Instance.SetHealth(health.CurrentHealth);
-        GameManager.Instance.ShowTextPopup(TextType.Heal, cardData.power.ToString(), transform.position);
         healVFX.Play();
         PlayerEvents.PlayerHealed();
         PlayerEvents.SkillEnd();
@@ -132,7 +130,6 @@ public class Player : MonoBehaviour
     private void Shield(CardData cardData)
     {
         health.AddBlock(cardData.power);
-        GameManager.Instance.ShowTextPopup(TextType.Block, cardData.power.ToString(), transform.position);
         PlayerEvents.SkillEnd();
     }
 

@@ -25,6 +25,8 @@ namespace CardBattlerCourse.Systems
         private GameObject currentPlayerCharacter;
         private GameObject currentEnemyCharacter;
 
+        [SerializeField] private GameObject gameBoard;
+
         private int rewardGold = 10;
 
         private void OnEnable()
@@ -43,6 +45,7 @@ namespace CardBattlerCourse.Systems
         private void OnPlayerWin()
         {
             PlayerData.Instance.AddGold(rewardGold);
+            PlayerData.Instance.Save();
             OnBattleEnd();
         }
 
@@ -54,21 +57,20 @@ namespace CardBattlerCourse.Systems
         private void OnBattleEnd()
         {
             isBattleActive = false;
-            PlayerData.Instance.Save();
+            gameBoard.SetActive(false);
         }
 
         public void SetupBattle(GameState enemyType)
         {
             isBattleActive = true;
 
+            gameBoard.SetActive(true);
             playerHand.Initialize();
             battleUI.SetActive(true);
             playZone.EnablePlayZone();
             TurnSystem.Instance.Initialize();
 
             InstantiateCharacters(enemyType);
-
-            print(enemyType);
         }
 
         private void InstantiateCharacters(GameState enemyType)

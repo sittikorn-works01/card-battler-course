@@ -5,6 +5,7 @@ namespace CardBattlerCourse.Enemies
     [CreateAssetMenu(fileName = "EnemyData", menuName = "Scriptable Objects/EnemyData")]
     public class EnemyData : ScriptableObject
     {
+        public string Id;
         public float maxHealth;
         public int attackPower;
         public int empowerAmount;

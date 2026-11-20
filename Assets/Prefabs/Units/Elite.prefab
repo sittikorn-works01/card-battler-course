@@ -192,6 +192,10 @@ PrefabInstance:
       propertyPath: flash
       value: 
       objectReference: {fileID: 9131652200720595214}
+    - target: {fileID: 461419182486332367, guid: 186e51df8c71f274bbd2baecf93ae78f, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 579857239887650438}
     - target: {fileID: 2192463960879138277, guid: 186e51df8c71f274bbd2baecf93ae78f, type: 3}
       propertyPath: m_Name
       value: Canvas - EnemyUI

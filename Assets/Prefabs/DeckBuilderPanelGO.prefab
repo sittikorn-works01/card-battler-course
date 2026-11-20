@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 3587167381454793586}
   - component: {fileID: 2323991983208213018}
   m_Layer: 0
-  m_Name: DeckBuilder
+  m_Name: DeckBuilderPanelGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

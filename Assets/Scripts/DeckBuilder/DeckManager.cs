@@ -9,7 +9,6 @@ namespace CardBattlerCourse.DeckBuilder
         private List<CardData> currentDeck = new();
         [SerializeField] private int maxDeckSize = 9;
         [SerializeField] private DefaultDeck defaultDeck;
- 
         protected override void Awake()
         {
             base.Awake();

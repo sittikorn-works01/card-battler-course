@@ -598,6 +598,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5252773267494118768}
     - target: {fileID: 7057685673182423091, guid: 3b7660990d11a0047bad377c8e2b2bba, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 3340290348770968851}
+    - target: {fileID: 7057685673182423091, guid: 3b7660990d11a0047bad377c8e2b2bba, type: 3}
       propertyPath: blockText
       value: 
       objectReference: {fileID: 5247712699104003902}

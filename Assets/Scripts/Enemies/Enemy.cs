@@ -73,7 +73,6 @@ namespace CardBattlerCourse.Enemies
         protected virtual void OnHit(int damage)
         {
             health.TakeDamage(damage);
-            GameManager.Instance.ShowTextPopup(TextType.Damage, damage.ToString(), transform.position);
 
             if (!health.IsAlive())
             {
